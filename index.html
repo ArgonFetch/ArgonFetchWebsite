@@ -6,10 +6,10 @@
     <title>ArgonFetch - Modern Media Downloader</title>
     <style>
         :root {
-            --primary: #6d42f5;
-            --secondary: #1ee3cf;
-            --dark: #0f1118;
-            --darker: #090b10;
+            --primary: #9644ff;
+            --secondary: #b764ff;
+            --dark: #121212;
+            --darker: #0a0a0a;
             --light: #f1f2f6;
             --transition: all 0.3s ease;
         }
@@ -38,7 +38,7 @@
         
         /* Header & Navigation */
         header {
-            background-color: rgba(9, 11, 16, 0.8);
+            background-color: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
@@ -64,7 +64,7 @@
             align-items: center;
             gap: 1rem;
             text-decoration: none;
-            color: var(--light);
+            color: var(--primary);
         }
         
         .logo img {
@@ -80,10 +80,7 @@
         .logo h1 {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--primary);
         }
         
         .nav-links {
@@ -107,7 +104,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: var(--primary);
             transition: var(--transition);
         }
         
@@ -145,7 +142,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(109, 66, 245, 0.05) 0%, rgba(9, 11, 16, 0) 70%);
+            background: radial-gradient(circle, rgba(150, 68, 255, 0.05) 0%, rgba(10, 10, 10, 0) 70%);
             animation: pulse 15s infinite;
         }
         
@@ -193,10 +190,7 @@
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--primary);
         }
         
         .hero p {
@@ -209,7 +203,7 @@
         .btn {
             display: inline-block;
             padding: 0.875rem 2rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: var(--primary);
             color: var(--light);
             font-weight: 600;
             border-radius: 30px;
@@ -229,7 +223,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: linear-gradient(to right, var(--secondary), var(--primary));
+            background: var(--secondary);
             transition: var(--transition);
             z-index: -1;
         }
@@ -239,7 +233,7 @@
         }
         
         .btn:hover {
-            box-shadow: 0 5px 15px rgba(109, 66, 245, 0.4);
+            box-shadow: 0 5px 15px rgba(150, 68, 255, 0.4);
             transform: translateY(-2px);
         }
         
@@ -278,10 +272,7 @@
         .section-title h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--primary);
             display: inline-block;
         }
         
@@ -298,11 +289,11 @@
         }
         
         .feature-card {
-            background-color: rgba(15, 17, 24, 0.6);
+            background-color: rgba(18, 18, 18, 0.6);
             border-radius: 10px;
             padding: 2rem;
             transition: var(--transition);
-            border: 1px solid rgba(109, 66, 245, 0.1);
+            border: 1px solid rgba(150, 68, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -314,14 +305,14 @@
             left: 0;
             width: 4px;
             height: 0;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            background: var(--primary);
             transition: var(--transition);
         }
         
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-color: rgba(109, 66, 245, 0.3);
+            border-color: rgba(150, 68, 255, 0.3);
         }
         
         .feature-card:hover::before {
@@ -359,7 +350,7 @@
             right: 0;
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, rgba(30, 227, 207, 0.1) 0%, rgba(9, 11, 16, 0) 70%);
+            background: radial-gradient(circle, rgba(150, 68, 255, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
             border-radius: 50%;
         }
         
@@ -420,7 +411,7 @@
             left: 0;
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, rgba(109, 66, 245, 0.1) 0%, rgba(9, 11, 16, 0) 70%);
+            background: radial-gradient(circle, rgba(150, 68, 255, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
             border-radius: 50%;
         }
         
@@ -430,7 +421,7 @@
             padding: 2rem;
             margin-top: 2rem;
             position: relative;
-            border: 1px solid rgba(109, 66, 245, 0.2);
+            border: 1px solid rgba(150, 68, 255, 0.2);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
@@ -442,7 +433,7 @@
             right: 0;
             width: 100px;
             height: 100px;
-            background: radial-gradient(circle, rgba(30, 227, 207, 0.05) 0%, rgba(9, 11, 16, 0) 70%);
+            background: radial-gradient(circle, rgba(150, 68, 255, 0.05) 0%, rgba(10, 10, 10, 0) 70%);
             border-radius: 50%;
         }
         
@@ -508,15 +499,15 @@
         }
         
         .keyword {
-            color: #ff79c6;
+            color: #9644ff;
         }
         
         .string {
-            color: #f1fa8c;
+            color: #b764ff;
         }
         
         .function {
-            color: #8be9fd;
+            color: #9644ff;
         }
         
         .variable {
@@ -527,8 +518,8 @@
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: rgba(15, 17, 24, 0.7);
-            border: 1px solid rgba(109, 66, 245, 0.2);
+            background: rgba(18, 18, 18, 0.7);
+            border: 1px solid rgba(150, 68, 255, 0.2);
             color: var(--light);
             padding: 0.5rem 1rem;
             border-radius: 5px;
@@ -538,7 +529,7 @@
         }
         
         .copy-btn:hover {
-            background: rgba(109, 66, 245, 0.2);
+            background: rgba(150, 68, 255, 0.2);
         }
         
         /* Usage */
@@ -558,16 +549,16 @@
             display: flex;
             gap: 2rem;
             align-items: flex-start;
-            background-color: rgba(15, 17, 24, 0.6);
+            background-color: rgba(18, 18, 18, 0.6);
             border-radius: 10px;
             padding: 2rem;
             transition: var(--transition);
-            border: 1px solid rgba(109, 66, 245, 0.1);
+            border: 1px solid rgba(150, 68, 255, 0.1);
         }
         
         .step:hover {
             transform: translateX(5px);
-            border-color: rgba(109, 66, 245, 0.3);
+            border-color: rgba(150, 68, 255, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
@@ -602,7 +593,7 @@
             content: '';
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(109, 66, 245, 0.05) 0%, rgba(9, 11, 16, 0) 70%);
+            background: radial-gradient(circle, rgba(150, 68, 255, 0.05) 0%, rgba(10, 10, 10, 0) 70%);
         }
         
         .cta::before {
@@ -617,12 +608,13 @@
             right: -100px;
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, rgba(30, 227, 207, 0.05) 0%, rgba(9, 11, 16, 0) 70%);
+            background: radial-gradient(circle, rgba(150, 68, 255, 0.05) 0%, rgba(10, 10, 10, 0) 70%);
         }
         
         .cta h2 {
             font-size: 3rem;
             margin-bottom: 1.5rem;
+            color: var(--primary);
         }
         
         .cta p {
@@ -688,7 +680,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: rgba(109, 66, 245, 0.1);
+            background-color: rgba(150, 68, 255, 0.1);
             color: var(--light);
             text-decoration: none;
             transition: var(--transition);
@@ -823,7 +815,7 @@
     <header id="header">
         <nav class="container">
             <a href="#" class="logo">
-                <img src="https://github.com/user-attachments/assets/bf03eee6-0aa5-4508-8d2f-cb6fd6b1485f" alt="ArgonFetch Logo">
+                <img src="/api/placeholder/40/40" alt="ArgonFetch Logo">
                 <h1>ArgonFetch</h1>
             </a>
             <div class="nav-links" id="navLinks">
@@ -841,7 +833,7 @@
 
     <section class="hero">
         <div class="hero-content">
-            <img src="https://github.com/user-attachments/assets/bf03eee6-0aa5-4508-8d2f-cb6fd6b1485f" alt="ArgonFetch Logo" class="hero-logo">
+            <img src="/api/placeholder/150/150" alt="ArgonFetch Logo" class="hero-logo">
             <h1>ArgonFetch</h1>
             <p>A powerful and modern tool for downloading videos, music, and other media from various online sources. Simple to use, yet packed with advanced features.</p>
             <a href="https://github.com/Pianonic/ArgonFetch" class="btn">Get Started</a>
@@ -895,4 +887,16 @@
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    </div>
+                    <h3>Download Notifications</h3>
+                    <p>Get notified when your downloads are complete or if any errors occur during the process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>See It In Action</h2>
