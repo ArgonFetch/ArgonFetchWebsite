@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Event, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { Event, NavigationEnd, Router } from '@angular/router';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { FooterComponent } from "./footer/footer.component";
 import { HeroComponent } from "./hero/hero.component";
@@ -11,7 +11,15 @@ import { UsageComponent } from "./usage/usage.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, HeroComponent, FeaturesComponent, ScreenshotsComponent, InstallationComponent, UsageComponent],
+  imports: [
+    NavbarComponent,
+    FooterComponent,
+    HeroComponent,
+    FeaturesComponent,
+    ScreenshotsComponent,
+    InstallationComponent,
+    UsageComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
