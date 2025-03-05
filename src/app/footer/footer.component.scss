@@ -4,9 +4,10 @@
 
     .footer-content {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         margin-bottom: 2rem;
+        text-align: center;
 
         @media (max-width: 768px) {
             flex-direction: column;

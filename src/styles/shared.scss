@@ -1,0 +1,30 @@
+%section-base {
+    padding: var(--section-padding);
+    background-color: var(--darker);
+
+    h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: var(--primary);
+    }
+}
+
+%card-base {
+    background: var(--dark);
+    padding: var(--card-padding);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--card-shadow);
+    }
+}
+
+%grid-base {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--grid-gap);
+    padding: var(--container-padding);
+}
