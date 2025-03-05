@@ -1,0 +1,46 @@
+.screenshots {
+    padding: 6rem 0;
+    background-color: var(--dark);
+
+    h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: var(--primary);
+    }
+
+    .screenshot-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .screenshot-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        transition: var(--transition);
+
+        &:hover {
+            transform: scale(1.02);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: rgba(10, 10, 10, 0.8);
+            color: var(--light);
+            text-align: center;
+        }
+    }
+}

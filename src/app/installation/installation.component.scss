@@ -1,0 +1,40 @@
+.installation {
+    padding: 6rem 0;
+    background-color: var(--darker);
+
+    h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: var(--primary);
+    }
+
+    .installation-steps {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
+
+        .step {
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+
+            h3 {
+                color: var(--primary);
+                margin-bottom: 1rem;
+            }
+
+            pre {
+                background: var(--darker);
+                padding: 1rem;
+                border-radius: 8px;
+                overflow-x: auto;
+
+                code {
+                    color: var(--light);
+                }
+            }
+        }
+    }
+}

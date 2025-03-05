@@ -1,0 +1,33 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#A855F7" />
+      <stop offset="100%" stop-color="#C357FF" />
+    </linearGradient>
+    
+    <!-- Text Glow Effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background Rectangle with Rounded Corners -->
+  <rect x="0" y="0" width="200" height="200" rx="20" ry="20" fill="url(#bgGradient)"/>
+  
+  <!-- Version Number -->
+  <text x="20" y="40" font-size="24" fill="white" font-family="Arial, sans-serif" filter="url(#glow)">v1</text>
+  
+  <!-- AF Symbol -->
+  <text x="50%" y="55%" font-size="80" font-weight="bold" text-anchor="middle" fill="white" font-family="Arial, sans-serif" filter="url(#glow)">AF</text>
+  
+  <!-- Application Name -->
+  <text x="50%" y="80%" font-size="24" text-anchor="middle" fill="white" font-family="Arial, sans-serif" filter="url(#glow)">ArgonFetch</text>
+  
+  <!-- Creation Date -->
+  <text x="50%" y="90%" font-size="16" text-anchor="middle" fill="white" font-family="Arial, sans-serif" filter="url(#glow)">2025</text>
+</svg>
