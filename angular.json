@@ -34,8 +34,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "baseHref": "/ArgonFetchWebsite/"
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -95,13 +94,9 @@
               "src/styles.scss"
             ],
             "scripts": []
-          },
-        } "deploy": {}     "builder": "angular-cli-ghpages:deploy"
+          }
+        }
       }
     }
   }
-}
-}
-}
-}
 }
