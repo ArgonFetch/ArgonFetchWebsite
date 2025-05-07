@@ -7,33 +7,29 @@
       other media from various online sources. Simple to use, yet packed with
       advanced features.
     </p>
+
     <div class="important-note">
-      <p>
-        <strong>⚠️ Important Note:</strong> This project is currently under
-        active development. For the latest stable version, please check the
-        <a
-          href="https://github.com/ArgonFetch/ArgonFetch/releases"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Releases tab</a
-        >.
-      </p>
+      <fa-icon [icon]="faExclamationTriangle" class="warning-icon"></fa-icon>
+      <div class="note-text-wrapper">
+        <div class="note-label">
+          Important<br />Note:
+        </div>
+        <div class="note-message">
+          This project is currently under active development. For the latest
+          stable version, please check the
+          <a href="https://github.com/ArgonFetch/ArgonFetch/releases" target="_blank" rel="noopener noreferrer">Releases
+            tab</a>.
+        </div>
+      </div>
     </div>
+
     <div class="hero-actions">
-      <a routerLink="/" fragment="installation" class="btn btn-primary"
-        >Get Started (Self-Host)</a
-      >
-      <a
-        href="https://github.com/Pianonic/ArgonFetch"
-        class="btn btn-secondary"
-        target="_blank"
-        rel="noopener noreferrer"
-        >View on GitHub</a
-      >
+      <a routerLink="/" fragment="installation" class="btn btn-primary">Get Started (Self-Host)</a>
+      <a href="https://github.com/Pianonic/ArgonFetch" class="btn btn-secondary" target="_blank"
+        rel="noopener noreferrer">View on GitHub</a>
     </div>
   </div>
   <div class="scroll-down" (click)="scrollToNextSection()">
     <fa-icon [icon]="faChevronDown" size="2x"></fa-icon>
-    <!-- Using size="2x" for a larger icon -->
   </div>
 </section>

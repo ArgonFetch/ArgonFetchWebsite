@@ -1,35 +1,35 @@
 @use '../../styles/shared.scss';
 
 .features {
-    @extend %section-base;
+  @extend %section-base;
 
-    .features-grid {
-        @extend %grid-base;
+  .features-grid {
+    @extend %grid-base;
+  }
+
+  .feature-card {
+    @extend %card-base;
+
+    .icon {
+      color: var(--primary);
+      margin-bottom: 1rem;
     }
 
-    .feature-card {
-        @extend %card-base;
-
-        .icon {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        h3 {
-            color: var(--light);
-            margin-bottom: 1rem;
-        }
-
-        p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
+    h3 {
+      color: var(--light);
+      margin-bottom: 1rem;
     }
+
+    p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+  }
 }
 
 .features {
-  padding: 6rem 0; // Example padding
-  background-color: var(--dark); // Or as per your design
+  padding: 6rem 0;
+  background-color: var(--dark);
 
   h2 {
     text-align: center;
@@ -62,18 +62,18 @@
     .icon {
       color: var(--primary);
       margin-bottom: 1.5rem;
-      font-size: 40px; 
-      line-height: 1; 
+      font-size: 40px;
+      line-height: 1;
     }
 
     h3 {
-      color: var(--light); // Ensure this is not overridden by a global
+      color: var(--light);
       margin-bottom: 1rem;
       font-size: 1.25rem;
     }
 
     p {
-      color: var(--text-secondary, var(--light)); // Fallback for text-secondary
+      color: var(--text-secondary, var(--light));
       font-size: 0.95rem;
       line-height: 1.6;
     }

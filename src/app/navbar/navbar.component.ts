@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -37,10 +37,5 @@ export class NavbarComponent {
 
   closeMobileMenuAndScroll(fragment: string) {
     this.closeMobileMenu();
-    // Optional: if AppComponent's scrollToFragment is not sufficient or you want direct control
-    // this.router.navigate(['/'], { fragment: fragment });
-    // Or, if you have a shared scroll service:
-    // this.scrollService.scrollTo(fragment);
-    // For now, relying on AppComponent's logic triggered by fragment change.
   }
 }

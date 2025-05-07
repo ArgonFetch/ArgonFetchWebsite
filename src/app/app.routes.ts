@@ -12,11 +12,11 @@ export const routes: Routes = [
   { path: 'screenshots', component: ScreenshotsComponent, title: 'ArgonFetch - Screenshots' },
   { path: 'installation', component: InstallationComponent, title: 'ArgonFetch - Installation' },
   { path: 'usage', component: UsageComponent, title: 'ArgonFetch - Usage' },
-  { path: 'roadmap', component: RoadmapComponent, title: 'ArgonFetch - Roadmap' }, 
+  { path: 'roadmap', component: RoadmapComponent, title: 'ArgonFetch - Roadmap' },
   { path: '**', redirectTo: '' },
 ];
 
 export const routingConfig = withInMemoryScrolling({
   scrollPositionRestoration: 'enabled',
-  anchorScrolling: 'enabled', 
+  anchorScrolling: 'enabled',
 });

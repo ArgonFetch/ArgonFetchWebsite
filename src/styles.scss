@@ -36,7 +36,9 @@ body {
     scroll-behavior: smooth;
 }
 
-h1, h2, .logo h1 {
+h1,
+h2,
+.logo h1 {
     font-family: var(--font-family-heading);
     font-weight: var(--font-weight-heading-bold);
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; // Import
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
     faBolt,
     faSlidersH,

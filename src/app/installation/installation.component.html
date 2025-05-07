@@ -1,36 +1,32 @@
 <section id="installation" class="installation">
-    <div class="container">
-      <h2>Self-Host ArgonFetch</h2>
-      <p class="section-subtitle">
-        Follow these steps to get your own instance of ArgonFetch running locally.
-      </p>
-  
-      <div class="installation-steps">
-        <div class="step">
-          <h3><span class="step-number">1</span> Prerequisites</h3>
-          <p>
-            For Spotify support, you'll need to create an App using
-            <a
-              href="https://developer.spotify.com/documentation/web-api/concepts/apps"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Spotify for Developers</a
-            >.
-          </p>
-          <p>
-            From there, obtain a <strong>Client ID</strong> and a
-            <strong>Client Secret</strong>. You will be prompted for these during
-            the setup process.
-          </p>
-        </div>
-  
-        <div class="step">
-          <h3>
-            <span class="step-number">2</span> Download & Setup (Linux/macOS)
-          </h3>
-          <p>Open your terminal and run the following commands:</p>
-          <div class="code-block">
-            <pre><code class="language-bash"># Download Source
+  <div class="container">
+    <h2>Self-Host ArgonFetch</h2>
+    <p class="section-subtitle">
+      Follow these steps to get your own instance of ArgonFetch running locally.
+    </p>
+
+    <div class="installation-steps">
+      <div class="step">
+        <h3><span class="step-number">1</span> Prerequisites</h3>
+        <p>
+          For Spotify support, you'll need to create an App using
+          <a href="https://developer.spotify.com/documentation/web-api/concepts/apps" target="_blank"
+            rel="noopener noreferrer">Spotify for Developers</a>.
+        </p>
+        <p>
+          From there, obtain a <strong>Client ID</strong> and a
+          <strong>Client Secret</strong>. You will be prompted for these during
+          the setup process.
+        </p>
+      </div>
+
+      <div class="step">
+        <h3>
+          <span class="step-number">2</span> Download & Setup (Linux/macOS)
+        </h3>
+        <p>Open your terminal and run the following commands:</p>
+        <div class="code-block">
+          <pre><code class="language-bash"># Download Source
   curl -fsSL -o argonfetch.tar.gz https://github.com/ArgonFetch/ArgonFetch/archive/refs/heads/main.tar.gz
   
   # Unpack Source, remove tar and cd into the source directory
@@ -43,17 +39,17 @@
   
   # Run interactively
   ./setup.sh</code></pre>
-          </div>
         </div>
-  
-        <div class="step">
-          <h3>
-            <span class="step-number">3</span> Download & Setup (Windows -
-            PowerShell)
-          </h3>
-          <p>Open PowerShell and run the following commands:</p>
-          <div class="code-block">
-            <pre><code class="language-powershell"># Download the source using Invoke-WebRequest
+      </div>
+
+      <div class="step">
+        <h3>
+          <span class="step-number">3</span> Download & Setup (Windows -
+          PowerShell)
+        </h3>
+        <p>Open PowerShell and run the following commands:</p>
+        <div class="code-block">
+          <pre><code class="language-powershell"># Download the source using Invoke-WebRequest
   Invoke-WebRequest -Uri "https://github.com/ArgonFetch/ArgonFetch/archive/refs/heads/main.tar.gz" -OutFile "argonfetch.tar.gz"
   
   # Extract the tar.gz file (Windows 10 and later include tar)
@@ -67,27 +63,24 @@
   
   # Run interactively
   .\\setup.ps1</code></pre>
-          </div>
-          <p class="note">
-            Ensure your PowerShell execution policy allows running local scripts.
-            You might need to run:
-            <code>Set-ExecutionPolicy RemoteSigned -Scope Process</code>
-          </p>
         </div>
-  
-        <div class="step">
-          <h3><span class="step-number">4</span> Access ArgonFetch</h3>
-          <p>
-            After the setup script completes successfully, ArgonFetch should be
-            accessible in your web browser at:
-          </p>
-          <p class="highlight-link">
-            <a href="http://localhost:8080" target="_blank"
-              >http://localhost:8080</a
-            >
-          </p>
-        </div>
+        <p class="note">
+          Ensure your PowerShell execution policy allows running local scripts.
+          You might need to run:
+          <code>Set-ExecutionPolicy RemoteSigned -Scope Process</code>
+        </p>
+      </div>
+
+      <div class="step">
+        <h3><span class="step-number">4</span> Access ArgonFetch</h3>
+        <p>
+          After the setup script completes successfully, ArgonFetch should be
+          accessible in your web browser at:
+        </p>
+        <p class="highlight-link">
+          <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>
+        </p>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>

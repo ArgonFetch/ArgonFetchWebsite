@@ -5,7 +5,7 @@
     h2 {
         text-align: center;
         font-size: 2.5rem;
-        margin-bottom: 1rem; // Adjusted
+        margin-bottom: 1rem;
         color: var(--primary);
     }
 
@@ -40,13 +40,13 @@
 
     .usage-card {
         background: var(--darker);
-        padding: 2.5rem 2rem; // More padding
+        padding: 2.5rem 2rem;
         border-radius: 15px;
         transition: var(--transition);
         display: flex;
         flex-direction: column;
-        align-items: center; // Center content
-        text-align: center; // Center text
+        align-items: center;
+        text-align: center;
 
         &:hover {
             transform: translateY(-5px);
@@ -63,7 +63,7 @@
         h3 {
             color: var(--primary);
             margin-bottom: 1.5rem;
-            font-size: 1.35rem; // Slightly larger
+            font-size: 1.35rem;
         }
 
         .code-block {
@@ -87,12 +87,11 @@
         p {
             color: var(--text-secondary, var(--light));
             font-size: 0.95rem;
-            line-height: 1.7; // Improved readability
+            line-height: 1.7;
             margin-bottom: 1rem;
         }
 
         .usage-screenshot {
-            // Optional styling for screenshots within cards
             width: 100%;
             max-width: 250px;
             border-radius: 8px;
