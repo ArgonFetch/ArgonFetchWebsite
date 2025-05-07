@@ -46,6 +46,66 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 0 1rem;
+
+    .tagline {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem; // Adjusted margin
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .important-note {
+        background-color: rgba(var(--primary-rgb, 150, 68, 255), 0.1); // Use RGB for opacity
+        border-left: 4px solid var(--primary);
+        padding: 1rem;
+        margin: 1.5rem auto;
+        max-width: 700px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        text-align: left;
+
+        p {
+            margin: 0;
+            color: var(--light);
+        }
+
+        a {
+            color: var(--secondary);
+            text-decoration: underline;
+            font-weight: 600;
+
+            &:hover {
+                color: var(--primary);
+            }
+        }
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1.5rem; // Adjusted margin
+
+        .btn-primary {
+            // Uses existing .btn styles
+        }
+
+        .btn-secondary {
+            @extend .btn; // Inherit base button styles
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+
+            &::before {
+                background: var(--secondary); // Hover effect
+            }
+
+            &:hover {
+                color: var(--light); // Text color on hover
+                border-color: var(--secondary);
+            }
+        }
+    }
 }
 
 .hero-logo {
@@ -56,7 +116,6 @@
 }
 
 @keyframes float {
-
     0%,
     100% {
         transform: translateY(0);
@@ -128,7 +187,6 @@
 }
 
 @keyframes bounce {
-
     0%,
     20%,
     50%,

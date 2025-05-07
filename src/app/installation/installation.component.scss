@@ -5,8 +5,18 @@
     h2 {
         text-align: center;
         font-size: 2.5rem;
-        margin-bottom: 3rem;
+        margin-bottom: 1rem; // Adjusted
         color: var(--primary);
+    }
+
+    .section-subtitle {
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 1.1rem;
+        color: var(--text-secondary, var(--light));
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .installation-steps {
@@ -18,21 +28,95 @@
             background: var(--dark);
             padding: 2rem;
             border-radius: 15px;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem; // Increased spacing
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
             h3 {
                 color: var(--primary);
-                margin-bottom: 1rem;
+                margin-bottom: 1.5rem;
+                font-size: 1.5rem; // Larger step titles
+                display: flex;
+                align-items: center;
+
+                .step-number {
+                    background-color: var(--primary);
+                    color: var(--darker);
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    margin-right: 0.75rem;
+                }
             }
 
-            pre {
+            p {
+                margin-bottom: 1rem;
+                line-height: 1.7;
+                color: var(--text-secondary, var(--light));
+
+                a {
+                    color: var(--secondary);
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                strong {
+                    color: var(--light);
+                    font-weight: 600;
+                }
+            }
+
+            .code-block {
                 background: var(--darker);
-                padding: 1rem;
+                padding: 1.5rem; // More padding
                 border-radius: 8px;
                 overflow-x: auto;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
 
+                pre {
+                    margin: 0;
+                    code {
+                        color: var(--light);
+                        font-family: 'Fira Code', monospace; // Ensure font is loaded
+                        font-size: 0.9rem;
+                        white-space: pre-wrap; // Allow wrapping
+                        word-break: break-all;
+                    }
+                }
+            }
+
+            .note {
+                font-size: 0.9rem;
+                background-color: rgba(var(--primary-rgb, 150, 68, 255), 0.05);
+                padding: 0.75rem 1rem;
+                border-radius: 5px;
+                border-left: 3px solid var(--primary);
                 code {
-                    color: var(--light);
+                    background-color: var(--dark);
+                    padding: 0.2em 0.4em;
+                    border-radius: 3px;
+                    font-family: 'Fira Code', monospace;
+                }
+            }
+
+            .highlight-link {
+                font-size: 1.2rem;
+                font-weight: bold;
+                text-align: center;
+                margin-top: 1.5rem;
+                a {
+                    color: var(--primary);
+                    &:hover {
+                        color: var(--secondary);
+                    }
                 }
             }
         }

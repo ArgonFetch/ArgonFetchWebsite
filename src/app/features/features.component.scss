@@ -26,3 +26,59 @@
         }
     }
 }
+
+.features {
+  padding: 6rem 0; // Example padding
+  background-color: var(--dark); // Or as per your design
+
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .feature-card {
+    background: var(--darker);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: var(--transition);
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(150, 68, 255, 0.2);
+    }
+
+    .icon {
+      color: var(--primary);
+      margin-bottom: 1.5rem; // Increased margin
+
+      svg {
+        width: 48px; // Larger icons
+        height: 48px;
+      }
+    }
+
+    h3 {
+      color: var(--light); // Ensure this is not overridden by a global
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    p {
+      color: var(--text-secondary, var(--light)); // Fallback for text-secondary
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  }
+}

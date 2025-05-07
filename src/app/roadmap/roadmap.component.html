@@ -1,0 +1,51 @@
+<section id="roadmap" class="roadmap">
+    <div class="container">
+      <h2>Project Roadmap</h2>
+      <p class="section-subtitle">
+        Our journey to make ArgonFetch the ultimate media downloader. Here's what
+        we've done and where we're headed.
+      </p>
+  
+      <div class="roadmap-columns">
+        <div class="roadmap-column">
+          <h3>✅ Completed</h3>
+          <ul class="roadmap-list">
+            <li *ngFor="let feature of completedFeatures" class="roadmap-item">
+              <h4>{{ feature.name }}</h4>
+              <p>{{ feature.description }}</p>
+            </li>
+          </ul>
+        </div>
+  
+        <div class="roadmap-column">
+          <h3>⏳ In Progress / Planned</h3>
+          <ul class="roadmap-list">
+            <li *ngFor="let feature of plannedFeatures" class="roadmap-item">
+              <h4>{{ feature.name }}</h4>
+              <p>{{ feature.description }}</p>
+            </li>
+          </ul>
+        </div>
+  
+        <div class="roadmap-column">
+          <h3>🚀 Future Ideas</h3>
+          <ul class="roadmap-list">
+            <li *ngFor="let feature of futureIdeas" class="roadmap-item">
+              <h4>{{ feature.name }}</h4>
+              <p>{{ feature.description }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="roadmap-contribution-note">
+        Have ideas or want to contribute? Check out our
+        <a
+          href="https://github.com/Pianonic/ArgonFetch"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub repository</a
+        >!
+      </p>
+    </div>
+  </section>
+  
