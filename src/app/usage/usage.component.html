@@ -1,103 +1,49 @@
 <section id="usage" class="usage">
-    <div class="container">
-      <h2>How to Use ArgonFetch</h2>
-      <p class="section-subtitle">
-        Once you have ArgonFetch installed and running (usually at
-        <a href="http://localhost:8080" target="_blank">http://localhost:8080</a
-        >), using it is straightforward:
-      </p>
-      <div class="usage-content">
-        <div class="usage-card">
-          <div class="usage-icon">
-            <!-- Icon: Link -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
-              ></path>
-              <path
-                d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
-              ></path>
-            </svg>
-          </div>
-          <h3>1. Paste the Media URL</h3>
-          <p>
-            Navigate to ArgonFetch in your web browser. You'll see an input
-            field. Simply paste the URL of the video, song, or media you wish to
-            download.
-          </p>
-          <!-- Optional: Add a placeholder for a screenshot of the input field -->
-          <!-- <img src="path/to/ui-input-screenshot.png" alt="ArgonFetch input field" class="usage-screenshot"> -->
+  <div class="container">
+    <h2>How to Use ArgonFetch</h2>
+    <p class="section-subtitle">
+      Once you have ArgonFetch installed and running (usually at
+      <a href="http://localhost:8080" target="_blank">http://localhost:8080</a
+      >), using it is straightforward:
+    </p>
+    <div class="usage-content">
+      <div class="usage-card">
+        <div class="usage-icon">
+          <fa-icon [icon]="faLink"></fa-icon>
         </div>
-  
-        <div class="usage-card">
-          <div class="usage-icon">
-            <!-- Icon: Settings / Download Options -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M21.2 15c.7-1.2 1-2.5.7-3.9-.6-2.4-2.2-4.4-4.4-5.5-.7-.4-1.5-.4-2.2 0L12 7l-3.3-1.4c-.7-.3-1.5-.3-2.2.1-2.2 1.1-3.8 3.1-4.4 5.5-.3 1.4 0 2.7.7 3.9l.7.7c.7.7 1.6.9 2.4.6l.9-.4.9.4c.8.3 1.7.1 2.4-.5l.7-.7.7.7c.7.7 1.6.9 2.4.6l.9-.4.9.4c.8.3 1.7.1 2.4-.5l.7-.7.7-.7z"
-              ></path>
-              <path d="M7 13l2 2 4-4"></path>
-            </svg>
-          </div>
-          <h3>2. Choose Options (If Available)</h3>
-          <p>
-            Depending on the source and media type, you might be presented with
-            options to select quality, format, or other preferences.
-          </p>
-          <!-- <img src="path/to/ui-options-screenshot.png" alt="ArgonFetch download options" class="usage-screenshot"> -->
-        </div>
-  
-        <div class="usage-card">
-          <div class="usage-icon">
-            <!-- Icon: Download -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-          </div>
-          <h3>3. Start Downloading</h3>
-          <p>
-            Once you've set your preferences, click the download button. ArgonFetch
-            will process your request and begin downloading the media.
-          </p>
-          <!-- <img src="path/to/ui-downloading-screenshot.png" alt="ArgonFetch downloading" class="usage-screenshot"> -->
-        </div>
+        <h3>1. Paste the Media URL</h3>
+        <p>
+          Navigate to ArgonFetch in your web browser. You'll see an input
+          field. Simply paste the URL of the video, song, or media you wish to
+          download.
+        </p>
       </div>
-      <p class="usage-tip">
-        <strong>Tip:</strong> Keep an eye on the Roadmap section for upcoming
-        features and supported platforms!
-      </p>
+
+      <div class="usage-card">
+        <div class="usage-icon">
+          <fa-icon [icon]="faTasks"></fa-icon>
+        </div>
+        <h3>2. Choose Options (If Available)</h3>
+        <p>
+          Depending on the source and media type, you might be presented with
+          options to select quality, format, or other preferences.
+        </p>
+      </div>
+
+      <div class="usage-card">
+        <div class="usage-icon">
+          <fa-icon [icon]="faDownload"></fa-icon>
+        </div>
+        <h3>3. Start Downloading</h3>
+        <p>
+          Once you've set your preferences, click the download button. ArgonFetch
+          will process your request and begin downloading the media.
+        </p>
+      </div>
     </div>
-  </section>
-  
+    <p class="usage-tip">
+      <strong>Tip:</strong> Keep an eye on the Roadmap section for upcoming
+      features and supported platforms!
+    </p>
+  </div>
+</section>

@@ -1,52 +1,39 @@
 <section class="hero">
-    <div class="hero-content">
-      <img src="logo-simple.svg" alt="ArgonFetch Logo" class="hero-logo" />
-      <h1>ArgonFetch</h1>
-      <p class="tagline">
-        A powerful and modern web application for downloading videos, music, and
-        other media from various online sources. Simple to use, yet packed with
-        advanced features.
-      </p>
-      <!-- Important Note from README -->
-      <div class="important-note">
-        <p>
-          <strong>⚠️ Important Note:</strong> This project is currently under
-          active development. For the latest stable version, please check the
-          <a
-            href="https://github.com/ArgonFetch/ArgonFetch/releases"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Releases tab</a
-          >.
-        </p>
-      </div>
-      <div class="hero-actions">
-        <a routerLink="/" fragment="installation" class="btn btn-primary"
-          >Get Started (Self-Host)</a
-        >
+  <div class="hero-content">
+    <img src="logo-simple.svg" alt="ArgonFetch Logo" class="hero-logo" />
+    <h1>ArgonFetch</h1>
+    <p class="tagline">
+      A powerful and modern web application for downloading videos, music, and
+      other media from various online sources. Simple to use, yet packed with
+      advanced features.
+    </p>
+    <div class="important-note">
+      <p>
+        <strong>⚠️ Important Note:</strong> This project is currently under
+        active development. For the latest stable version, please check the
         <a
-          href="https://github.com/Pianonic/ArgonFetch"
-          class="btn btn-secondary"
+          href="https://github.com/ArgonFetch/ArgonFetch/releases"
           target="_blank"
           rel="noopener noreferrer"
-          >View on GitHub</a
-        >
-      </div>
+          >Releases tab</a
+        >.
+      </p>
     </div>
-    <div class="scroll-down" (click)="scrollToNextSection()">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+    <div class="hero-actions">
+      <a routerLink="/" fragment="installation" class="btn btn-primary"
+        >Get Started (Self-Host)</a
       >
-        <path d="M12 5v14M19 12l-7 7-7-7" />
-      </svg>
+      <a
+        href="https://github.com/Pianonic/ArgonFetch"
+        class="btn btn-secondary"
+        target="_blank"
+        rel="noopener noreferrer"
+        >View on GitHub</a
+      >
     </div>
-  </section>
-  
+  </div>
+  <div class="scroll-down" (click)="scrollToNextSection()">
+    <fa-icon [icon]="faChevronDown" size="2x"></fa-icon>
+    <!-- Using size="2x" for a larger icon -->
+  </div>
+</section>

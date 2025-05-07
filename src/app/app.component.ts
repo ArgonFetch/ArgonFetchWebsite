@@ -10,20 +10,19 @@ import { UsageComponent } from './usage/usage.component';
 import { RoadmapComponent } from './roadmap/roadmap.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    NavbarComponent,
-    FooterComponent,
-    HeroComponent,
-    FeaturesComponent,
-    ScreenshotsComponent,
-    InstallationComponent,
-    UsageComponent,
-    RoadmapComponent
-],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    imports: [
+        NavbarComponent,
+        FooterComponent,
+        HeroComponent,
+        FeaturesComponent,
+        ScreenshotsComponent,
+        InstallationComponent,
+        UsageComponent,
+        RoadmapComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'ArgonFetch';

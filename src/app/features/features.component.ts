@@ -1,12 +1,24 @@
 import { Component } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; // Import
+import {
+    faBolt,
+    faSlidersH,
+    faGlobe,
+    faMusic,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-features',
-  standalone: true,
-  imports: [],
-  templateUrl: './features.component.html',
-  styleUrl: './features.component.scss'
+    selector: 'app-features',
+    standalone: true,
+    imports: [
+        FontAwesomeModule
+    ],
+    templateUrl: './features.component.html',
+    styleUrl: './features.component.scss',
 })
 export class FeaturesComponent {
-
+    faBolt = faBolt;
+    faSlidersH = faSlidersH;
+    faGlobe = faGlobe;
+    faMusic = faMusic;
 }

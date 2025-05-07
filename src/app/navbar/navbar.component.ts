@@ -1,23 +1,30 @@
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Import CommonModule for *ngIf
+import { CommonModule } from '@angular/common';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
-  imports: [RouterLink, CommonModule], // Add CommonModule
+  imports: [
+    RouterLink,
+    CommonModule,
+    FontAwesomeModule
+  ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+  styleUrl: './navbar.component.scss'
 })
+
 export class NavbarComponent {
   isMobileMenuOpen = false;
   isScrolled = false;
 
-  constructor(private router: Router) {}
+  faBars = faBars;
+  faTimes = faTimes;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    this.isScrolled = window.scrollY > 50; // Add 'scrolled' class after 50px scroll
+    this.isScrolled = window.scrollY > 50;
   }
 
   toggleMobileMenu() {

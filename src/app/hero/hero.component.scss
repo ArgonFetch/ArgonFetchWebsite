@@ -184,6 +184,7 @@
     transform: translateX(-50%);
     animation: bounce 2s infinite;
     cursor: pointer;
+    color: var(--light);
 }
 
 @keyframes bounce {

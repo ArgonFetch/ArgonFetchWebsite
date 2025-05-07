@@ -2,13 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-roadmap',
-  standalone: true,
-  imports: [
-    CommonModule
-  ],
-  templateUrl: './roadmap.component.html',
-  styleUrl: './roadmap.component.scss',
+    selector: 'app-roadmap',
+    imports: [
+        CommonModule
+    ],
+    templateUrl: './roadmap.component.html',
+    styleUrl: './roadmap.component.scss'
 })
 export class RoadmapComponent {
   completedFeatures = [

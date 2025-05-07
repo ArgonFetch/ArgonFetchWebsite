@@ -56,11 +56,8 @@
         .usage-icon {
             color: var(--primary);
             margin-bottom: 1.5rem;
-
-            svg {
-                width: 40px; // Icon size
-                height: 40px;
-            }
+            font-size: 32px;
+            line-height: 1;
         }
 
         h3 {
