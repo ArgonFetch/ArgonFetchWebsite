@@ -1,0 +1,132 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.btn {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    font-weight: get($typography, 'font-weight-semibold');
+    border-radius: 30px;
+    text-decoration: none;
+    transition: get($effects, 'transition');
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        transition: get($effects, 'transition');
+        z-index: -1;
+    }
+
+    &:hover::before {
+        width: 100%;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+
+        &:hover {
+            transform: none;
+        }
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+// Button types
+.btn-primary {
+    background: get($colors, 'primary');
+    color: get($colors, 'light');
+
+    &::before {
+        background: get($colors, 'secondary');
+    }
+
+    &:hover {
+        box-shadow: get($effects, 'card-shadow');
+    }
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid get($colors, 'secondary');
+    color: get($colors, 'secondary');
+
+    &::before {
+        background: get($colors, 'secondary');
+    }
+
+    &:hover {
+        color: get($colors, 'light');
+    }
+}
+
+.btn-text {
+    background: transparent;
+    color: get($colors, 'primary');
+    padding: 0.5rem 1rem;
+
+    &:hover {
+        background: rgba(get($colors, 'primary-rgb'), 0.1);
+    }
+}
+
+// Button sizes
+.btn-sm {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+}
+
+.btn-md {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+}
+
+.btn-full-width {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+// Loading spinner
+.btn-loader {
+    display: inline-block;
+    width: 1.25em;
+    height: 1.25em;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    position: absolute;
+    left: calc(50% - 0.625em);
+    top: calc(50% - 0.625em);
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,29 @@
+<ng-container *ngIf="href; else routerLinkTpl">
+    <a [href]="href" [target]="target || '_self'" class="btn btn-{{type}} btn-{{size}}"
+        [class.btn-full-width]="fullWidth" [class.disabled]="disabled || loading" (click)="handleClick($event)">
+        <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+    </a>
+</ng-container>
+
+<ng-template #routerLinkTpl>
+    <ng-container *ngIf="routerLink; else buttonTpl">
+        <a [routerLink]="routerLink" [fragment]="fragment" class="btn btn-{{type}} btn-{{size}}"
+            [class.btn-full-width]="fullWidth" [class.disabled]="disabled || loading" (click)="handleClick($event)">
+            <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+        </a>
+    </ng-container>
+</ng-template>
+
+<ng-template #buttonTpl>
+    <button type="button" class="btn btn-{{type}} btn-{{size}}" [class.btn-full-width]="fullWidth"
+        [disabled]="disabled || loading" (click)="handleClick($event)">
+        <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+    </button>
+</ng-template>
+
+<ng-template #contentTpl>
+    <span class="btn-loader" *ngIf="loading"></span>
+    <span [class.invisible]="loading">
+        <ng-content></ng-content>
+    </span>
+</ng-template>

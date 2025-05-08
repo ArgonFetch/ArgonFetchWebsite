@@ -1,0 +1,14 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.section {
+    @include section;
+}
+
+.section-dark {
+    background-color: get($colors, 'dark');
+}
+
+.section-darker {
+    background-color: get($colors, 'darker');
+}

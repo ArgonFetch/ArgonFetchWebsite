@@ -1,0 +1,48 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.card {
+    @include card;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: get($effects, 'card-shadow');
+}
+
+.card-centered {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-feature {
+    padding: get($spacing, 'lg');
+    text-align: center;
+
+    .icon {
+        color: get($colors, 'primary');
+        margin-bottom: get($spacing, 'md');
+        font-size: 40px;
+        line-height: 1;
+    }
+
+    h3 {
+        color: get($colors, 'light');
+        margin-bottom: get($spacing, 'sm');
+        font-size: 1.25rem;
+    }
+
+    p {
+        color: get($colors, 'text-secondary');
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+}
+
+.card-usage,
+.card-roadmap {
+    padding: get($spacing, 'lg');
+    background: get($colors, 'darker');
+}

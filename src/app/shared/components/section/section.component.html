@@ -1,0 +1,7 @@
+<section [id]="id" class="section section-{{background}}">
+    <div class="container">
+        <h2 class="section-title" *ngIf="title">{{title}}</h2>
+        <p class="section-subtitle" *ngIf="subtitle">{{subtitle}}</p>
+        <ng-content></ng-content>
+    </div>
+</section>

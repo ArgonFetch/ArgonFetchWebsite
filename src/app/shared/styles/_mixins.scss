@@ -1,0 +1,93 @@
+@use 'variables' as *;
+
+// Get value from map
+@function get($map, $key) {
+    @return map-get($map, $key);
+}
+
+// Responsive breakpoints
+@mixin respond-to($breakpoint) {
+    $size: get($breakpoints, $breakpoint);
+
+    @if $size {
+        @media (max-width: $size) {
+            @content;
+        }
+    }
+
+    @else {
+        @media (max-width: $breakpoint) {
+            @content;
+        }
+    }
+}
+
+// Flexbox helpers
+@mixin flex($direction: row, $justify: center, $align: center, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+
+    @if $gap >0 {
+        gap: $gap;
+    }
+}
+
+// Grid helpers
+@mixin grid($columns: 1, $gap: get($spacing, 'grid-gap')) {
+    display: grid;
+    gap: $gap;
+
+    @if type-of($columns)=='number' {
+        grid-template-columns: repeat($columns, 1fr);
+    }
+
+    @else {
+        grid-template-columns: $columns;
+    }
+}
+
+// Standard card styles
+@mixin card {
+    padding: get($spacing, 'card');
+    border-radius: get($effects, 'border-radius');
+    background-color: get($colors, 'dark');
+    transition: get($effects, 'transition');
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: get($effects, 'card-shadow');
+    }
+}
+
+// Section container
+@mixin section {
+    padding: get($spacing, 'section') 0;
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 get($spacing, 'container');
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: get($typography, 'font-weight-heading-bold');
+        color: get($colors, 'primary');
+        margin-bottom: get($spacing, 'lg');
+    }
+
+    .section-subtitle {
+        text-align: center;
+        margin-bottom: get($spacing, 'xl');
+        font-size: 1.1rem;
+        color: get($colors, 'text-secondary');
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+}
