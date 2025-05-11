@@ -1,0 +1,113 @@
+/**
+ * ArgonFetch Theme System
+ * A consolidated theme file that brings together all variables and settings
+ */
+
+@use "sass:map";
+
+// Define Sass variables for use within SCSS code
+$colors: (
+  'primary': #9644ff,
+  'primary-rgb': (150, 68, 255),
+  'secondary': #6c2bff,
+  'darker': #0a0a0a,
+  'dark': #121212,
+  'light': #f1f2f6,
+  'text-primary': #f1f2f6,
+  'text-secondary': rgba(241, 242, 246, 0.8)
+);
+
+$typography: (
+  'font-family-sans': 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+  'font-family-heading': 'Montserrat, Inter, sans-serif',
+  'font-family-code': 'Fira Code, Consolas, Monaco, monospace',
+  'font-weight-normal': 400,
+  'font-weight-medium': 500,
+  'font-weight-semibold': 600,
+  'font-weight-bold': 700,
+  'font-weight-heading-bold': 800
+);
+
+$spacing: (
+  'xs': 0.5rem,
+  'sm': 1rem,
+  'md': 1.5rem,
+  'lg': 2rem,
+  'xl': 3rem,
+  'xxl': 4rem,
+  'section': 6rem,
+  'container': 1rem,
+  'card': 2rem,
+  'grid-gap': 2rem
+);
+
+$effects: (
+  'border-radius': 15px,
+  'border-radius-sm': 8px,
+  'card-shadow': 0 5px 15px rgba(150, 68, 255, 0.2),
+  'transition': all 0.3s ease
+);
+
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px
+);
+
+// Prism theme colors for syntax highlighting
+$prism-theme: (
+  'background': #0a0a0a,
+  'text': #f1f2f6,
+  'comment': #636e7b,
+  'punctuation': #b3b9c5,
+  'tag': #9644ff,
+  'attr-name': #6c2bff,
+  'string': #4cd2ff,
+  'operator': #ff9940,
+  'keyword': #9644ff,
+  'function': #fff394,
+  'variable': #ff9940
+);
+
+// Export all theme variables to CSS variables
+:root {  // Colors
+  --primary: #{map.get($colors, 'primary')};
+  --primary-rgb: #{map.get($colors, 'primary-rgb')};
+  --secondary: #{map.get($colors, 'secondary')};
+  --darker: #{map.get($colors, 'darker')};
+  --dark: #{map.get($colors, 'dark')};
+  --light: #{map.get($colors, 'light')};
+  --text-primary: #{map.get($colors, 'text-primary')};
+  --text-secondary: #{map.get($colors, 'text-secondary')};
+  
+  // Typography
+  --font-family-sans-serif: #{map-get($typography, 'font-family-sans')};
+  --font-family-heading: #{map-get($typography, 'font-family-heading')};
+  --font-family-code: #{map-get($typography, 'font-family-code')};
+  --font-weight-heading-bold: #{map-get($typography, 'font-weight-heading-bold')};
+  
+  // Spacing
+  --section-padding: #{map-get($spacing, 'section')} 0;
+  --container-padding: 0 #{map-get($spacing, 'container')};
+  --card-padding: #{map-get($spacing, 'card')};
+  --grid-gap: #{map-get($spacing, 'grid-gap')};
+  
+  // Effects
+  --border-radius: #{map-get($effects, 'border-radius')};
+  --transition: #{map-get($effects, 'transition')};
+  --card-shadow: #{map-get($effects, 'card-shadow')};
+
+  // Code Theme for Prism.js
+  --prism-bg: #{map-get($prism-theme, 'background')};
+  --prism-text: #{map-get($prism-theme, 'text')};
+  --prism-comment: #{map-get($prism-theme, 'comment')};
+  --prism-punctuation: #{map-get($prism-theme, 'punctuation')};
+  --prism-tag: #{map-get($prism-theme, 'tag')};
+  --prism-attr-name: #{map-get($prism-theme, 'attr-name')};
+  --prism-string: #{map-get($prism-theme, 'string')};
+  --prism-operator: #{map-get($prism-theme, 'operator')};
+  --prism-keyword: #{map-get($prism-theme, 'keyword')};
+  --prism-function: #{map-get($prism-theme, 'function')};
+  --prism-variable: #{map-get($prism-theme, 'variable')};
+}

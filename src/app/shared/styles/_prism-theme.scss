@@ -1,0 +1,146 @@
+/**
+ * Custom Prism.js theme for ArgonFetch
+ * Designed to match the dark theme with purple accents
+ * This uses variables defined in _design-system.scss
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: var(--prism-text);
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  tab-size: 4;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  border-radius: 0.3em;
+}
+
+:not(pre)>code[class*="language-"],
+pre[class*="language-"] {
+  background: var(--prism-bg);
+}
+
+/* Inline code */
+:not(pre)>code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--prism-comment);
+}
+
+.token.punctuation {
+  color: var(--prism-punctuation);
+}
+
+.token.namespace {
+  opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--prism-tag);
+}
+
+.token.boolean,
+.token.number {
+  color: var(--prism-variable);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--prism-string);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: var(--prism-operator);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--prism-keyword);
+}
+
+.token.function,
+.token.class-name {
+  color: var(--prism-function);
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--prism-variable);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* Line highlighting */
+.line-highlight {
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid var(--primary);
+}
+
+/* Command line specific */
+.command-line-prompt {
+  border-right: 1px solid #999;
+  color: #999;
+  display: block;
+  float: left;
+  font-size: 100%;
+  letter-spacing: -1px;
+  margin-right: 1em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.command-line-prompt>span:before {
+  color: #999;
+  content: ' ';
+  display: block;
+  padding-right: 0.8em;
+}
+
+.command-line-prompt>span[data-prompt]:before {
+  content: attr(data-prompt);
+}

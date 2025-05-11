@@ -7,10 +7,14 @@ import {
   WritableSignal,
   effect,
   inject,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  AfterViewChecked
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as Prism from 'prismjs';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-powershell';
+import 'prismjs/components/prism-markup';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -20,9 +24,10 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './installation.component.html',
   styleUrl: './installation.component.scss',
 })
-export class InstallationComponent implements OnInit {
+export class InstallationComponent implements OnInit, AfterViewChecked {
   bashScriptContent: WritableSignal<string> = signal('Loading...');
   powershellScriptContent: WritableSignal<string> = signal('Loading...');
+  contentLoaded: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -52,9 +57,14 @@ export class InstallationComponent implements OnInit {
       }
     });
   }
-
   ngOnInit() {
     this.loadScripts();
+  }
+  
+  ngAfterViewChecked() {
+    if (this.contentLoaded) {
+      this.highlightAllCodeBlocks();
+    }
   }
 
   loadScripts() {
@@ -85,18 +95,36 @@ export class InstallationComponent implements OnInit {
           this.cdr.detectChanges();
         },
       });
-  }
-
-  private highlightCodeBlock(selector: string) {
+  }  private highlightCodeBlock(selector: string) {
     setTimeout(() => {
-      const specificCodeElement =
-        this.el.nativeElement.querySelector(selector);
-      if (specificCodeElement) {
-        Prism.highlightElement(specificCodeElement);
+      // Find all code blocks matching the selector
+      const codeBlocks = this.el.nativeElement.querySelectorAll(selector);
+      
+      if (codeBlocks && codeBlocks.length > 0) {
+        codeBlocks.forEach((block: any) => {
+          // Make sure Prism is available and initialized
+          if (typeof Prism !== 'undefined' && Prism.highlightElement) {
+            Prism.highlightElement(block);
+          } else {
+            console.error('Prism is not properly initialized');
+          }
+        });
+        this.contentLoaded = true;
       } else {
-        console.warn(`Element not found for selector: ${selector}`);
+        console.warn(`No code elements found for selector: ${selector}`);
       }
-    }, 0);
+    }, 200); // Give more time for elements to render
+  }
+  
+  highlightAllCodeBlocks() {
+    const codeBlocks = this.el.nativeElement.querySelectorAll('pre code');
+    if (codeBlocks && codeBlocks.length > 0) {
+      codeBlocks.forEach((block: any) => {
+        if (typeof Prism !== 'undefined') {
+          Prism.highlightElement(block);
+        }
+      });
+    }
   }
 
   copyToClipboard(text: string, event: MouseEvent) {

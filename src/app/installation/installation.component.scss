@@ -148,18 +148,21 @@
         &:hover {
             background-color: var(--secondary);
         }
-    }
+    }        .code-block {
+            background: #0a0a0a; /* Use the direct color to ensure consistency */
+            padding: 1.5rem;
+            padding-top: 2.5rem; /* Add padding to top to make space for the button */
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
 
-    .code-block {
-        background: var(--darker);
-        padding: 1.5rem; // Keep original padding
-        padding-top: 2.5rem; // Add padding to top to make space for the button
-        border-radius: 8px;
-        overflow-x: auto;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-
-        pre {
-            margin: 0; // Ensure pre tag doesn't add extra margins
+            pre {
+                margin: 0;
+                background: transparent;
+                
+                code {
+                    background: transparent;
+                }
+            }
         }
-    }
 }

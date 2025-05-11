@@ -1,0 +1,235 @@
+/**
+ * ArgonFetch Unified Theme System
+ * This file serves as the single source of truth for all design tokens
+ * used throughout the application.
+ */
+
+// ========================================
+// COLORS
+// ========================================
+$colors: (
+  'primary': #9644ff,
+  'primary-rgb': (150, 68, 255),
+  'primary-light': #b47aff,
+  'primary-dark': #7b20ff,
+  'secondary': #6c2bff,
+  'secondary-light': #8f59ff,
+  'secondary-dark': #5215e0,
+  'darker': #0a0a0a,
+  'dark': #121212,
+  'light': #f1f2f6,
+  'gray-100': #f8f9fa,
+  'gray-200': #e9ecef,
+  'gray-300': #dee2e6,
+  'gray-400': #ced4da,
+  'gray-500': #adb5bd,
+  'gray-600': #6c757d,
+  'gray-700': #495057,
+  'gray-800': #343a40,
+  'gray-900': #212529,
+  'text-primary': #f1f2f6,
+  'text-secondary': rgba(241, 242, 246, 0.8),
+  'success': #28a745,
+  'warning': #ffc107,
+  'danger': #dc3545,
+  'info': #17a2b8
+);
+
+// ========================================
+// TYPOGRAPHY
+// ========================================
+$typography: (
+  // Font families
+  'font-family-sans': 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+  'font-family-heading': 'Montserrat, Inter, sans-serif',
+  'font-family-code': 'Fira Code, Consolas, Monaco, monospace',
+  
+  // Font weights
+  'font-weight-normal': 400,
+  'font-weight-medium': 500,
+  'font-weight-semibold': 600,
+  'font-weight-bold': 700,
+  'font-weight-heading-bold': 800,
+  
+  // Font sizes
+  'font-size-xs': 0.75rem,    // 12px
+  'font-size-sm': 0.875rem,   // 14px
+  'font-size-base': 1rem,     // 16px
+  'font-size-md': 1.125rem,   // 18px
+  'font-size-lg': 1.25rem,    // 20px
+  'font-size-xl': 1.5rem,     // 24px
+  'font-size-2xl': 1.875rem,  // 30px
+  'font-size-3xl': 2.25rem,   // 36px
+  'font-size-4xl': 3rem,      // 48px
+  'font-size-5xl': 3.75rem,   // 60px
+  
+  // Line heights
+  'line-height-tight': 1.1,
+  'line-height-normal': 1.5,
+  'line-height-loose': 1.8
+);
+
+// ========================================
+// SPACING
+// ========================================
+$spacing: (
+  'xs': 0.5rem,    // 8px
+  'sm': 1rem,      // 16px
+  'md': 1.5rem,    // 24px
+  'lg': 2rem,      // 32px
+  'xl': 3rem,      // 48px
+  'xxl': 4rem,     // 64px
+  'section': 6rem, // 96px
+  'container': 1rem,
+  'card': 2rem,
+  'grid-gap': 2rem
+);
+
+// ========================================
+// EFFECTS
+// ========================================
+$effects: (
+  'border-radius': 15px,
+  'border-radius-sm': 8px,
+  'border-radius-lg': 20px,
+  'border-radius-pill': 9999px,
+  'card-shadow': 0 5px 15px rgba(150, 68, 255, 0.2),
+  'card-shadow-hover': 0 8px 25px rgba(150, 68, 255, 0.35),
+  'button-shadow': 0 4px 10px rgba(150, 68, 255, 0.3),
+  'transition-fast': all 0.2s ease,
+  'transition': all 0.3s ease,
+  'transition-slow': all 0.5s ease
+);
+
+// ========================================
+// BREAKPOINTS
+// ========================================
+$breakpoints: (
+  'xs': 0,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px
+);
+
+// ========================================
+// PRISM THEME
+// ========================================
+$prism-theme: (
+  'background': #0a0a0a,
+  'text': #f1f2f6,
+  'comment': #636e7b,
+  'punctuation': #b3b9c5,
+  'tag': #9644ff,
+  'attr-name': #6c2bff,
+  'string': #4cd2ff,
+  'operator': #ff9940,
+  'keyword': #9644ff,
+  'function': #fff394,
+  'variable': #ff9940
+);
+
+// ========================================
+// CSS VARIABLES EXPORT
+// ========================================
+
+:root {
+  // Export all colors as CSS variables
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+  }
+  
+  // Primary shortcuts
+  --primary: #{map-get($colors, 'primary')};
+  --primary-rgb: #{map-get($colors, 'primary-rgb')};
+  --primary-light: #{map-get($colors, 'primary-light')};
+  --primary-dark: #{map-get($colors, 'primary-dark')};
+  --secondary: #{map-get($colors, 'secondary')};
+  --darker: #{map-get($colors, 'darker')};
+  --dark: #{map-get($colors, 'dark')};
+  --light: #{map-get($colors, 'light')};
+  --text-primary: #{map-get($colors, 'text-primary')};
+  --text-secondary: #{map-get($colors, 'text-secondary')};
+  
+  // Typography
+  @each $name, $value in $typography {
+    --#{$name}: #{$value};
+  }
+  
+  // Spacing
+  @each $name, $value in $spacing {
+    --spacing-#{$name}: #{$value};
+  }
+  --section-padding: #{map-get($spacing, 'section')} 0;
+  --container-padding: 0 #{map-get($spacing, 'container')};
+  --card-padding: #{map-get($spacing, 'card')};
+  --grid-gap: #{map-get($spacing, 'grid-gap')};
+  
+  // Effects
+  @each $name, $value in $effects {
+    --#{$name}: #{$value};
+  }
+
+  // Code Theme for Prism.js
+  @each $name, $value in $prism-theme {
+    --prism-#{$name}: #{$value};
+  }
+}
+
+// ========================================
+// HELPER FUNCTIONS
+// ========================================
+
+// Helper functions to access the design system
+@function color($key) {
+  @return map-get($colors, $key);
+}
+
+@function font($key) {
+  @return map-get($typography, $key);
+}
+
+@function spacing($key) {
+  @return map-get($spacing, $key);
+}
+
+@function effect($key) {
+  @return map-get($effects, $key);
+}
+
+@function breakpoint($key) {
+  @return map-get($breakpoints, $key);
+}
+
+@function prism($key) {
+  @return map-get($prism-theme, $key);
+}
+
+// ========================================
+// MIXINS
+// ========================================
+
+@mixin media-breakpoint-up($breakpoint) {
+  @media (min-width: breakpoint($breakpoint)) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint) {
+  @media (max-width: breakpoint($breakpoint) - 0.02) {
+    @content;
+  }
+}
+
+@mixin text-gradient($direction: to right, $start-color: color('primary'), $end-color: color('secondary')) {
+  background: linear-gradient($direction, $start-color, $end-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+@mixin gradient-bg($direction: to right, $start-color: color('primary'), $end-color: color('secondary')) {
+  background: linear-gradient($direction, $start-color, $end-color);
+}

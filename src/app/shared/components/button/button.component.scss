@@ -1,13 +1,12 @@
-@use '../../styles/mixins' as *;
-@use '../../styles/variables' as *;
+@use '../../../../styles/design-tokens' as tokens;
 
 .btn {
     display: inline-block;
     padding: 0.875rem 2rem;
-    font-weight: get($typography, 'font-weight-semibold');
-    border-radius: 30px;
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--border-radius-pill);
     text-decoration: none;
-    transition: get($effects, 'transition');
+    transition: var(--transition);
     border: none;
     cursor: pointer;
     position: relative;
@@ -49,39 +48,39 @@
 
 // Button types
 .btn-primary {
-    background: get($colors, 'primary');
-    color: get($colors, 'light');
+    background: var(--primary);
+    color: var(--light);
 
     &::before {
-        background: get($colors, 'secondary');
+        background: var(--secondary);
     }
 
     &:hover {
-        box-shadow: get($effects, 'card-shadow');
+        box-shadow: var(--button-shadow);
     }
 }
 
 .btn-secondary {
     background: transparent;
-    border: 2px solid get($colors, 'secondary');
-    color: get($colors, 'secondary');
+    border: 2px solid var(--secondary);
+    color: var(--secondary);
 
     &::before {
-        background: get($colors, 'secondary');
+        background: var(--secondary);
     }
 
     &:hover {
-        color: get($colors, 'light');
+        color: var(--light);
     }
 }
 
 .btn-text {
     background: transparent;
-    color: get($colors, 'primary');
+    color: var(--primary);
     padding: 0.5rem 1rem;
 
     &:hover {
-        background: rgba(get($colors, 'primary-rgb'), 0.1);
+        background: rgba(var(--primary-rgb), 0.1);
     }
 }
 

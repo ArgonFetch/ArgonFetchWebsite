@@ -1,13 +1,15 @@
-@use '../../styles/mixins' as *;
-@use '../../styles/variables' as *;
+@use '../../../../styles/design-tokens' as tokens;
 
 .card {
-    @include card;
+    background: var(--dark);
+    padding: var(--card-padding);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
 }
 
 .card-hover:hover {
     transform: translateY(-5px);
-    box-shadow: get($effects, 'card-shadow');
+    box-shadow: var(--card-shadow);
 }
 
 .card-centered {
@@ -18,31 +20,31 @@
 }
 
 .card-feature {
-    padding: get($spacing, 'lg');
+    padding: var(--spacing-lg);
     text-align: center;
 
     .icon {
-        color: get($colors, 'primary');
-        margin-bottom: get($spacing, 'md');
+        color: var(--primary);
+        margin-bottom: var(--spacing-md);
         font-size: 40px;
         line-height: 1;
     }
 
     h3 {
-        color: get($colors, 'light');
-        margin-bottom: get($spacing, 'sm');
-        font-size: 1.25rem;
+        color: var(--light);
+        margin-bottom: var(--spacing-sm);
+        font-size: var(--font-size-lg);
     }
 
     p {
-        color: get($colors, 'text-secondary');
-        font-size: 0.95rem;
-        line-height: 1.6;
+        color: var(--text-secondary);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-normal);
     }
 }
 
 .card-usage,
 .card-roadmap {
-    padding: get($spacing, 'lg');
-    background: get($colors, 'darker');
+    padding: var(--spacing-lg);
+    background: var(--darker);
 }

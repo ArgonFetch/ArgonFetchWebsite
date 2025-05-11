@@ -1,14 +1,40 @@
-@use '../../styles/mixins' as *;
-@use '../../styles/variables' as *;
+@use '../../../../styles/design-tokens' as tokens;
 
 .section {
-    @include section;
+    padding: var(--section-padding);
+    
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--container-padding);
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-heading-bold);
+        color: var(--primary);
+        margin-bottom: var(--spacing-lg);
+        font-family: var(--font-family-heading);
+    }
+
+    .section-subtitle {
+        text-align: center;
+        margin-bottom: var(--spacing-xl);
+        font-size: var(--font-size-md);
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: var(--line-height-normal);
+    }
 }
 
 .section-dark {
-    background-color: get($colors, 'dark');
+    background-color: var(--dark);
 }
 
 .section-darker {
-    background-color: get($colors, 'darker');
+    background-color: var(--darker);
 }

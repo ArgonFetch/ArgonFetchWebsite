@@ -1,8 +1,9 @@
-@use 'variables' as *;
+@use "sass:map";
+@use 'design-system' as *;
 
 // Get value from map
 @function get($map, $key) {
-    @return map-get($map, $key);
+    @return map.get($map, $key);
 }
 
 // Responsive breakpoints

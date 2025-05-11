@@ -1,12 +1,23 @@
+@use 'design-tokens' as tokens;
+
+// Base placeholders for common components
 %section-base {
     padding: var(--section-padding);
     background-color: var(--darker);
 
     h2 {
         text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
+        font-size: var(--font-size-3xl);
+        margin-bottom: var(--spacing-xl);
         color: var(--primary);
+        font-family: var(--font-family-heading);
+        font-weight: var(--font-weight-heading-bold);
+    }
+    
+    p {
+        color: var(--text-secondary);
+        line-height: var(--line-height-normal);
+        margin-bottom: var(--spacing-md);
     }
 }
 
@@ -20,6 +31,12 @@
         transform: translateY(-5px);
         box-shadow: var(--card-shadow);
     }
+    
+    h3 {
+        font-family: var(--font-family-heading);
+        margin-bottom: var(--spacing-sm);
+        color: var(--primary);
+    }
 }
 
 %grid-base {
@@ -27,4 +44,20 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--grid-gap);
     padding: var(--container-padding);
+}
+
+%button-base {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    border-radius: var(--border-radius-pill);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+    
+    &:hover {
+        transform: translateY(-2px);
+    }
 }
