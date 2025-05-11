@@ -34,9 +34,15 @@
             "styles": [
               "src/styles.scss",
               "src/styles/variables.scss",
-              "src/styles/shared.scss"
+              "src/styles/shared.scss",
+              "node_modules/prismjs/themes/prism-okaidia.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-bash.min.js",
+              "node_modules/prismjs/components/prism-powershell.min.js",
+              "node_modules/prismjs/components/prism-markup.min.js"
+            ]
           },
           "configurations": {
             "production": {

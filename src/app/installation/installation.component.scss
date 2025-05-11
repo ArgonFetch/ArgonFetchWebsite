@@ -127,3 +127,39 @@
         }
     }
 }
+
+.code-block-container {
+    position: relative;
+    margin-bottom: 1rem; // Added to match original spacing if any
+
+    .copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 0.35rem 0.75rem;
+        background-color: var(--primary);
+        color: var(--light);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: var(--secondary);
+        }
+    }
+
+    .code-block {
+        background: var(--darker);
+        padding: 1.5rem; // Keep original padding
+        padding-top: 2.5rem; // Add padding to top to make space for the button
+        border-radius: 8px;
+        overflow-x: auto;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        pre {
+            margin: 0; // Ensure pre tag doesn't add extra margins
+        }
+    }
+}

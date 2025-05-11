@@ -10,8 +10,12 @@
         <h3><span class="step-number">1</span> Prerequisites</h3>
         <p>
           For Spotify support, you'll need to create an App using
-          <a href="https://developer.spotify.com/documentation/web-api/concepts/apps" target="_blank"
-            rel="noopener noreferrer">Spotify for Developers</a>.
+          <a
+            href="https://developer.spotify.com/documentation/web-api/concepts/apps"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Spotify for Developers</a
+          >.
         </p>
         <p>
           From there, obtain a <strong>Client ID</strong> and a
@@ -25,20 +29,20 @@
           <span class="step-number">2</span> Download & Setup (Linux/macOS)
         </h3>
         <p>Open your terminal and run the following commands:</p>
-        <div class="code-block">
-          <pre><code class="language-bash"># Download Source
-  curl -fsSL -o argonfetch.tar.gz https://github.com/ArgonFetch/ArgonFetch/archive/refs/heads/main.tar.gz
-  
-  # Unpack Source, remove tar and cd into the source directory
-  tar -xzf argonfetch.tar.gz
-  rm argonfetch.tar.gz
-  cd ArgonFetch-main # Or the name of the extracted folder
-  
-  # Make the script executable
-  chmod +x setup.sh
-  
-  # Run interactively
-  ./setup.sh</code></pre>
+        <div class="code-block-container">
+          <button
+            class="copy-btn"
+            (click)="copyToClipboard(bashScriptContent(), $event)"
+          >
+            Copy
+          </button>
+          <div class="code-block">
+            @if (bashScriptContent() === 'Loading...') {
+              <pre><code>Loading script content...</code></pre>
+            } @else {
+              <pre><code class="language-bash">{{ bashScriptContent() }}</code></pre>
+            }
+          </div>
         </div>
       </div>
 
@@ -48,21 +52,20 @@
           PowerShell)
         </h3>
         <p>Open PowerShell and run the following commands:</p>
-        <div class="code-block">
-          <pre><code class="language-powershell"># Download the source using Invoke-WebRequest
-  Invoke-WebRequest -Uri "https://github.com/ArgonFetch/ArgonFetch/archive/refs/heads/main.tar.gz" -OutFile "argonfetch.tar.gz"
-  
-  # Extract the tar.gz file (Windows 10 and later include tar)
-  tar -xzf argonfetch.tar.gz
-  
-  # Remove the downloaded archive
-  Remove-Item argonfetch.tar.gz
-  
-  # Change directory into the extracted folder
-  Set-Location ArgonFetch-main # Or the name of the extracted folder
-  
-  # Run interactively
-  .\\setup.ps1</code></pre>
+        <div class="code-block-container">
+          <button
+            class="copy-btn"
+            (click)="copyToClipboard(powershellScriptContent(), $event)"
+          >
+            Copy
+          </button>
+          <div class="code-block">
+            @if (powershellScriptContent() === 'Loading...') {
+              <pre><code>Loading script content...</code></pre>
+            } @else {
+              <pre><code class="language-powershell">{{ powershellScriptContent() }}</code></pre>
+            }
+          </div>
         </div>
         <p class="note">
           Ensure your PowerShell execution policy allows running local scripts.
@@ -78,7 +81,9 @@
           accessible in your web browser at:
         </p>
         <p class="highlight-link">
-          <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>
+          <a href="http://localhost:8080" target="_blank"
+            >http://localhost:8080</a
+          >
         </p>
       </div>
     </div>
