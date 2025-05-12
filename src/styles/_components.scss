@@ -19,20 +19,34 @@
 }
 
 %card-base {
-    background: var(--dark);
+    background: var(--darker);
     padding: var(--card-padding);
     border-radius: var(--border-radius);
     transition: var(--transition);
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: var(--card-shadow);
+        box-shadow: 0 5px 15px rgba(150, 68, 255, 0.2);
     }
 
     h3 {
         font-family: var(--font-family-heading);
         margin-bottom: var(--spacing-sm);
+        color: var(--light);
+        font-size: 1.25rem;
+    }
+
+    p {
+        color: var(--text-secondary, var(--light));
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .icon {
         color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-size: 40px;
+        line-height: 1;
     }
 }
 
