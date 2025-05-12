@@ -32,7 +32,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/styles/shared.scss"
             ],
             "scripts": [
               "node_modules/prismjs/prism.js",

@@ -1,5 +1,5 @@
+@use "./design-tokens" as tokens;
 @use "sass:map";
-@use '../../../styles/design-tokens' as tokens;
 
 // Get value from map
 @function get($map, $key) {
@@ -8,13 +8,15 @@
 
 // Responsive breakpoints
 @mixin respond-down($breakpoint) {
-    $size: get(tokens.$breakpoints, $breakpoint);
+    $size: map.get(tokens.$breakpoints, $breakpoint);
 
     @if $size {
         @media (max-width: $size) {
             @content;
         }
-    } @else {
+    }
+
+    @else {
         @media (max-width: $breakpoint) {
             @content;
         }
@@ -34,7 +36,7 @@
 }
 
 // Grid helpers
-@mixin grid($columns: 1, $gap: get($spacing, 'grid-gap')) {
+@mixin grid($columns: 1, $gap: map.get(tokens.$spacing, 'grid-gap')) {
     display: grid;
     gap: $gap;
 
@@ -49,41 +51,41 @@
 
 // Standard card styles
 @mixin card {
-    padding: get($spacing, 'card');
-    border-radius: get($effects, 'border-radius');
-    background-color: get($colors, 'dark');
-    transition: get($effects, 'transition');
+    padding: map.get(tokens.$spacing, 'card');
+    border-radius: map.get(tokens.$effects, 'border-radius');
+    background-color: map.get(tokens.$colors, 'dark');
+    transition: map.get(tokens.$effects, 'transition');
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: get($effects, 'card-shadow');
+        box-shadow: map.get(tokens.$effects, 'card-shadow');
     }
 }
 
 // Section container
 @mixin section {
-    padding: get($spacing, 'section') 0;
+    padding: map.get(tokens.$spacing, 'section') 0;
 
     .container {
         width: 90%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 get($spacing, 'container');
+        padding: 0 map.get(tokens.$spacing, 'container');
     }
 
     .section-title {
         text-align: center;
         font-size: 2.5rem;
-        font-weight: get($typography, 'font-weight-heading-bold');
-        color: get($colors, 'primary');
-        margin-bottom: get($spacing, 'lg');
+        font-weight: map.get(tokens.$typography, 'font-weight-heading-bold');
+        color: map.get(tokens.$colors, 'primary');
+        margin-bottom: map.get(tokens.$spacing, 'lg');
     }
 
     .section-subtitle {
         text-align: center;
-        margin-bottom: get($spacing, 'xl');
+        margin-bottom: map.get(tokens.$spacing, 'xl');
         font-size: 1.1rem;
-        color: get($colors, 'text-secondary');
+        color: map.get(tokens.$colors, 'text-secondary');
         max-width: 700px;
         margin-left: auto;
         margin-right: auto;
