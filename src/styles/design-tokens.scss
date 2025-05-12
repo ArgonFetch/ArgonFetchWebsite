@@ -1,5 +1,5 @@
 /**
- * ArgonFetch Design Tokens
+ * ArgonFetch Design Tokens (Improved Version)
  * This file defines all colors, fonts, and design variables used throughout the application.
  * It serves as a single source of truth for design consistency.
  */
@@ -144,15 +144,33 @@ $breakpoints: (
 );
 
 // ========================================
+// PRISM THEME
+// ========================================
+$prism-theme: (
+    'background': #0a0a0a,
+    'text': #f1f2f6,
+    'comment': #636e7b,
+    'punctuation': #b3b9c5,
+    'tag': #9644ff,
+    'attr-name': #6c2bff,
+    'string': #4cd2ff,
+    'operator': #ff9940,
+    'keyword': #9644ff,
+    'function': #fff394,
+    'variable': #ff9940
+);
+
+// ========================================
 // CSS VARIABLES EXPORT
 // ========================================
 
 :root {
-
     // Export all colors as CSS variables
     @each $name, $value in $colors {
         --color-#{$name}: #{$value};
-    }    // Primary shortcuts
+    }
+
+    // Primary shortcuts
     --primary: #{map.get($colors, 'primary')};
     --primary-rgb: #{map.get($colors, 'primary-rgb')};
     --primary-light: #{map.get($colors, 'primary-light')};
@@ -169,6 +187,15 @@ $breakpoints: (
         --#{$name}: #{$value};
     }
 
+    --font-family-sans-serif: #{map.get($typography, 'font-family-sans')};
+    --font-family-heading: #{map.get($typography, 'font-family-heading')};
+    --font-family-code: #{map.get($typography, 'font-family-code')};
+    --font-weight-normal: #{map.get($typography, 'font-weight-normal')};
+    --font-weight-medium: #{map.get($typography, 'font-weight-medium')};
+    --font-weight-semibold: #{map.get($typography, 'font-weight-semibold')};
+    --font-weight-bold: #{map.get($typography, 'font-weight-bold')};
+    --font-weight-heading-bold: #{map.get($typography, 'font-weight-heading-bold')};
+
     // Spacing
     @each $name, $value in $spacing {
         --spacing-#{$name}: #{$value};
@@ -183,13 +210,22 @@ $breakpoints: (
     @each $name, $value in $effects {
         --#{$name}: #{$value};
     }
+
+    --border-radius: #{map.get($effects, 'border-radius')};
+    --border-radius-sm: #{map.get($effects, 'border-radius-sm')};
+    --transition: #{map.get($effects, 'transition')};
+    --card-shadow: #{map.get($effects, 'card-shadow')};
+
+    // Prism Theme
+    @each $name, $value in $prism-theme {
+        --prism-#{$name}: #{$value};
+    }
 }
 
 // ========================================
 // HELPER FUNCTIONS
 // ========================================
 
-// Helper functions to access the design tokens
 @function color($key) {
     @return map.get($colors, $key);
 }
@@ -210,7 +246,14 @@ $breakpoints: (
     @return map.get($breakpoints, $key);
 }
 
-// Mixins for common patterns
+@function prism($key) {
+    @return map.get($prism-theme, $key);
+}
+
+// ========================================
+// MIXINS
+// ========================================
+
 @mixin text-gradient($direction: to right, $start-color: color('primary'), $end-color: color('secondary')) {
     background: linear-gradient($direction, $start-color, $end-color);
     -webkit-background-clip: text;
@@ -228,6 +271,3 @@ $breakpoints: (
         @content;
     }
 }
-
-// We're removing the :export block as it's causing CSS errors
-// The design tokens can be accessed via the Sass functions above

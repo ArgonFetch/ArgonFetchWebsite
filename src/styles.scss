@@ -75,3 +75,35 @@ h2,
     margin: 0 auto;
     padding: 0 1rem;
 }
+
+/* Cross-browser scrollbar styles */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--darker);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+    border: 3px solid var(--darker);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--darker);
+}
+
+/* For Edge and IE */
+body {
+    -ms-overflow-style: scrollbar;
+}

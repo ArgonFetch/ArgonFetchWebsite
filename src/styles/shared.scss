@@ -13,7 +13,7 @@
         font-family: var(--font-family-heading);
         font-weight: var(--font-weight-heading-bold);
     }
-    
+
     p {
         color: var(--text-secondary);
         line-height: var(--line-height-normal);
@@ -31,7 +31,7 @@
         transform: translateY(-5px);
         box-shadow: var(--card-shadow);
     }
-    
+
     h3 {
         font-family: var(--font-family-heading);
         margin-bottom: var(--spacing-sm);
@@ -56,7 +56,7 @@
     transition: var(--transition);
     cursor: pointer;
     border: none;
-    
+
     &:hover {
         transform: translateY(-2px);
     }

@@ -1,5 +1,5 @@
 @use "sass:map";
-@use 'design-system' as *;
+@use '../../../styles/design-tokens' as tokens;
 
 // Get value from map
 @function get($map, $key) {
@@ -7,16 +7,14 @@
 }
 
 // Responsive breakpoints
-@mixin respond-to($breakpoint) {
-    $size: get($breakpoints, $breakpoint);
+@mixin respond-down($breakpoint) {
+    $size: get(tokens.$breakpoints, $breakpoint);
 
     @if $size {
         @media (max-width: $size) {
             @content;
         }
-    }
-
-    @else {
+    } @else {
         @media (max-width: $breakpoint) {
             @content;
         }

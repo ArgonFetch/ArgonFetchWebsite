@@ -1,4 +1,4 @@
-@use 'design-system' as *;
+@use '../../../styles/design-tokens' as *;
 @use 'mixins' as *;
 
 // Grid utilities
@@ -23,7 +23,7 @@
     grid-template-columns: repeat(4, 1fr);
 }
 
-@include respond-to('md') {
+@include respond-down('md') {
 
     .grid-cols-2,
     .grid-cols-3,
