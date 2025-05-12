@@ -10,12 +10,8 @@
         <h3><span class="step-number">1</span> Prerequisites</h3>
         <p>
           For Spotify support, you'll need to create an App using
-          <a
-            href="https://developer.spotify.com/documentation/web-api/concepts/apps"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Spotify for Developers</a
-          >.
+          <a href="https://developer.spotify.com/documentation/web-api/concepts/apps" target="_blank"
+            rel="noopener noreferrer">Spotify for Developers</a>.
         </p>
         <p>
           From there, obtain a <strong>Client ID</strong> and a
@@ -30,17 +26,14 @@
         </h3>
         <p>Open your terminal and run the following commands:</p>
         <div class="code-block-container">
-          <button
-            class="copy-btn"
-            (click)="copyToClipboard(bashScriptContent(), $event)"
-          >
+          <button class="copy-btn" (click)="copyToClipboard(bashScriptContent(), $event)">
             Copy
           </button>
           <div class="code-block">
             @if (bashScriptContent() === 'Loading...') {
-              <pre><code>Loading script content...</code></pre>
+            <pre><code>Loading script content...</code></pre>
             } @else {
-              <pre><code class="language-bash">{{ bashScriptContent() }}</code></pre>
+            <pre><code class="language-bash">{{ bashScriptContent() }}</code></pre>
             }
           </div>
         </div>
@@ -53,17 +46,14 @@
         </h3>
         <p>Open PowerShell and run the following commands:</p>
         <div class="code-block-container">
-          <button
-            class="copy-btn"
-            (click)="copyToClipboard(powershellScriptContent(), $event)"
-          >
+          <button class="copy-btn" (click)="copyToClipboard(powershellScriptContent(), $event)">
             Copy
           </button>
           <div class="code-block">
             @if (powershellScriptContent() === 'Loading...') {
-              <pre><code>Loading script content...</code></pre>
+            <pre><code>Loading script content...</code></pre>
             } @else {
-              <pre><code class="language-powershell">{{ powershellScriptContent() }}</code></pre>
+            <pre><code class="language-powershell">{{ powershellScriptContent() }}</code></pre>
             }
           </div>
         </div>
@@ -81,9 +71,7 @@
           accessible in your web browser at:
         </p>
         <p class="highlight-link">
-          <a href="http://localhost:8080" target="_blank"
-            >http://localhost:8080</a
-          >
+          <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>
         </p>
       </div>
     </div>

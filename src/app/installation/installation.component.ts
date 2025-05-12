@@ -60,7 +60,7 @@ export class InstallationComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.loadScripts();
   }
-  
+
   ngAfterViewChecked() {
     if (this.contentLoaded) {
       this.highlightAllCodeBlocks();
@@ -95,11 +95,11 @@ export class InstallationComponent implements OnInit, AfterViewChecked {
           this.cdr.detectChanges();
         },
       });
-  }  private highlightCodeBlock(selector: string) {
+  } private highlightCodeBlock(selector: string) {
     setTimeout(() => {
       // Find all code blocks matching the selector
       const codeBlocks = this.el.nativeElement.querySelectorAll(selector);
-      
+
       if (codeBlocks && codeBlocks.length > 0) {
         codeBlocks.forEach((block: any) => {
           // Make sure Prism is available and initialized
@@ -115,7 +115,7 @@ export class InstallationComponent implements OnInit, AfterViewChecked {
       }
     }, 200); // Give more time for elements to render
   }
-  
+
   highlightAllCodeBlocks() {
     const codeBlocks = this.el.nativeElement.querySelectorAll('pre code');
     if (codeBlocks && codeBlocks.length > 0) {
