@@ -1,0 +1,46 @@
+<div class="docs-page">
+  <h1>Configuration</h1>
+
+  <p class="lead">
+    Learn how to configure ArgonFetch to suit your needs and preferences.
+  </p>
+
+  <div class="config-section">
+    <h2>Environment Variables</h2>
+    <p>ArgonFetch can be configured using the following environment variables:</p>
+
+    <div class="config-item">
+      <h3><code>PORT</code></h3>
+      <p>The port on which the server will run.</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>PORT=3000</code></pre>
+      </div>
+    </div>
+
+    <div class="config-item">
+      <h3><code>NODE_ENV</code></h3>
+      <p>The environment mode (development, production).</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>NODE_ENV=production</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="config-section">
+    <h2>Configuration File</h2>
+    <p>You can also use a configuration file to customize ArgonFetch behavior:</p>
+
+    <div class="code-block-container">
+      <pre class="code-block"><code>{{ '{' }}
+  "server": {{ '{' }}
+    "port": 3000,
+    "host": "localhost"
+  {{ '}' }},
+  "downloads": {{ '{' }}
+    "outputPath": "./downloads",
+    "maxConcurrent": 3
+  {{ '}' }}
+{{ '}' }}</code></pre>
+    </div>
+  </div>
+</div>

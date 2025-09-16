@@ -36,6 +36,10 @@ $colors: (
     'light': #f8fafc,
     'white': #ffffff,
 
+    // Section alternating backgrounds
+    'section-bg-1': #1e1a24,
+    'section-bg-2': #2a252f,
+
     // Modern grayscale with blue undertones
     'gray-50': #f9fafb,
     'gray-100': #f3f4f6,
@@ -239,6 +243,10 @@ $prism-theme: (
     --light: #{map.get($colors, 'light')};
     --text-primary: #{map.get($colors, 'text-primary')};
     --text-secondary: #{map.get($colors, 'text-secondary')};
+
+    // Section backgrounds
+    --section-bg-1: #{map.get($colors, 'section-bg-1')};
+    --section-bg-2: #{map.get($colors, 'section-bg-2')};
 
     // Typography
     @each $name, $value in $typography {

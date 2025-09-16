@@ -1,6 +1,13 @@
 .roadmap {
-  padding: 6rem 0;
-  background-color: var(--darker);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--section-bg-2) 0%, var(--card) 50%, var(--section-bg-2) 100%);
+  padding: 2rem 0;
+
+  .container {
+    width: 100%;
+  }
 
   h2 {
     text-align: center;

@@ -1,0 +1,58 @@
+<div class="docs-page">
+  <h1>API Reference</h1>
+
+  <p class="lead">
+    Complete reference for the ArgonFetch API endpoints and methods.
+  </p>
+
+  <div class="api-section">
+    <h2>Download Endpoint</h2>
+    <div class="endpoint">
+      <div class="method-url">
+        <span class="method post">POST</span>
+        <span class="url">/api/download</span>
+      </div>
+      <p>Download media from a supported platform.</p>
+
+      <h3>Request Body</h3>
+      <div class="code-block-container">
+        <pre class="code-block"><code>{{ '{' }}
+  "url": "https://example.com/video",
+  "format": "mp4",
+  "quality": "720p"
+{{ '}' }}</code></pre>
+      </div>
+
+      <h3>Response</h3>
+      <div class="code-block-container">
+        <pre class="code-block"><code>{{ '{' }}
+  "success": true,
+  "downloadId": "abc123",
+  "filename": "video.mp4",
+  "size": 15728640
+{{ '}' }}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="api-section">
+    <h2>Status Endpoint</h2>
+    <div class="endpoint">
+      <div class="method-url">
+        <span class="method get">GET</span>
+        <span class="url">/api/status/:id</span>
+      </div>
+      <p>Check the status of a download.</p>
+
+      <h3>Response</h3>
+      <div class="code-block-container">
+        <pre class="code-block"><code>{{ '{' }}
+  "id": "abc123",
+  "status": "completed",
+  "progress": 100,
+  "downloadUrl": "/downloads/video.mp4"
+{{ '}' }}</code></pre>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,145 @@
+<div class="docs-page">
+  <h1>Basic Usage</h1>
+
+  <p class="lead">
+    Learn how to use ArgonFetch to download media from various platforms quickly and efficiently.
+  </p>
+
+  <div class="usage-section">
+    <h2>Web Interface</h2>
+    <p>The simplest way to use ArgonFetch is through the web interface:</p>
+
+    <div class="step">
+      <h3>1. Access the Web Interface</h3>
+      <p>Open your browser and navigate to your ArgonFetch installation:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>http://localhost:3000</code></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <h3>2. Enter Media URL</h3>
+      <p>Paste the URL of the video or media you want to download in the input field.</p>
+    </div>
+
+    <div class="step">
+      <h3>3. Select Quality (Optional)</h3>
+      <p>Choose your preferred quality settings from the dropdown menu.</p>
+    </div>
+
+    <div class="step">
+      <h3>4. Download</h3>
+      <p>Click the "Download" button and wait for the process to complete.</p>
+    </div>
+  </div>
+
+  <div class="usage-section">
+    <h2>API Usage</h2>
+    <p>For programmatic access, you can use the REST API:</p>
+
+    <div class="step">
+      <h3>Basic Download Request</h3>
+      <div class="code-block-container">
+        <pre class="code-block"><code>curl -X POST http://localhost:3000/api/download \
+  -H "Content-Type: application/json" \
+  -d '{{ '{' }}
+    "url": "https://example.com/video",
+    "format": "mp4",
+    "quality": "720p"
+  {{ '}' }}'</code></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <h3>Check Download Status</h3>
+      <div class="code-block-container">
+        <pre class="code-block"><code>curl http://localhost:3000/api/status/abc123</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="usage-section">
+    <h2>Supported Platforms</h2>
+    <p>ArgonFetch supports downloading from various platforms:</p>
+
+    <ul class="platform-list">
+      <li>✅ YouTube</li>
+      <li>✅ Twitter</li>
+      <li>✅ Instagram</li>
+      <li>✅ TikTok</li>
+      <li>✅ Facebook</li>
+      <li>✅ Reddit</li>
+      <li>✅ And many more...</li>
+    </ul>
+  </div>
+
+  <div class="usage-section">
+    <h2>Quality Options</h2>
+    <p>Available quality settings depend on the source platform:</p>
+
+    <table class="quality-table">
+      <thead>
+        <tr>
+          <th>Quality</th>
+          <th>Resolution</th>
+          <th>Use Case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>best</code></td>
+          <td>Highest available</td>
+          <td>Best quality download</td>
+        </tr>
+        <tr>
+          <td><code>1080p</code></td>
+          <td>1920x1080</td>
+          <td>Full HD</td>
+        </tr>
+        <tr>
+          <td><code>720p</code></td>
+          <td>1280x720</td>
+          <td>HD (recommended)</td>
+        </tr>
+        <tr>
+          <td><code>480p</code></td>
+          <td>854x480</td>
+          <td>Standard quality</td>
+        </tr>
+        <tr>
+          <td><code>worst</code></td>
+          <td>Lowest available</td>
+          <td>Fastest download</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="usage-section">
+    <h2>Tips and Best Practices</h2>
+    <ul>
+      <li><strong>Check platform policies:</strong> Always respect the terms of service of the platforms you're downloading from</li>
+      <li><strong>Storage space:</strong> Higher quality videos require more storage space</li>
+      <li><strong>Network bandwidth:</strong> Consider your internet connection when selecting quality</li>
+      <li><strong>Batch downloads:</strong> Use the API for downloading multiple files</li>
+    </ul>
+  </div>
+
+  <div class="usage-section">
+    <h2>Troubleshooting</h2>
+    <div class="trouble-item">
+      <h3>Download fails immediately</h3>
+      <p>Make sure the URL is valid and the media is publicly accessible.</p>
+    </div>
+
+    <div class="trouble-item">
+      <h3>Slow download speeds</h3>
+      <p>Try selecting a lower quality or check your network connection.</p>
+    </div>
+
+    <div class="trouble-item">
+      <h3>Unsupported platform</h3>
+      <p>Check our <a routerLink="/docs/api">API documentation</a> for the list of supported platforms.</p>
+    </div>
+  </div>
+</div>

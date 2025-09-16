@@ -1,6 +1,6 @@
 .footer {
     background: linear-gradient(135deg, var(--darker) 0%, #13111a 100%);
-    padding: var(--spacing-5xl) 0 var(--spacing-8);
+    padding: var(--spacing-6) 0 var(--spacing-4);
     position: relative;
     border-top: 1px solid rgba(153, 72, 253, 0.1);
 
@@ -8,12 +8,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: var(--spacing-8);
+        margin-bottom: var(--spacing-4);
         text-align: center;
 
         @media (max-width: 768px) {
             flex-direction: column;
-            gap: var(--spacing-8);
+            gap: var(--spacing-4);
         }
     }
 
@@ -57,7 +57,7 @@
 
     .footer-bottom {
         text-align: center;
-        padding-top: var(--spacing-8);
+        padding-top: var(--spacing-4);
         border-top: 1px solid rgba(153, 72, 253, 0.1);
 
         p {
@@ -66,7 +66,7 @@
         }
 
         .credits {
-            margin-top: var(--spacing-4);
+            margin-top: var(--spacing-2);
 
             a {
                 color: var(--primary);

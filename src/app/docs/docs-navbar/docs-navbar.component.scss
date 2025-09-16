@@ -38,15 +38,16 @@ header {
 
     .docs-badge {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      -webkit-background-clip: unset;
-      -webkit-text-fill-color: var(--white);
-      background-clip: unset;
-      color: var(--white);
+      color: white !important;
+      -webkit-text-fill-color: white !important;
+      -webkit-background-clip: border-box !important;
+      background-clip: border-box !important;
       padding: var(--spacing-1) var(--spacing-2);
       border-radius: var(--border-radius);
       font-size: var(--font-size-xs);
       font-weight: var(--font-weight-semibold);
       margin-left: var(--spacing-2);
+      display: inline-block;
     }
   }
 }

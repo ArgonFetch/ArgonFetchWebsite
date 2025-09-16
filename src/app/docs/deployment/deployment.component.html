@@ -1,0 +1,72 @@
+<div class="docs-page">
+  <h1>Deployment</h1>
+
+  <p class="lead">
+    Learn how to deploy ArgonFetch to production environments.
+  </p>
+
+  <div class="deploy-section">
+    <h2>Docker Deployment</h2>
+    <p>The easiest way to deploy ArgonFetch is using Docker:</p>
+
+    <div class="step">
+      <h3>1. Build Docker Image</h3>
+      <div class="code-block-container">
+        <pre class="code-block"><code>docker build -t argonfetch .</code></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <h3>2. Run Container</h3>
+      <div class="code-block-container">
+        <pre class="code-block"><code>docker run -p 3000:3000 -v ./downloads:/app/downloads argonfetch</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="deploy-section">
+    <h2>Manual Deployment</h2>
+    <p>For manual deployment on a server:</p>
+
+    <div class="step">
+      <h3>1. Build for Production</h3>
+      <div class="code-block-container">
+        <pre class="code-block"><code>npm run build</code></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <h3>2. Start Production Server</h3>
+      <div class="code-block-container">
+        <pre class="code-block"><code>NODE_ENV=production npm start</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="deploy-section">
+    <h2>Environment Configuration</h2>
+    <p>Make sure to set these environment variables in production:</p>
+    <div class="code-block-container">
+      <pre class="code-block"><code>NODE_ENV=production
+PORT=3000
+HOST=0.0.0.0</code></pre>
+    </div>
+  </div>
+
+  <div class="deploy-section">
+    <h2>Reverse Proxy Setup</h2>
+    <p>Example Nginx configuration:</p>
+    <div class="code-block-container">
+      <pre class="code-block"><code>server {{ '{' }}
+    listen 80;
+    server_name your-domain.com;
+
+    location / {{ '{' }}
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    {{ '}' }}
+{{ '}' }}</code></pre>
+    </div>
+  </div>
+</div>

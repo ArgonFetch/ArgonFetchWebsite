@@ -5,6 +5,7 @@ import {
   faChevronDown,
   faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-hero',
@@ -15,6 +16,7 @@ import {
 export class HeroComponent {
   faChevronDown = faChevronDown;
   faExclamationTriangle = faExclamationTriangle;
+  faGithub = faGithub;
 
   scrollToNextSection() {
     const featuresSection = document.getElementById('features');
