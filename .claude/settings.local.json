@@ -14,7 +14,9 @@
       "Bash(npx:*)",
       "Bash(git add:*)",
       "Bash(npm view:*)",
-      "Bash(npm ci:*)"
+      "Bash(npm ci:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
