@@ -1,26 +1,114 @@
 @use "../../styles/shared.scss";
 
 .features {
-  @extend %section-base;
-  background-color: var(--dark);
+  padding: var(--spacing-5xl) 0;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--card) 50%, var(--dark) 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(153, 72, 253, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(81, 45, 127, 0.03) 0%, transparent 50%);
+  }
+
+  h2 {
+    text-align: center;
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    margin-bottom: var(--spacing-4xl);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+  }
 
   .features-grid {
-    @extend %grid-base;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-8);
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   .feature-card {
-    @extend %card-base;
-    background: var(--darker);
+    background: linear-gradient(135deg, var(--card) 0%, rgba(75, 85, 99, 0.8) 100%);
+    padding: var(--spacing-8);
+    border-radius: var(--border-radius-2xl);
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: var(--backdrop-blur-sm);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--card-shadow-hover);
+      border-color: rgba(153, 72, 253, 0.2);
+
+      &::before {
+        opacity: 1;
+      }
+
+      .icon {
+        transform: scale(1.1);
+        background: linear-gradient(135deg, rgba(153, 72, 253, 0.15) 0%, rgba(196, 154, 255, 0.08) 100%);
+      }
+    }
 
     .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(153, 72, 253, 0.1) 0%, rgba(196, 154, 255, 0.05) 100%);
+      border-radius: var(--border-radius-2xl);
       color: var(--primary);
-      margin-bottom: var(--spacing-md);
-      font-size: 40px;
+      margin: 0 auto var(--spacing-5);
+      font-size: 32px;
       line-height: 1;
+      border: 1px solid rgba(153, 72, 253, 0.2);
+      transition: var(--transition);
+    }
+
+    h3 {
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-3);
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+      max-width: 280px;
+      margin: 0 auto;
     }
   }
 }

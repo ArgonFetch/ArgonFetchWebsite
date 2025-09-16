@@ -1,0 +1,25 @@
+<app-docs-navbar></app-docs-navbar>
+
+<div class="docs-container">
+  <aside class="docs-sidebar">
+    <nav class="docs-nav">
+      <h3>Getting Started</h3>
+      <ul>
+        <li><a routerLink="/docs/installation" routerLinkActive="active">Installation</a></li>
+        <li><a routerLink="/docs/usage" routerLinkActive="active">Basic Usage</a></li>
+        <li><a routerLink="/docs/configuration" routerLinkActive="active">Configuration</a></li>
+      </ul>
+
+      <h3>Advanced</h3>
+      <ul>
+        <li><a routerLink="/docs/api" routerLinkActive="active">API Reference</a></li>
+        <li><a routerLink="/docs/development" routerLinkActive="active">Development</a></li>
+        <li><a routerLink="/docs/deployment" routerLinkActive="active">Deployment</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="docs-content" [@slideAnimation]="getRouteAnimationData()">
+    <router-outlet></router-outlet>
+  </main>
+</div>

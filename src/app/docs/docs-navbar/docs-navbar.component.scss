@@ -1,0 +1,93 @@
+header {
+  background: rgba(23, 21, 26, 0.95);
+  backdrop-filter: var(--backdrop-blur);
+  border-bottom: 1px solid rgba(153, 72, 253, 0.1);
+  padding: var(--spacing-4) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.docs-nav-left {
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    text-decoration: none;
+    color: var(--text-primary);
+
+    img {
+      width: 28px;
+      height: 28px;
+    }
+
+    h1 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .docs-badge {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: var(--white);
+      background-clip: unset;
+      color: var(--white);
+      padding: var(--spacing-1) var(--spacing-2);
+      border-radius: var(--border-radius);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      margin-left: var(--spacing-2);
+    }
+  }
+}
+
+.docs-nav-right {
+  display: flex;
+  gap: var(--spacing-4);
+  align-items: center;
+
+  .btn-back, .btn-github {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition);
+  }
+
+  .btn-back {
+    background: rgba(153, 72, 253, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(153, 72, 253, 0.3);
+
+    &:hover {
+      background: rgba(153, 72, 253, 0.2);
+      transform: translateY(-1px);
+    }
+  }
+
+  .btn-github {
+    background: var(--card);
+    color: var(--text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: var(--surface);
+      color: var(--text-primary);
+      transform: translateY(-1px);
+    }
+  }
+}

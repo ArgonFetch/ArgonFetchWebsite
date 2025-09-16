@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* Import the shared styles */
 
@@ -14,17 +14,27 @@ html {
 }
 
 body {
-    background-color: var(--darker);
-    color: var(--light);
+    background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+    color: var(--text-primary);
     overflow-x: hidden;
     scroll-behavior: smooth;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2,
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--text-primary);
+}
+
 .logo h1 {
     font-family: var(--font-family-heading);
-    font-weight: var(--font-weight-heading-bold);
+    font-weight: var(--font-weight-extrabold);
 }
 
 .text-primary {
@@ -36,12 +46,17 @@ h2,
 }
 
 .btn {
-    display: inline-block;
-    padding: 0.875rem 2rem;
-    background: var(--primary);
-    color: var(--light);
-    font-weight: 600;
-    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3) var(--spacing-6);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--white);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--border-radius-lg);
     text-decoration: none;
     transition: var(--transition);
     border: none;
@@ -49,11 +64,22 @@ h2,
     position: relative;
     overflow: hidden;
     z-index: 1;
+    box-shadow: var(--button-shadow);
 }
 
 .btn:hover {
-    box-shadow: 0 5px 15px rgba(150, 68, 255, 0.4);
     transform: translateY(-2px);
+    box-shadow: var(--button-shadow-hover);
+    background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 100%);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .fade-in {
@@ -68,40 +94,59 @@ h2,
 }
 
 .container {
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 var(--spacing-container);
 }
 
-/* Cross-browser scrollbar styles */
+@media (min-width: 640px) {
+    .container {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1024px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1280px;
+    }
+}
+
+/* Modern scrollbar styles */
 ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--darker);
-    border-radius: 10px;
+    background: var(--card);
+    border-radius: var(--border-radius);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 10px;
-    border: 3px solid var(--darker);
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--card);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary);
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%);
 }
 
-/* For Firefox */
+/* Firefox scrollbar */
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--primary) var(--darker);
-}
-
-/* For Edge and IE */
-body {
-    -ms-overflow-style: scrollbar;
+    scrollbar-color: var(--primary) var(--card);
 }

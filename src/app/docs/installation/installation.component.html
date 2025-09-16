@@ -1,0 +1,115 @@
+<div class="docs-page">
+  <h1>Installation Guide</h1>
+
+  <p class="lead">
+    ArgonFetch can be easily installed and set up on your system. Follow the steps below to get started with self-hosting ArgonFetch.
+  </p>
+
+  <div class="installation-steps">
+    <div class="step">
+      <h3>
+        <span class="step-number">1</span>
+        Prerequisites
+      </h3>
+      <p>Before installing ArgonFetch, make sure you have the following prerequisites installed on your system:</p>
+      <ul>
+        <li><strong>Node.js</strong> (version 18 or higher)</li>
+        <li><strong>npm</strong> or <strong>yarn</strong> package manager</li>
+        <li><strong>Git</strong> for cloning the repository</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h3>
+        <span class="step-number">2</span>
+        Clone the Repository
+      </h3>
+      <p>Start by cloning the ArgonFetch repository from GitHub:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>git clone https://github.com/Pianonic/ArgonFetch.git
+cd ArgonFetch</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('git clone https://github.com/Pianonic/ArgonFetch.git\ncd ArgonFetch')">Copy</button>
+      </div>
+    </div>
+
+    <div class="step">
+      <h3>
+        <span class="step-number">3</span>
+        Install Dependencies
+      </h3>
+      <p>Install the required Node.js dependencies:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>npm install</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('npm install')">Copy</button>
+      </div>
+      <p><strong>Or if you prefer using Yarn:</strong></p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>yarn install</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('yarn install')">Copy</button>
+      </div>
+    </div>
+
+    <div class="step">
+      <h3>
+        <span class="step-number">4</span>
+        Configuration
+      </h3>
+      <p>Copy the example environment file and configure your settings:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>cp .env.example .env</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('cp .env.example .env')">Copy</button>
+      </div>
+      <p>Edit the <code>.env</code> file with your preferred settings:</p>
+      <div class="note">
+        <p><strong>Note:</strong> Make sure to configure the <code>PORT</code> and other environment variables according to your needs.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <h3>
+        <span class="step-number">5</span>
+        Start the Application
+      </h3>
+      <p>Start ArgonFetch in development mode:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>npm run dev</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('npm run dev')">Copy</button>
+      </div>
+      <p>For production deployment:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>npm run build
+npm start</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('npm run build\nnpm start')">Copy</button>
+      </div>
+      <p>ArgonFetch will be available at <code>http://localhost:3000</code> (or your configured port).</p>
+    </div>
+
+    <div class="step">
+      <h3>
+        <span class="step-number">6</span>
+        Docker Installation (Alternative)
+      </h3>
+      <p>You can also run ArgonFetch using Docker:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>docker build -t argonfetch .
+docker run -p 3000:3000 argonfetch</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('docker build -t argonfetch .\ndocker run -p 3000:3000 argonfetch')">Copy</button>
+      </div>
+      <p>Or use Docker Compose:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>docker-compose up -d</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('docker-compose up -d')">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="next-steps">
+    <h2>What's Next?</h2>
+    <p>Now that you have ArgonFetch installed, check out these resources:</p>
+    <ul>
+      <li><a routerLink="/docs/usage">Basic Usage Guide</a> - Learn how to use ArgonFetch</li>
+      <li><a routerLink="/docs/configuration">Configuration Options</a> - Customize your setup</li>
+      <li><a href="https://github.com/Pianonic/ArgonFetch/issues" target="_blank">Report Issues</a> - Found a bug? Let us know!</li>
+    </ul>
+  </div>
+</div>

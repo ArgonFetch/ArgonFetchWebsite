@@ -7,125 +7,185 @@
 @use "sass:map";
 
 // ========================================
-// COLORS
+// COLORS - ArgonFetch Brand Purple Palette
 // ========================================
 $colors: (
-    // Primary palette
-    'primary': #9644ff,
-    'primary-rgb': (150, 68, 255),
-    'primary-light': #b47aff,
-    'primary-dark': #7b20ff,
+    // Primary palette - Brand purple gradient
+    'primary': #9948fd,
+    'primary-rgb': (153, 72, 253),
+    'primary-light': #b470fe,
+    'primary-dark': #7e34fc,
+    'primary-hover': #a65bfd,
 
-    // Secondary palette
-    'secondary': #6c2bff,
-    'secondary-light': #8f59ff,
-    'secondary-dark': #5215e0,
+    // Secondary palette - Deeper brand purple
+    'secondary': #512d7f,
+    'secondary-light': #6b4196,
+    'secondary-dark': #3d2161,
+    'secondary-hover': #5c3588,
 
-    // Background colors
-    'darker': #0a0a0a,
-    'dark': #121212,
-    'light': #f1f2f6,
+    // Accent colors - Extended purple range
+    'accent': #c49aff,
+    'accent-light': #d4b3ff,
+    'accent-dark': #a678e8,
 
-    // Grayscale
-    'gray-100': #f8f9fa,
-    'gray-200': #e9ecef,
-    'gray-300': #dee2e6,
-    'gray-400': #ced4da,
-    'gray-500': #adb5bd,
-    'gray-600': #6c757d,
-    'gray-700': #495057,
-    'gray-800': #343a40,
-    'gray-900': #212529,
+    // Background colors - Brand dark theme
+    'darker': #17151a,
+    'dark': #2a252f,
+    'card': #3a3240,
+    'surface': #4a4151,
+    'light': #f8fafc,
+    'white': #ffffff,
 
-    // Text colors
-    'text-primary': #f1f2f6,
-    'text-secondary': rgba(241, 242, 246, 0.8),
+    // Modern grayscale with blue undertones
+    'gray-50': #f9fafb,
+    'gray-100': #f3f4f6,
+    'gray-200': #e5e7eb,
+    'gray-300': #d1d5db,
+    'gray-400': #9ca3af,
+    'gray-500': #6b7280,
+    'gray-600': #4b5563,
+    'gray-700': #374151,
+    'gray-800': #1f2937,
+    'gray-900': #111827,
 
-    // State colors
-    'success': #28a745,
-    'warning': #ffc107,
-    'danger': #dc3545,
-    'info': #17a2b8
+    // Text colors with better contrast
+    'text-primary': #f8fafc,
+    'text-secondary': rgba(248, 250, 252, 0.85),
+    'text-muted': rgba(248, 250, 252, 0.65),
+    'text-dark': #1f2937,
+
+    // Modern state colors - softer and more pleasant
+    'success': #10b981,
+    'success-light': #34d399,
+    'warning': #f59e0b,
+    'warning-light': #fbbf24,
+    'error': #ef4444,
+    'error-light': #f87171,
+    'info': #3b82f6,
+    'info-light': #60a5fa
 );
 
 // ========================================
-// TYPOGRAPHY
+// TYPOGRAPHY - Modern Typography Scale
 // ========================================
 $typography: (
-    // Font families
-    'font-family-sans': 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    'font-family-heading': 'Montserrat, Inter, sans-serif',
-    'font-family-code': 'Fira Code, Consolas, Monaco, monospace',
+    // Font families - Modern system fonts
+    'font-family-sans': 'Inter Variable, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
+    'font-family-heading': 'Poppins, Inter Variable, Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    'font-family-code': 'JetBrains Mono, Fira Code, "SF Mono", Monaco, Inconsolata, "Roboto Mono", Consolas, "Courier New", monospace',
 
-    // Font weights
+    // Font weights - Updated for modern fonts
+    'font-weight-light': 300,
     'font-weight-normal': 400,
     'font-weight-medium': 500,
     'font-weight-semibold': 600,
     'font-weight-bold': 700,
-    'font-weight-heading-bold': 800,
+    'font-weight-extrabold': 800,
+    'font-weight-black': 900,
 
-    // Font sizes
-    'font-size-xs': 0.75rem,
-    // 12px
-    'font-size-sm': 0.875rem,
-    // 14px
-    'font-size-base': 1rem,
-    // 16px
-    'font-size-md': 1.125rem,
-    // 18px
-    'font-size-lg': 1.25rem,
-    // 20px
-    'font-size-xl': 1.5rem,
-    // 24px
-    'font-size-2xl': 1.875rem,
-    // 30px
-    'font-size-3xl': 2.25rem,
-    // 36px
-    'font-size-4xl': 3rem,
-    // 48px
-    'font-size-5xl': 3.75rem,
-    // 60px
+    // Modern type scale (Perfect fourth - 1.333)
+    'font-size-xs': 0.75rem,      // 12px
+    'font-size-sm': 0.875rem,     // 14px
+    'font-size-base': 1rem,       // 16px
+    'font-size-md': 1.125rem,     // 18px
+    'font-size-lg': 1.25rem,      // 20px
+    'font-size-xl': 1.5rem,       // 24px
+    'font-size-2xl': 1.875rem,    // 30px
+    'font-size-3xl': 2.375rem,    // 38px
+    'font-size-4xl': 3rem,        // 48px
+    'font-size-5xl': 3.75rem,     // 60px
+    'font-size-6xl': 4.5rem,      // 72px
 
-    // Line heights
-    'line-height-tight': 1.1,
+    // Line heights - Optimized for readability
+    'line-height-none': 1,
+    'line-height-tight': 1.25,
+    'line-height-snug': 1.375,
     'line-height-normal': 1.5,
-    'line-height-loose': 1.8
+    'line-height-relaxed': 1.625,
+    'line-height-loose': 2,
+
+    // Letter spacing
+    'letter-spacing-tight': -0.025em,
+    'letter-spacing-normal': 0,
+    'letter-spacing-wide': 0.025em
 );
 
 // ========================================
-// SPACING
+// SPACING - 8px Grid System
 // ========================================
 $spacing: (
-    'grid-gap': 1rem,
-    // Default grid gap
-    'xs': 0.25rem,
-    'sm': 0.5rem,
+    // Base 8px grid
+    '0': 0,
+    '1': 0.25rem,    // 4px
+    '2': 0.5rem,     // 8px
+    '3': 0.75rem,    // 12px
+    '4': 1rem,       // 16px
+    '5': 1.25rem,    // 20px
+    '6': 1.5rem,     // 24px
+    '8': 2rem,       // 32px
+    '10': 2.5rem,    // 40px
+    '12': 3rem,      // 48px
+    '16': 4rem,      // 64px
+    '20': 5rem,      // 80px
+    '24': 6rem,      // 96px
+    '32': 8rem,      // 128px
+
+    // Semantic spacing
+    'xs': 0.5rem,
+    'sm': 0.75rem,
     'md': 1rem,
     'lg': 1.5rem,
     'xl': 2rem,
-    // 32px
-    'xxl': 4rem,
-    // 64px
-    'section': 6rem,
-    // 96px
-    'container': 1rem,
-    'card': 2rem
+    'xxl': 3rem,
+    '3xl': 4rem,
+    '4xl': 6rem,
+    '5xl': 8rem,
+
+    // Component specific
+    'section': 5rem,     // 80px
+    'container': 1.5rem, // 24px
+    'card': 1.5rem,      // 24px
+    'grid-gap': 1.5rem   // 24px
 );
 
 // ========================================
-// EFFECTS
+// EFFECTS - Modern Shadows & Transitions
 // ========================================
 $effects: (
-    'border-radius': 15px,
-    'border-radius-sm': 8px,
-    'border-radius-lg': 20px,
-    'border-radius-pill': 9999px,
-    'card-shadow': 0 5px 15px rgba(150, 68, 255, 0.2),
-    'card-shadow-hover': 0 8px 25px rgba(150, 68, 255, 0.35),
-    'button-shadow': 0 4px 10px rgba(150, 68, 255, 0.3),
-    'transition-fast': all 0.2s ease,
-    'transition': all 0.3s ease,
-    'transition-slow': all 0.5s ease
+    // Border radius - Modern rounded corners
+    'border-radius-none': 0,
+    'border-radius-sm': 0.375rem,    // 6px
+    'border-radius': 0.5rem,         // 8px
+    'border-radius-md': 0.75rem,     // 12px
+    'border-radius-lg': 1rem,        // 16px
+    'border-radius-xl': 1.25rem,     // 20px
+    'border-radius-2xl': 1.5rem,     // 24px
+    'border-radius-full': 9999px,
+
+    // Modern shadows with new color palette
+    'shadow-sm': 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+    'shadow': 0 1px 3px 0 rgba(0, 0, 0, 0.1) 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+    'shadow-md': 0 4px 6px -1px rgba(0, 0, 0, 0.1) 0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    'shadow-lg': 0 10px 15px -3px rgba(0, 0, 0, 0.1) 0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    'shadow-xl': 0 20px 25px -5px rgba(0, 0, 0, 0.1) 0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    'shadow-2xl': 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+
+    // Component specific shadows
+    'card-shadow': 0 4px 6px -1px rgba(0, 0, 0, 0.1) 0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    'card-shadow-hover': 0 10px 15px -3px rgba(153, 72, 253, 0.1) 0 4px 6px -2px rgba(153, 72, 253, 0.05),
+    'button-shadow': 0 4px 14px 0 rgba(153, 72, 253, 0.3),
+    'button-shadow-hover': 0 6px 20px rgba(153, 72, 253, 0.4),
+
+    // Transitions - Smoother easing curves
+    'transition-fast': all 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    'transition': all 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    'transition-slow': all 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    'transition-colors': color 150ms cubic-bezier(0.4, 0, 0.2, 1) background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+
+    // Backdrop effects
+    'backdrop-blur': blur(12px),
+    'backdrop-blur-sm': blur(4px),
+    'backdrop-blur-lg': blur(16px)
 );
 
 // ========================================
