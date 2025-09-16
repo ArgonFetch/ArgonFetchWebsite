@@ -74,7 +74,7 @@
   position: relative;
 
   // Docs content styling
-  :deep() {
+  ::ng-deep {
     h1, h2, h3, h4, h5, h6 {
       color: var(--text-primary);
       margin-top: var(--spacing-8);

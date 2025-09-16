@@ -12,7 +12,8 @@
       "Bash(node:*)",
       "Bash(ng update:*)",
       "Bash(npx:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(npm view:*)"
     ],
     "deny": [],
     "ask": []
