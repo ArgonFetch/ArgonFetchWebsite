@@ -1,23 +1,35 @@
-<header id="header" [class.scrolled]="isScrolled">
+<header id="header" [class.scrolled]="isScrolled" [class.docs-mode]="isDocsMode">
   <nav class="container">
     <a routerLink="/" (click)="closeMobileMenuAndScroll('hero')" class="logo">
       <img src="logo-simple.svg" alt="ArgonFetch Logo" />
       <h1>ArgonFetch</h1>
+      <span class="docs-badge" *ngIf="isDocsMode">DOCS</span>
     </a>
-    <div class="nav-links" id="navLinks" [class.active]="isMobileMenuOpen">
-      <a routerLink="/" fragment="features" (click)="closeMobileMenuAndScroll('features')"
-         [class.active]="isActiveSection('features')">Features</a>
-      <a routerLink="/" fragment="screenshots" (click)="closeMobileMenuAndScroll('screenshots')"
-         [class.active]="isActiveSection('screenshots')">Screenshots</a>
-      <a routerLink="/" fragment="usage" (click)="closeMobileMenuAndScroll('usage')"
-         [class.active]="isActiveSection('usage')">Usage</a>
-      <a routerLink="/" fragment="roadmap" (click)="closeMobileMenuAndScroll('roadmap')"
-         [class.active]="isActiveSection('roadmap')">Roadmap</a>
-      <a routerLink="/docs" (click)="closeMobileMenu()">Docs</a>
+    <div class="nav-links" id="navLinks" [class.active]="isMobileMenuOpen" [class.docs-mode]="isDocsMode">
+      <ng-container *ngIf="!isDocsMode">
+        <a routerLink="/" fragment="features" (click)="closeMobileMenuAndScroll('features')"
+           [class.active]="isActiveSection('features')" class="nav-link-icon"
+           [@iconFadeOut]="animationState">Features</a>
+        <a routerLink="/" fragment="screenshots" (click)="closeMobileMenuAndScroll('screenshots')"
+           [class.active]="isActiveSection('screenshots')" class="nav-link-icon"
+           [@iconFadeOut]="animationState">Screenshots</a>
+        <a routerLink="/" fragment="usage" (click)="closeMobileMenuAndScroll('usage')"
+           [class.active]="isActiveSection('usage')" class="nav-link-icon"
+           [@iconFadeOut]="animationState">Usage</a>
+        <a routerLink="/" fragment="roadmap" (click)="closeMobileMenuAndScroll('roadmap')"
+           [class.active]="isActiveSection('roadmap')" class="nav-link-icon"
+           [@iconFadeOut]="animationState">Roadmap</a>
+        <a (click)="navigateToDocs()" class="nav-link-icon docs-link"
+           [@iconFadeOut]="animationState">Docs</a>
+      </ng-container>
+      <button *ngIf="isDocsMode" class="back-button" (click)="navigateBack()">
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+        <span>Back</span>
+      </button>
       <a href="https://github.com/ArgonFetch/ArgonFetch" target="_blank" rel="noopener noreferrer"
-        (click)="closeMobileMenu()">
+        (click)="closeMobileMenu()" [class.outlined]="isDocsMode" class="github-link">
         <fa-icon [icon]="faGithub"></fa-icon>
-        GitHub
+        <span>GitHub</span>
       </a>
     </div>
     <button class="mobile-menu-btn" (click)="toggleMobileMenu()" aria-label="Toggle navigation menu"

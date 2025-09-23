@@ -4,8 +4,13 @@
   </app-intro-animation>
 }
 
+<app-navbar *ngIf="!showIntroAnimation"></app-navbar>
+
 <div class="app-container"
      [class.content-visible]="!showIntroAnimation"
      [class.content-hidden]="showIntroAnimation">
-  <router-outlet></router-outlet>
+  <div class="navbar-spacer"></div>
+  <div class="content-wrapper" [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
 </div>

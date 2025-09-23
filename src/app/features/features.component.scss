@@ -65,8 +65,8 @@
     }
 
     &:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(150, 68, 255, 0.2);
       border-color: rgba(153, 72, 253, 0.2);
 
       &::before {
@@ -74,7 +74,6 @@
       }
 
       .icon {
-        transform: scale(1.1);
         background: linear-gradient(135deg, rgba(153, 72, 253, 0.15) 0%, rgba(196, 154, 255, 0.08) 100%);
       }
     }

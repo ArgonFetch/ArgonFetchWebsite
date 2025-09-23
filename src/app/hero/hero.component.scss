@@ -3,12 +3,17 @@
 }
 
 .hero {
-    min-height: 100vh;
+    min-height: calc(100vh - 60px);
+    min-height: calc(100dvh - 60px); // Dynamic viewport height for mobile
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, var(--card) 100%);
+    padding: var(--spacing-8) var(--spacing-4);
+    padding-top: max(var(--spacing-8), env(safe-area-inset-top));
+    padding-bottom: max(var(--spacing-8), env(safe-area-inset-bottom));
 }
 
 .hero::before {
@@ -55,8 +60,9 @@
     align-items: center;
     text-align: center;
     max-width: 900px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 var(--spacing-6);
+    padding: 0 var(--spacing-4);
 
     .tagline {
         font-size: var(--font-size-lg);
@@ -145,9 +151,9 @@
 }
 
 .hero-logo {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 2rem;
+    width: clamp(100px, 20vw, 150px);
+    height: clamp(100px, 20vw, 150px);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
     animation: float 6s ease-in-out infinite;
 }
 
@@ -164,25 +170,22 @@
 }
 
 .hero h1 {
-    font-size: var(--font-size-5xl);
+    font-size: clamp(1.75rem, 5vw, var(--font-size-5xl));
     font-weight: var(--font-weight-extrabold);
-    margin-bottom: var(--spacing-4);
+    margin-bottom: clamp(0.5rem, 2vw, var(--spacing-4));
     line-height: var(--line-height-tight);
     letter-spacing: var(--letter-spacing-tight);
-
-    /* Solid color for all browsers */
     color: var(--primary);
-
-    /* Remove gradient effect for now to ensure visibility */
-    /* We can add it back later once the basic color works */
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .hero p {
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-8);
+    font-size: clamp(0.9rem, 2.5vw, var(--font-size-lg));
+    margin-bottom: clamp(1rem, 3vw, var(--spacing-8));
     color: var(--text-secondary);
     line-height: var(--line-height-relaxed);
-    max-width: 600px;
+    max-width: min(600px, 90vw);
 }
 
 .btn {
@@ -224,12 +227,17 @@
 
 .scroll-down {
     position: absolute;
-    bottom: 2rem;
+    bottom: clamp(1rem, 3vh, 2rem);
     left: 50%;
     transform: translateX(-50%);
     animation: bounce 2s infinite;
     cursor: pointer;
     color: var(--light);
+    display: none; // Hide on small screens to prevent overlap
+
+    @media (min-height: 600px) {
+        display: block;
+    }
 }
 
 @keyframes bounce {
@@ -251,20 +259,49 @@
     }
 }
 
-@media (max-width: 992px) {
-    .hero h1 {
-        font-size: 2.8rem;
-    }
-}
-
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.3rem;
+    .hero {
+        min-height: auto;
+        padding: var(--spacing-6) var(--spacing-4);
+    }
+
+    .hero-content {
+        .tagline {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+        }
+
+        .important-note {
+            padding: var(--spacing-3) var(--spacing-4);
+            font-size: 0.85rem;
+
+            .warning-icon {
+                font-size: 1.2em;
+            }
+        }
+
+        .hero-actions {
+            flex-direction: column;
+            width: 100%;
+            max-width: 300px;
+
+            .btn, .btn-secondary {
+                width: 100%;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.95rem;
+            }
+        }
     }
 }
 
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 2rem;
+@media (max-height: 700px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: var(--spacing-4) var(--spacing-4);
+    }
+
+    .hero-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1rem;
     }
 }

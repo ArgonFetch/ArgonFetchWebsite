@@ -4,7 +4,9 @@ import {
     faBolt,
     faSlidersH,
     faGlobe,
-    faMusic,
+    faShieldAlt,
+    faPlug,
+    faLayerGroup,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -20,5 +22,7 @@ export class FeaturesComponent {
     faBolt = faBolt;
     faSlidersH = faSlidersH;
     faGlobe = faGlobe;
-    faMusic = faMusic;
+    faShieldAlt = faShieldAlt;
+    faPlug = faPlug;
+    faLayerGroup = faLayerGroup;
 }

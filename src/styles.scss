@@ -124,29 +124,25 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* Modern scrollbar styles */
+/* Hide all scrollbars but keep functionality */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    display: none;
+    width: 0;
+    height: 0;
 }
 
-::-webkit-scrollbar-track {
-    background: var(--card);
-    border-radius: var(--border-radius);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
-    border-radius: var(--border-radius);
-    border: 1px solid var(--card);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%);
-}
-
-/* Firefox scrollbar */
+/* Firefox */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary) var(--card);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for IE, Edge */
+body, html {
+    -ms-overflow-style: none;
+}
+
+/* Ensure content is still scrollable */
+* {
+    overflow: -moz-scrollbars-none;
 }

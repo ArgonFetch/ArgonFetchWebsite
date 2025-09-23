@@ -1,6 +1,7 @@
 .app-container {
   width: 100%;
   min-height: 100vh;
+  position: relative;
 
   &.content-hidden {
     opacity: 0;
@@ -10,6 +11,17 @@
   &.content-visible {
     animation: fadeInUp 800ms ease-out forwards;
   }
+}
+
+.navbar-spacer {
+  height: 60px; // Fixed height matching navbar
+  width: 100%;
+  flex-shrink: 0; // Prevent it from shrinking
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 60px);
+  position: relative;
 }
 
 @keyframes fadeInUp {
