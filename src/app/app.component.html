@@ -1,3 +1,11 @@
-<div [@slideAnimation]="getRouteAnimationData()" class="app-container">
+@if (showIntroAnimation) {
+  <app-intro-animation
+    (animationComplete)="onIntroAnimationComplete()">
+  </app-intro-animation>
+}
+
+<div class="app-container"
+     [class.content-visible]="!showIntroAnimation"
+     [class.content-hidden]="showIntroAnimation">
   <router-outlet></router-outlet>
 </div>

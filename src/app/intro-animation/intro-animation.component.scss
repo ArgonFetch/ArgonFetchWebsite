@@ -1,0 +1,179 @@
+.intro-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0f2e 100%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  &.fade-out {
+    animation: fadeOut 800ms ease-in-out forwards;
+  }
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.argon-logo {
+  width: 200px;
+  height: 200px;
+  filter: drop-shadow(0 20px 40px rgba(168, 85, 247, 0.4));
+  border-radius: 20px;
+  opacity: 0;
+  transform: translateY(-100vh) scale(0.5);
+
+  &.logo-drop {
+    animation: logoDrop 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+}
+
+.logo-text {
+  margin-top: 20px;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+  opacity: 0;
+  transform: translateY(20px);
+
+  &.text-fade-in {
+    animation: textFadeIn 800ms ease-out 900ms forwards;
+  }
+}
+
+.wave-container {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  line-height: 0;
+  transform: translateY(100%);
+
+  &.wave-visible {
+    animation: waveRise 1500ms cubic-bezier(0.4, 0, 0.2, 1) 1200ms forwards;
+  }
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 400px;
+}
+
+.wave-1 {
+  animation: waveMove1 3s ease-in-out infinite;
+  z-index: 3;
+}
+
+.wave-2 {
+  animation: waveMove2 4s ease-in-out infinite;
+  z-index: 2;
+  opacity: 0.8;
+}
+
+.wave-3 {
+  animation: waveMove3 5s ease-in-out infinite;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+@keyframes logoDrop {
+  0% {
+    transform: translateY(-100vh) scale(0.5);
+    opacity: 0;
+  }
+  80% {
+    transform: translateY(20px) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes waveRise {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes waveMove1 {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-30px) translateX(-20px);
+  }
+}
+
+@keyframes waveMove2 {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-40px) translateX(30px);
+  }
+}
+
+@keyframes waveMove3 {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-25px) translateX(-15px);
+  }
+}
+
+@media (max-width: 768px) {
+  .argon-logo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .logo-text {
+    font-size: 2rem;
+  }
+
+  .wave {
+    height: 200px;
+  }
+}
