@@ -24,6 +24,21 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+    color: #9f54e5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #b77ff0;
+        text-decoration: underline;
+    }
+
+    &:visited {
+        color: #8540c7;
+    }
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-family-heading);
     font-weight: var(--font-weight-bold);

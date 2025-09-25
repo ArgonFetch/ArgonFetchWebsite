@@ -26,12 +26,20 @@ export class RoadmapComponent {
 
   completedFeatures = [
     {
-      name: 'Spotify Songs',
-      description: 'Download individual songs from Spotify.',
+      name: 'Spotify Integration',
+      description: 'Search songs via Spotify API, download from YouTube Music.',
     },
     {
       name: 'YouTube Media',
       description: 'Support for downloading videos and audio from YouTube.',
+    },
+    {
+      name: 'SoundCloud Media',
+      description: 'Download tracks and audio from SoundCloud.',
+    },
+    {
+      name: 'TikTok Videos',
+      description: 'Download videos from TikTok.',
     },
   ];
 
@@ -44,16 +52,12 @@ export class RoadmapComponent {
       name: 'Spotify Albums',
       description: 'Allow users to download full albums from Spotify.',
     },
-    {
-      name: 'SoundCloud Media',
-      description: 'Integrate support for SoundCloud tracks and playlists.',
-    },
   ];
 
   futureIdeas = [
     {
-      name: 'Social Media Support',
-      description: 'Explore adding support for platforms like X, Instagram, TikTok, etc.',
+      name: 'More Social Media Support',
+      description: 'Explore adding support for platforms like X, Instagram, Facebook, etc.',
     },
     {
       name: 'Enhanced Format/Quality Options',

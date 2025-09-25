@@ -52,26 +52,9 @@
     position: relative;
     overflow: hidden;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-      opacity: 0;
-      transition: var(--transition);
-    }
-
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(150, 68, 255, 0.2);
-      border-color: rgba(153, 72, 253, 0.2);
-
-      &::before {
-        opacity: 1;
-      }
+      box-shadow: 0 8px 25px rgba(150, 68, 255, 0.3);
+      border-color: rgba(153, 72, 253, 0.3);
 
       .icon {
         background: linear-gradient(135deg, rgba(153, 72, 253, 0.15) 0%, rgba(196, 154, 255, 0.08) 100%);
