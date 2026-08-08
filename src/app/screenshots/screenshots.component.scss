@@ -1,56 +1,102 @@
-.screenshots {
-    padding: 6rem 0;
-    background: linear-gradient(135deg, var(--section-bg-2) 0%, var(--card) 50%, var(--section-bg-2) 100%);
+.interface {
+    padding: var(--section-padding);
+    background: var(--ink-raised);
+    border-top: var(--border-hairline);
+}
 
-    h2 {
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
-        color: var(--primary);
+.section-head {
+    max-width: 46rem;
+    margin-bottom: var(--spacing-10);
+
+    code {
+        font-family: var(--font-family-code);
+        font-size: 0.9em;
+        color: var(--signal);
+        background: var(--signal-glow);
+        border: var(--border-signal);
+        border-radius: var(--border-radius-sm);
+        padding: 0.1em 0.35em;
     }
+}
 
-    .screenshot-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        padding: 0 1rem;
+/* A frame that says where the app is: on your own machine, at your own port. */
+.frame {
+    margin: 0;
+    background: var(--ink);
+    border: var(--border-hairline);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+
+    // Direct child only, so the title-bar logo keeps its own size.
+    > img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-top: var(--border-hairline);
+        border-bottom: var(--border-hairline);
     }
+}
 
-    .screenshot-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 15px;
-        transition: var(--transition);
+/* Matches the resolver's title bar in the hero - same chrome, same product. */
+.frame-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--ink-raised);
+}
+
+.window-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.window-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.875rem;
+    color: var(--text-muted);
+
+    lucide-icon {
+        display: block;
+        line-height: 0;
+    }
+}
+
+figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+    padding: 0.875rem 1rem;
+    font-family: var(--font-family-code);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--text-muted);
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        color: var(--signal);
+        text-decoration: none;
+        transition: color 150ms ease;
 
         &:hover {
-            transform: scale(1.02);
+            color: var(--text-primary);
         }
 
-        img {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-        }
-
-        .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem;
-            background: rgba(10, 10, 10, 0.8);
-            color: var(--light);
-            text-align: center;
+        lucide-icon {
+            display: block;
+            line-height: 0;
         }
     }
+}
 
-    .section-subtitle {
-        text-align: center;
-        margin-bottom: 2.5rem;
-        font-size: 1.1rem;
-        color: var(--text-secondary, var(--light));
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
+@media (max-width: 600px) {
+    .frame-bar {
+        padding: 0.625rem 0.75rem;
     }
 }

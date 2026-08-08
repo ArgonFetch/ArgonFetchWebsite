@@ -1,56 +1,28 @@
 <section id="features" class="features">
   <div class="container">
-    <h2>Key Features</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="icon">
-          <fa-icon [icon]="faBolt"></fa-icon>
-        </div>
-        <h3>Fast Downloads</h3>
-        <p>Efficient downloading, designed for speed.</p>
-      </div>
+    <header class="section-head">
+      <p class="eyebrow">What it does</p>
+      <h2 class="section-title">Six things worth running it for</h2>
+      <p class="section-lede">
+        ArgonFetch is a small service. Use the hosted one or run your own copy;
+        either way, this is what you get.
+      </p>
+    </header>
 
-      <div class="feature-card">
-        <div class="icon">
-          <fa-icon [icon]="faSlidersH"></fa-icon>
+    <!--
+      A datasheet, not a card wall: one bounded block, hairline-ruled into
+      cells. The mono labels are categories - nothing here is a sequence, so
+      nothing here is numbered.
+    -->
+    <div class="sheet">
+      <article class="cell" *ngFor="let capability of capabilities">
+        <div class="cell-label">
+          <lucide-icon [img]="capability.icon" [size]="15"></lucide-icon>
+          <span>{{ capability.label }}</span>
         </div>
-        <h3>Easy-to-Use Interface</h3>
-        <p>Clean and intuitive web interface for a seamless experience.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="icon">
-          <fa-icon [icon]="faGlobe"></fa-icon>
-        </div>
-        <h3>Multi-Source Support</h3>
-        <p>
-          Download from various online platforms. (See Roadmap for specifics)
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="icon">
-          <fa-icon [icon]="faShieldAlt"></fa-icon>
-        </div>
-        <h3>Secure & Private</h3>
-        <p>Your data stays private with no tracking and secure download handling.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="icon">
-          <fa-icon [icon]="faPlug"></fa-icon>
-        </div>
-        <h3>Plugin System</h3>
-        <p>Extend functionality with custom plugins for enhanced capabilities.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="icon">
-          <fa-icon [icon]="faLayerGroup"></fa-icon>
-        </div>
-        <h3>Source System</h3>
-        <p>Add support for new platforms through our flexible source plugin architecture.</p>
-      </div>
+        <h3>{{ capability.title }}</h3>
+        <p>{{ capability.body }}</p>
+      </article>
     </div>
   </div>
 </section>

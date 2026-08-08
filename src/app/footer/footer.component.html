@@ -1,14 +1,50 @@
 <footer class="footer">
-    <div class="container">
-        <div class="footer-content">
-            <p class="credits">
-                Made with ❤️ by
-                <a href="https://github.com/Pianonic" class="btn-link">PianoNic</a> and
-                <a href="https://github.com/MyDrift-user" class="btn-link">MyDrift</a>
-            </p>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a routerLink="/" class="footer-logo">
+          <img src="logo-simple.svg" alt="" aria-hidden="true" width="24" height="24" />
+          <span>ArgonFetch</span>
+        </a>
+        <p>Self-hosted media downloader. Free and open source.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <div class="footer-col">
+          <h2>Docs</h2>
+          <a routerLink="/docs/installation">Installation</a>
+          <a routerLink="/docs/usage">Basic usage</a>
+          <a routerLink="/docs/configuration">Configuration</a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 ArgonFetch. All rights reserved.</p>
+        <div class="footer-col">
+          <h2>Reference</h2>
+          <a routerLink="/docs/api">API</a>
+          <a routerLink="/docs/development">Development</a>
+          <a routerLink="/docs/deployment">Deployment</a>
         </div>
+        <div class="footer-col">
+          <h2>Project</h2>
+          <a href="https://github.com/ArgonFetch/ArgonFetch" target="_blank" rel="noopener noreferrer">
+            <fa-icon [icon]="faGithub"></fa-icon> Source
+          </a>
+          <a href="https://github.com/ArgonFetch/ArgonFetch/releases" target="_blank" rel="noopener noreferrer">
+            Releases
+          </a>
+          <a href="https://github.com/ArgonFetch/ArgonFetch/issues" target="_blank" rel="noopener noreferrer">
+            Report an issue
+          </a>
+        </div>
+      </nav>
     </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {{ copyrightYears }} ArgonFetch</p>
+      <p class="credits">
+        Built by
+        <a href="https://github.com/Pianonic" target="_blank" rel="noopener noreferrer">PianoNic</a>
+        and
+        <a href="https://github.com/MyDrift-user" target="_blank" rel="noopener noreferrer">MyDrift</a>
+      </p>
+    </div>
+  </div>
 </footer>

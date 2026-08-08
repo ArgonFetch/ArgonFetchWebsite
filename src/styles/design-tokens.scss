@@ -1,84 +1,102 @@
 /**
- * ArgonFetch Design Tokens (Improved Version)
- * This file defines all colors, fonts, and design variables used throughout the application.
- * It serves as a single source of truth for design consistency.
+ * ArgonFetch Design Tokens
+ *
+ * Single source of truth for colour, type, space and motion.
+ *
+ * The palette is grounded in near-black with a violet cast (the brand mark is
+ * violet, so the whole surface leans that way rather than fighting it), with
+ * cyan reserved as the "signal" colour: live state, resolved data, anything the
+ * app is telling you right now. Violet is identity; cyan is information.
  */
 
 @use "sass:map";
 
 // ========================================
-// COLORS - ArgonFetch Brand Purple Palette
+// COLOR
 // ========================================
 $colors: (
-    // Primary palette - Brand purple gradient
-    'primary': #9948fd,
+    // --- Brand violet -------------------------------------------------------
+    'primary': #9948fd,          // the logo violet. Identity, large marks, fills.
     'primary-rgb': (153, 72, 253),
-    'primary-light': #b470fe,
-    'primary-dark': #7e34fc,
-    'primary-hover': #a65bfd,
+    'primary-light': #b47cff,
+    'primary-lift': #c09bff,     // violet legible as small text on ink (6.7:1)
+    'primary-dark': #7a2ee8,
+    'primary-hover': #a865fd,
 
-    // Secondary palette - Deeper brand purple
-    'secondary': #512d7f,
-    'secondary-light': #6b4196,
-    'secondary-dark': #3d2161,
-    'secondary-hover': #5c3588,
+    'secondary': #6d3fb0,
+    'secondary-light': #8558c9,
+    'secondary-dark': #4a2a7a,
+    'secondary-hover': #7b4cc0,
 
-    // Accent colors - Extended purple range
-    'accent': #c49aff,
-    'accent-light': #d4b3ff,
+    'accent': #c09bff,
+    'accent-light': #d9c4ff,
     'accent-dark': #a678e8,
 
-    // Background colors - Brand dark theme
-    'darker': #17151a,
-    'dark': #2a252f,
-    'card': #3a3240,
-    'surface': #4a4151,
-    'light': #f8fafc,
+    // --- Signal cyan --------------------------------------------------------
+    // Data, live status, resolved results. Never decorative.
+    'signal': #4cd2ff,
+    'signal-dim': #2a8fb3,
+    'signal-glow': rgba(76, 210, 255, 0.14),
+
+    // --- Ink (surfaces) -----------------------------------------------------
+    'ink': #0a0910,              // page ground
+    'ink-raised': #100e17,       // panels sitting on the ground
+    'ink-sunken': #070610,       // wells: code blocks, inputs
+    'ink-line': #1e1a29,         // hairlines and dividers
+    'ink-chip': #171423,         // chips, tags, inline code
+
+    // Legacy aliases kept so existing rules keep resolving
+    'darker': #0a0910,
+    'dark': #100e17,
+    'card': #14111d,
+    'surface': #1e1a29,
+    'section-bg-1': #0a0910,
+    'section-bg-2': #0d0b14,
+
+    'light': #edebf3,
     'white': #ffffff,
 
-    // Section alternating backgrounds
-    'section-bg-1': #1e1a24,
-    'section-bg-2': #2a252f,
+    // --- Neutrals -----------------------------------------------------------
+    'gray-50': #f7f6fa,
+    'gray-100': #eceaf2,
+    'gray-200': #d5d1e0,
+    'gray-300': #b3adc4,
+    'gray-400': #8b849c,
+    'gray-500': #665f78,
+    'gray-600': #4a4459,
+    'gray-700': #332e3f,
+    'gray-800': #201c2a,
+    'gray-900': #12101a,
 
-    // Modern grayscale with blue undertones
-    'gray-50': #f9fafb,
-    'gray-100': #f3f4f6,
-    'gray-200': #e5e7eb,
-    'gray-300': #d1d5db,
-    'gray-400': #9ca3af,
-    'gray-500': #6b7280,
-    'gray-600': #4b5563,
-    'gray-700': #374151,
-    'gray-800': #1f2937,
-    'gray-900': #111827,
+    // --- Text ---------------------------------------------------------------
+    'text-primary': #edebf3,
+    'text-secondary': #a9a3bb,
+    'text-muted': #746d88,
+    'text-dark': #12101a,
 
-    // Text colors with better contrast
-    'text-primary': #f8fafc,
-    'text-secondary': rgba(248, 250, 252, 0.85),
-    'text-muted': rgba(248, 250, 252, 0.65),
-    'text-dark': #1f2937,
-
-    // Modern state colors - softer and more pleasant
-    'success': #10b981,
-    'success-light': #34d399,
-    'warning': #f59e0b,
-    'warning-light': #fbbf24,
-    'error': #ef4444,
-    'error-light': #f87171,
-    'info': #3b82f6,
-    'info-light': #60a5fa
+    // --- State --------------------------------------------------------------
+    'success': #3ddc97,
+    'success-light': #6ce8b3,
+    'warning': #ffb454,
+    'warning-light': #ffc87a,
+    'error': #ff6b6b,
+    'error-light': #ff9494,
+    'info': #4cd2ff,
+    'info-light': #7de0ff
 );
 
 // ========================================
-// TYPOGRAPHY - Modern Typography Scale
+// TYPOGRAPHY
 // ========================================
+// Three voices, three jobs:
+//   display - Bricolage Grotesque. Wordmark and section heads only.
+//   sans    - Inter. Everything you actually read.
+//   mono    - JetBrains Mono. Labels, status, numbers, URLs. The tool's own voice.
 $typography: (
-    // Font families - Modern system fonts
-    'font-family-sans': 'Inter Variable, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
-    'font-family-heading': 'Poppins, Inter Variable, Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-    'font-family-code': 'JetBrains Mono, Fira Code, "SF Mono", Monaco, Inconsolata, "Roboto Mono", Consolas, "Courier New", monospace',
+    'font-family-sans': ('Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif),
+    'font-family-heading': ('Bricolage Grotesque', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif),
+    'font-family-code': ('JetBrains Mono', 'SF Mono', Monaco, Consolas, 'Courier New', monospace),
 
-    // Font weights - Updated for modern fonts
     'font-weight-light': 300,
     'font-weight-normal': 400,
     'font-weight-medium': 500,
@@ -86,55 +104,53 @@ $typography: (
     'font-weight-bold': 700,
     'font-weight-extrabold': 800,
     'font-weight-black': 900,
+    'font-weight-heading-bold': 700,
 
-    // Modern type scale (Perfect fourth - 1.333)
-    'font-size-xs': 0.75rem,      // 12px
-    'font-size-sm': 0.875rem,     // 14px
-    'font-size-base': 1rem,       // 16px
-    'font-size-md': 1.125rem,     // 18px
-    'font-size-lg': 1.25rem,      // 20px
-    'font-size-xl': 1.5rem,       // 24px
-    'font-size-2xl': 1.875rem,    // 30px
-    'font-size-3xl': 2.375rem,    // 38px
-    'font-size-4xl': 3rem,        // 48px
-    'font-size-5xl': 3.75rem,     // 60px
-    'font-size-6xl': 4.5rem,      // 72px
+    'font-size-xs': 0.75rem,      // 12
+    'font-size-sm': 0.8125rem,    // 13
+    'font-size-base': 0.9375rem,  // 15
+    'font-size-md': 1.0625rem,    // 17
+    'font-size-lg': 1.1875rem,    // 19
+    'font-size-xl': 1.375rem,     // 22
+    'font-size-2xl': 1.75rem,     // 28
+    'font-size-3xl': 2.25rem,     // 36
+    'font-size-4xl': 3rem,        // 48
+    'font-size-5xl': 4rem,        // 64
+    'font-size-6xl': 5.25rem,     // 84
 
-    // Line heights - Optimized for readability
     'line-height-none': 1,
-    'line-height-tight': 1.25,
-    'line-height-snug': 1.375,
-    'line-height-normal': 1.5,
-    'line-height-relaxed': 1.625,
-    'line-height-loose': 2,
+    'line-height-tight': 1.1,
+    'line-height-snug': 1.3,
+    'line-height-normal': 1.55,
+    'line-height-relaxed': 1.7,
+    'line-height-loose': 1.9,
 
-    // Letter spacing
-    'letter-spacing-tight': -0.025em,
+    'letter-spacing-tighter': -0.035em,
+    'letter-spacing-tight': -0.02em,
     'letter-spacing-normal': 0,
-    'letter-spacing-wide': 0.025em
+    'letter-spacing-wide': 0.06em,
+    'letter-spacing-wider': 0.14em   // mono eyebrows and status tags
 );
 
 // ========================================
-// SPACING - 8px Grid System
+// SPACING - 4px grid
 // ========================================
 $spacing: (
-    // Base 8px grid
     '0': 0,
-    '1': 0.25rem,    // 4px
-    '2': 0.5rem,     // 8px
-    '3': 0.75rem,    // 12px
-    '4': 1rem,       // 16px
-    '5': 1.25rem,    // 20px
-    '6': 1.5rem,     // 24px
-    '8': 2rem,       // 32px
-    '10': 2.5rem,    // 40px
-    '12': 3rem,      // 48px
-    '16': 4rem,      // 64px
-    '20': 5rem,      // 80px
-    '24': 6rem,      // 96px
-    '32': 8rem,      // 128px
+    '1': 0.25rem,
+    '2': 0.5rem,
+    '3': 0.75rem,
+    '4': 1rem,
+    '5': 1.25rem,
+    '6': 1.5rem,
+    '8': 2rem,
+    '10': 2.5rem,
+    '12': 3rem,
+    '16': 4rem,
+    '20': 5rem,
+    '24': 6rem,
+    '32': 8rem,
 
-    // Semantic spacing
     'xs': 0.5rem,
     'sm': 0.75rem,
     'md': 1rem,
@@ -145,51 +161,53 @@ $spacing: (
     '4xl': 6rem,
     '5xl': 8rem,
 
-    // Component specific
-    'section': 5rem,     // 80px
-    'container': 1.5rem, // 24px
-    'card': 1.5rem,      // 24px
-    'grid-gap': 1.5rem   // 24px
+    'section': 7rem,
+    'container': 1.5rem,
+    'card': 1.5rem,
+    'grid-gap': 1.5rem
 );
 
 // ========================================
-// EFFECTS - Modern Shadows & Transitions
+// EFFECTS
 // ========================================
 $effects: (
-    // Border radius - Modern rounded corners
+    // Radii stay modest: this is an instrument panel, not a pill factory.
     'border-radius-none': 0,
-    'border-radius-sm': 0.375rem,    // 6px
-    'border-radius': 0.5rem,         // 8px
-    'border-radius-md': 0.75rem,     // 12px
-    'border-radius-lg': 1rem,        // 16px
-    'border-radius-xl': 1.25rem,     // 20px
-    'border-radius-2xl': 1.5rem,     // 24px
+    'border-radius-sm': 4px,
+    'border-radius': 6px,
+    'border-radius-md': 8px,
+    'border-radius-lg': 12px,
+    'border-radius-xl': 16px,
+    'border-radius-2xl': 20px,
+    'border-radius-pill': 9999px,
     'border-radius-full': 9999px,
 
-    // Modern shadows with new color palette
-    'shadow-sm': 0 1px 2px 0 rgba(0, 0, 0, 0.05),
-    'shadow': 0 1px 3px 0 rgba(0, 0, 0, 0.1) 0 1px 2px 0 rgba(0, 0, 0, 0.06),
-    'shadow-md': 0 4px 6px -1px rgba(0, 0, 0, 0.1) 0 2px 4px -1px rgba(0, 0, 0, 0.06),
-    'shadow-lg': 0 10px 15px -3px rgba(0, 0, 0, 0.1) 0 4px 6px -2px rgba(0, 0, 0, 0.05),
-    'shadow-xl': 0 20px 25px -5px rgba(0, 0, 0, 0.1) 0 10px 10px -5px rgba(0, 0, 0, 0.04),
-    'shadow-2xl': 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    // Shadows on near-black read as depth only when they are near-opaque.
+    'shadow-sm': (0 1px 2px rgba(0, 0, 0, 0.5)),
+    'shadow': (0 2px 8px rgba(0, 0, 0, 0.5)),
+    'shadow-md': (0 6px 20px rgba(0, 0, 0, 0.45)),
+    'shadow-lg': (0 16px 40px rgba(0, 0, 0, 0.5)),
+    'shadow-xl': (0 28px 64px rgba(0, 0, 0, 0.55)),
+    'shadow-2xl': (0 40px 90px rgba(0, 0, 0, 0.6)),
 
-    // Component specific shadows
-    'card-shadow': 0 4px 6px -1px rgba(0, 0, 0, 0.1) 0 2px 4px -1px rgba(0, 0, 0, 0.06),
-    'card-shadow-hover': 0 10px 15px -3px rgba(153, 72, 253, 0.1) 0 4px 6px -2px rgba(153, 72, 253, 0.05),
-    'button-shadow': 0 4px 14px 0 rgba(153, 72, 253, 0.3),
-    'button-shadow-hover': 0 6px 20px rgba(153, 72, 253, 0.4),
+    'card-shadow': (0 2px 8px rgba(0, 0, 0, 0.5)),
+    'card-shadow-hover': (0 16px 40px rgba(0, 0, 0, 0.5)),
+    'button-shadow': (0 1px 2px rgba(0, 0, 0, 0.4)),
+    'button-shadow-hover': (0 8px 24px rgba(153, 72, 253, 0.35)),
+    'glow-violet': (0 0 0 1px rgba(153, 72, 253, 0.35), 0 0 32px rgba(153, 72, 253, 0.18)),
+    'glow-signal': (0 0 0 1px rgba(76, 210, 255, 0.3), 0 0 28px rgba(76, 210, 255, 0.16)),
 
-    // Transitions - Smoother easing curves
-    'transition-fast': all 150ms cubic-bezier(0.4, 0, 0.2, 1),
-    'transition': all 200ms cubic-bezier(0.4, 0, 0.2, 1),
-    'transition-slow': all 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    'transition-colors': color 150ms cubic-bezier(0.4, 0, 0.2, 1) background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    // Motion: short, decisive, one easing family.
+    'ease-out': cubic-bezier(0.16, 1, 0.3, 1),
+    'ease-in-out': cubic-bezier(0.65, 0, 0.35, 1),
+    'transition-fast': (all 120ms cubic-bezier(0.16, 1, 0.3, 1)),
+    'transition': (all 200ms cubic-bezier(0.16, 1, 0.3, 1)),
+    'transition-slow': (all 400ms cubic-bezier(0.16, 1, 0.3, 1)),
+    'transition-colors': (color 120ms ease, background-color 120ms ease, border-color 120ms ease),
 
-    // Backdrop effects
-    'backdrop-blur': blur(12px),
-    'backdrop-blur-sm': blur(4px),
-    'backdrop-blur-lg': blur(16px)
+    'backdrop-blur': blur(16px),
+    'backdrop-blur-sm': blur(8px),
+    'backdrop-blur-lg': blur(28px)
 );
 
 // ========================================
@@ -205,50 +223,72 @@ $breakpoints: (
 );
 
 // ========================================
-// PRISM THEME
+// PRISM
 // ========================================
 $prism-theme: (
-    'background': #0a0a0a,
-    'text': #f1f2f6,
-    'comment': #636e7b,
-    'punctuation': #b3b9c5,
-    'tag': #9644ff,
-    'attr-name': #6c2bff,
+    'background': #070610,
+    'text': #edebf3,
+    'comment': #6b6480,
+    'punctuation': #a9a3bb,
+    'tag': #c09bff,
+    'attr-name': #b47cff,
     'string': #4cd2ff,
-    'operator': #ff9940,
-    'keyword': #9644ff,
-    'function': #fff394,
-    'variable': #ff9940
+    'operator': #ffb454,
+    'keyword': #c09bff,
+    'function': #7de0ff,
+    'variable': #ffb454
 );
 
 // ========================================
-// CSS VARIABLES EXPORT
+// CSS VARIABLE EXPORT
 // ========================================
-
 :root {
-
-    // Export all colors as CSS variables
     @each $name, $value in $colors {
         --color-#{$name}: #{$value};
     }
 
-    // Primary shortcuts
+    // Shortcuts used across components
     --primary: #{map.get($colors, 'primary')};
     --primary-rgb: #{map.get($colors, 'primary-rgb')};
     --primary-light: #{map.get($colors, 'primary-light')};
+    --primary-lift: #{map.get($colors, 'primary-lift')};
     --primary-dark: #{map.get($colors, 'primary-dark')};
+    --primary-hover: #{map.get($colors, 'primary-hover')};
     --secondary: #{map.get($colors, 'secondary')};
+    --secondary-light: #{map.get($colors, 'secondary-light')};
+    --signal: #{map.get($colors, 'signal')};
+    --signal-dim: #{map.get($colors, 'signal-dim')};
+    --signal-glow: #{map.get($colors, 'signal-glow')};
+
+    --ink: #{map.get($colors, 'ink')};
+    --ink-raised: #{map.get($colors, 'ink-raised')};
+    --ink-sunken: #{map.get($colors, 'ink-sunken')};
+    --ink-line: #{map.get($colors, 'ink-line')};
+    --ink-chip: #{map.get($colors, 'ink-chip')};
+
     --darker: #{map.get($colors, 'darker')};
     --dark: #{map.get($colors, 'dark')};
+    --card: #{map.get($colors, 'card')};
+    --surface: #{map.get($colors, 'surface')};
     --light: #{map.get($colors, 'light')};
-    --text-primary: #{map.get($colors, 'text-primary')};
-    --text-secondary: #{map.get($colors, 'text-secondary')};
-
-    // Section backgrounds
+    --white: #{map.get($colors, 'white')};
     --section-bg-1: #{map.get($colors, 'section-bg-1')};
     --section-bg-2: #{map.get($colors, 'section-bg-2')};
 
-    // Typography
+    --text-primary: #{map.get($colors, 'text-primary')};
+    --text-secondary: #{map.get($colors, 'text-secondary')};
+    --text-muted: #{map.get($colors, 'text-muted')};
+
+    --success: #{map.get($colors, 'success')};
+    --warning: #{map.get($colors, 'warning')};
+    --error: #{map.get($colors, 'error')};
+    --info: #{map.get($colors, 'info')};
+
+    // Semantic border tokens - one place to retune every hairline on the site
+    --border-hairline: 1px solid #{map.get($colors, 'ink-line')};
+    --border-violet: 1px solid rgba(153, 72, 253, 0.28);
+    --border-signal: 1px solid rgba(76, 210, 255, 0.28);
+
     @each $name, $value in $typography {
         --#{$name}: #{$value};
     }
@@ -256,13 +296,7 @@ $prism-theme: (
     --font-family-sans-serif: #{map.get($typography, 'font-family-sans')};
     --font-family-heading: #{map.get($typography, 'font-family-heading')};
     --font-family-code: #{map.get($typography, 'font-family-code')};
-    --font-weight-normal: #{map.get($typography, 'font-weight-normal')};
-    --font-weight-medium: #{map.get($typography, 'font-weight-medium')};
-    --font-weight-semibold: #{map.get($typography, 'font-weight-semibold')};
-    --font-weight-bold: #{map.get($typography, 'font-weight-bold')};
-    --font-weight-heading-bold: #{map.get($typography, 'font-weight-heading-bold')};
 
-    // Spacing
     @each $name, $value in $spacing {
         --spacing-#{$name}: #{$value};
     }
@@ -272,7 +306,6 @@ $prism-theme: (
     --card-padding: #{map.get($spacing, 'card')};
     --grid-gap: #{map.get($spacing, 'grid-gap')};
 
-    // Effects
     @each $name, $value in $effects {
         --#{$name}: #{$value};
     }
@@ -282,16 +315,18 @@ $prism-theme: (
     --transition: #{map.get($effects, 'transition')};
     --card-shadow: #{map.get($effects, 'card-shadow')};
 
-    // Prism Theme
     @each $name, $value in $prism-theme {
         --prism-#{$name}: #{$value};
     }
+
+    // Layout constants shared between the shell and its children
+    --nav-height: 64px;
+    --measure: 68ch;
 }
 
 // ========================================
-// HELPER FUNCTIONS
+// FUNCTIONS
 // ========================================
-
 @function color($key) {
     @return map.get($colors, $key);
 }
@@ -319,13 +354,11 @@ $prism-theme: (
 // ========================================
 // MIXINS
 // ========================================
-
 @mixin text-gradient($direction: to right, $start-color: color('primary'), $end-color: color('secondary')) {
     background: linear-gradient($direction, $start-color, $end-color);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
 }
 
 @mixin gradient-bg($direction: to right, $start-color: color('primary'), $end-color: color('secondary')) {
@@ -336,4 +369,14 @@ $prism-theme: (
     @media (min-width: breakpoint($breakpoint)) {
         @content;
     }
+}
+
+/// Mono eyebrow / status label. The site's structural voice.
+@mixin eyebrow($color: color('text-muted')) {
+    font-family: font('font-family-code');
+    font-size: font('font-size-xs');
+    font-weight: font('font-weight-medium');
+    letter-spacing: font('letter-spacing-wider');
+    text-transform: uppercase;
+    color: $color;
 }

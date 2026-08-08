@@ -1,16 +1,10 @@
-@if (showIntroAnimation) {
-  <app-intro-animation
-    (animationComplete)="onIntroAnimationComplete()">
-  </app-intro-animation>
-}
+<a class="skip-link" href="#main">Skip to content</a>
 
-<app-navbar *ngIf="!showIntroAnimation"></app-navbar>
+<app-navbar></app-navbar>
 
-<div class="app-container"
-     [class.content-visible]="!showIntroAnimation"
-     [class.content-hidden]="showIntroAnimation">
+<div class="app-container">
   <div class="navbar-spacer"></div>
-  <div class="content-wrapper" [@routeAnimations]="prepareRoute(outlet)">
-    <router-outlet #outlet="outlet"></router-outlet>
+  <div class="content-wrapper" id="main">
+    <router-outlet></router-outlet>
   </div>
 </div>

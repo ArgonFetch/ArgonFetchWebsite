@@ -1,40 +1,38 @@
 <header id="header" [class.scrolled]="isScrolled" [class.docs-mode]="isDocsMode">
-  <nav class="container">
+  <nav class="nav">
     <a routerLink="/" (click)="closeMobileMenuAndScroll('hero')" class="logo">
-      <img src="logo-simple.svg" alt="ArgonFetch Logo" />
-      <h1>ArgonFetch</h1>
-      <span class="docs-badge" *ngIf="isDocsMode">DOCS</span>
+      <img src="logo-simple.svg" alt="" aria-hidden="true" />
+      <span class="wordmark">ArgonFetch</span>
+      <span class="docs-badge" *ngIf="isDocsMode">Docs</span>
     </a>
+
     <div class="nav-links" id="navLinks" [class.active]="isMobileMenuOpen" [class.docs-mode]="isDocsMode">
       <ng-container *ngIf="!isDocsMode">
         <a routerLink="/" fragment="features" (click)="closeMobileMenuAndScroll('features')"
-           [class.active]="isActiveSection('features')" class="nav-link-icon"
-           [@iconFadeOut]="animationState">Features</a>
-        <a routerLink="/" fragment="screenshots" (click)="closeMobileMenuAndScroll('screenshots')"
-           [class.active]="isActiveSection('screenshots')" class="nav-link-icon"
-           [@iconFadeOut]="animationState">Screenshots</a>
+          [class.active]="isActiveSection('features')" class="nav-link">Features</a>
+        <a routerLink="/" fragment="interface" (click)="closeMobileMenuAndScroll('interface')"
+          [class.active]="isActiveSection('interface')" class="nav-link">Interface</a>
         <a routerLink="/" fragment="usage" (click)="closeMobileMenuAndScroll('usage')"
-           [class.active]="isActiveSection('usage')" class="nav-link-icon"
-           [@iconFadeOut]="animationState">Usage</a>
-        <a routerLink="/" fragment="roadmap" (click)="closeMobileMenuAndScroll('roadmap')"
-           [class.active]="isActiveSection('roadmap')" class="nav-link-icon"
-           [@iconFadeOut]="animationState">Roadmap</a>
-        <a (click)="navigateToDocs()" class="nav-link-icon docs-link"
-           [@iconFadeOut]="animationState">Docs</a>
+          [class.active]="isActiveSection('usage')" class="nav-link">Usage</a>
+        <a routerLink="/docs" (click)="closeMobileMenu()" class="nav-link">Docs</a>
       </ng-container>
-      <button *ngIf="isDocsMode" class="back-button" (click)="navigateBack()">
-        <fa-icon [icon]="faArrowLeft"></fa-icon>
-        <span>Back</span>
+
+      <button *ngIf="isDocsMode" class="nav-action" (click)="navigateBack()">
+        <lucide-icon [img]="ArrowLeftIcon" [size]="15"></lucide-icon>
+        <span>Back to site</span>
       </button>
+
       <a href="https://github.com/ArgonFetch/ArgonFetch" target="_blank" rel="noopener noreferrer"
-        (click)="closeMobileMenu()" [class.outlined]="isDocsMode" class="github-link">
+        (click)="closeMobileMenu()" class="nav-action">
         <fa-icon [icon]="faGithub"></fa-icon>
         <span>GitHub</span>
       </a>
     </div>
-    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" aria-label="Toggle navigation menu"
-      [attr.aria-expanded]="isMobileMenuOpen">
-      <fa-icon [icon]="isMobileMenuOpen ? faTimes : faBars"></fa-icon>
+
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()"
+      [attr.aria-label]="isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'"
+      [attr.aria-expanded]="isMobileMenuOpen" aria-controls="navLinks">
+      <lucide-icon [img]="isMobileMenuOpen ? XIcon : MenuIcon" [size]="18"></lucide-icon>
     </button>
   </nav>
 </header>

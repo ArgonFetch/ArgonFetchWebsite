@@ -1,48 +1,24 @@
 <section id="usage" class="usage">
   <div class="container">
-    <h2>How to Use ArgonFetch</h2>
-    <p class="section-subtitle">
-      Once you have ArgonFetch installed and running (usually at
-      <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>), using it is straightforward:
-    </p>
-    <div class="usage-content">
-      <div class="usage-card">
-        <div class="usage-icon">
-          <fa-icon [icon]="faLink"></fa-icon>
-        </div>
-        <h3>1. Paste the Media URL</h3>
-        <p>
-          Navigate to ArgonFetch in your web browser. You'll see an input
-          field. Simply paste the URL of the video, song, or media you wish to
-          download.
-        </p>
-      </div>
+    <header class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2 class="section-title">Three steps, start to file</h2>
+      <p class="section-lede">
+        Once ArgonFetch is running, open it in a browser and the whole job takes
+        about fifteen seconds.
+      </p>
+    </header>
 
-      <div class="usage-card">
-        <div class="usage-icon">
-          <fa-icon [icon]="faTasks"></fa-icon>
-        </div>
-        <h3>2. Choose Options (If Available)</h3>
-        <p>
-          Depending on the source and media type, you might be presented with
-          options to select quality, format, or other preferences.
-        </p>
-      </div>
-
-      <div class="usage-card">
-        <div class="usage-icon">
-          <fa-icon [icon]="faDownload"></fa-icon>
-        </div>
-        <h3>3. Start Downloading</h3>
-        <p>
-          Once you've set your preferences, click the download button. ArgonFetch
-          will process your request and begin downloading the media.
-        </p>
-      </div>
-    </div>
-    <p class="usage-tip">
-      <strong>Tip:</strong> Keep an eye on the Roadmap section for upcoming
-      features and supported platforms!
-    </p>
+    <!-- Ordered, because the order is real: nothing to pick until it resolves. -->
+    <ol class="steps">
+      <li class="step" *ngFor="let step of steps; let i = index">
+        <span class="step-index">{{ i + 1 }}</span>
+        <span class="step-icon">
+          <lucide-icon [img]="step.icon" [size]="18"></lucide-icon>
+        </span>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.body }}</p>
+      </li>
+    </ol>
   </div>
 </section>

@@ -1,8 +1,8 @@
 <div class="docs-page">
-  <h1>Basic Usage</h1>
+  <h1>Usage Guide</h1>
 
   <p class="lead">
-    Learn how to use ArgonFetch to download media from various platforms quickly and efficiently.
+    Learn how to use ArgonFetch to download media from Spotify, YouTube, and other platforms.
   </p>
 
   <div class="usage-section">
@@ -13,133 +13,138 @@
       <h3>1. Access the Web Interface</h3>
       <p>Open your browser and navigate to your ArgonFetch installation:</p>
       <div class="code-block-container">
-        <pre class="code-block"><code>http://localhost:3000</code></pre>
+        <pre class="code-block"><code>http://localhost:8080</code></pre>
       </div>
+      <p>Or use the cloud version at <a href="https://app.argonfetch.dev" target="_blank">app.argonfetch.dev</a></p>
     </div>
 
     <div class="step">
       <h3>2. Enter Media URL</h3>
-      <p>Paste the URL of the video or media you want to download in the input field.</p>
+      <p>Paste the URL of the media you want to download:</p>
+      <ul>
+        <li>Spotify song URL (e.g., <code>https://open.spotify.com/track/...</code>) - Searches and downloads from YouTube Music</li>
+        <li>YouTube video URL (e.g., <code>https://youtube.com/watch?v=...</code>)</li>
+        <li>SoundCloud track URL (e.g., <code>https://soundcloud.com/artist/track</code>)</li>
+        <li>TikTok video URL (e.g., <code>https://www.tiktok.com/@user/video/...</code>)</li>
+        <li>Other supported platform URLs</li>
+      </ul>
     </div>
 
     <div class="step">
-      <h3>3. Select Quality (Optional)</h3>
-      <p>Choose your preferred quality settings from the dropdown menu.</p>
+      <h3>3. Select Format</h3>
+      <p>Choose your preferred output format:</p>
+      <ul>
+        <li><strong>MP3</strong> - Audio only, widely compatible</li>
+        <li><strong>MP4</strong> - Video with audio</li>
+        <li><strong>WebM</strong> - Open format, good compression</li>
+      </ul>
     </div>
 
     <div class="step">
       <h3>4. Download</h3>
-      <p>Click the "Download" button and wait for the process to complete.</p>
+      <p>Click the "Download" button and wait for the process to complete. Your file will be automatically downloaded to your browser's download folder.</p>
     </div>
   </div>
 
   <div class="usage-section">
     <h2>API Usage</h2>
-    <p>For programmatic access, you can use the REST API:</p>
+    <p>ArgonFetch provides a REST API for programmatic access. API documentation is available at:</p>
+    <div class="code-block-container">
+      <pre class="code-block"><code>http://localhost:8080/swagger</code></pre>
+    </div>
 
     <div class="step">
-      <h3>Basic Download Request</h3>
+      <h3>Example: Download a Spotify Song</h3>
       <div class="code-block-container">
-        <pre class="code-block"><code>curl -X POST http://localhost:3000/api/download \
+        <pre class="code-block"><code>curl -X POST http://localhost:8080/api/download \
   -H "Content-Type: application/json" \
   -d '{{ '{' }}
-    "url": "https://example.com/video",
-    "format": "mp4",
-    "quality": "720p"
+    "url": "https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh",
+    "format": "mp3"
   {{ '}' }}'</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('curl -X POST http://localhost:8080/api/download \\\n  -H &quot;Content-Type: application/json&quot; \\\n  -d \'{\n    &quot;url&quot;: &quot;https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh&quot;,\n    &quot;format&quot;: &quot;mp3&quot;\n  }\'')">Copy</button>
       </div>
     </div>
 
     <div class="step">
-      <h3>Check Download Status</h3>
+      <h3>Example: Download a YouTube Video</h3>
       <div class="code-block-container">
-        <pre class="code-block"><code>curl http://localhost:3000/api/status/abc123</code></pre>
+        <pre class="code-block"><code>curl -X POST http://localhost:8080/api/download \
+  -H "Content-Type: application/json" \
+  -d '{{ '{' }}
+    "url": "https://youtube.com/watch?v=dQw4w9WgXcQ",
+    "format": "mp4"
+  {{ '}' }}'</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('curl -X POST http://localhost:8080/api/download \\\n  -H &quot;Content-Type: application/json&quot; \\\n  -d \'{\n    &quot;url&quot;: &quot;https://youtube.com/watch?v=dQw4w9WgXcQ&quot;,\n    &quot;format&quot;: &quot;mp4&quot;\n  }\'')">Copy</button>
       </div>
     </div>
   </div>
 
   <div class="usage-section">
-    <h2>Supported Platforms</h2>
-    <p>ArgonFetch supports downloading from various platforms:</p>
+    <h2>Currently Supported Platforms</h2>
+    <p>ArgonFetch currently supports downloading from:</p>
 
     <ul class="platform-list">
-      <li>✅ YouTube</li>
-      <li>✅ Twitter</li>
-      <li>✅ Instagram</li>
-      <li>✅ TikTok</li>
-      <li>✅ Facebook</li>
-      <li>✅ Reddit</li>
-      <li>✅ And many more...</li>
+      <li>✅ <strong>Spotify</strong> - Song metadata lookup (downloads via YouTube Music)</li>
+      <li>✅ <strong>YouTube</strong> - Videos and audio extraction</li>
+      <li>✅ <strong>SoundCloud</strong> - Tracks and audio downloads</li>
+      <li>✅ <strong>TikTok</strong> - Video downloads</li>
+      <li>🚧 <strong>More Social Media</strong> - X, Instagram, Facebook (Planned)</li>
     </ul>
+
+    <div class="note">
+      <p><strong>Note:</strong> Platform support is actively being expanded. Check the <a href="https://github.com/ArgonFetch/ArgonFetch#-roadmap" target="_blank">roadmap</a> for upcoming features.</p>
+    </div>
   </div>
 
   <div class="usage-section">
-    <h2>Quality Options</h2>
-    <p>Available quality settings depend on the source platform:</p>
+    <h2>Format Options</h2>
+    <p>Available output formats:</p>
 
     <table class="quality-table">
       <thead>
         <tr>
-          <th>Quality</th>
-          <th>Resolution</th>
+          <th>Format</th>
+          <th>Type</th>
           <th>Use Case</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><code>best</code></td>
-          <td>Highest available</td>
-          <td>Best quality download</td>
+          <td><code>mp3</code></td>
+          <td>Audio</td>
+          <td>Music downloads, podcasts, audio-only content</td>
         </tr>
         <tr>
-          <td><code>1080p</code></td>
-          <td>1920x1080</td>
-          <td>Full HD</td>
+          <td><code>mp4</code></td>
+          <td>Video</td>
+          <td>Standard video format, widely supported</td>
         </tr>
         <tr>
-          <td><code>720p</code></td>
-          <td>1280x720</td>
-          <td>HD (recommended)</td>
-        </tr>
-        <tr>
-          <td><code>480p</code></td>
-          <td>854x480</td>
-          <td>Standard quality</td>
-        </tr>
-        <tr>
-          <td><code>worst</code></td>
-          <td>Lowest available</td>
-          <td>Fastest download</td>
+          <td><code>webm</code></td>
+          <td>Video</td>
+          <td>Open format, efficient compression</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <div class="usage-section">
-    <h2>Tips and Best Practices</h2>
+    <h2>Tips & Best Practices</h2>
     <ul>
-      <li><strong>Check platform policies:</strong> Always respect the terms of service of the platforms you're downloading from</li>
-      <li><strong>Storage space:</strong> Higher quality videos require more storage space</li>
-      <li><strong>Network bandwidth:</strong> Consider your internet connection when selecting quality</li>
-      <li><strong>Batch downloads:</strong> Use the API for downloading multiple files</li>
+      <li>Always ensure you have the right to download content</li>
+      <li>For Spotify downloads, make sure your API credentials are properly configured</li>
+      <li>Use MP3 format for audio-only content to save bandwidth and storage</li>
+      <li>Check the API documentation at <code>/swagger</code> for advanced features</li>
     </ul>
   </div>
 
-  <div class="usage-section">
-    <h2>Troubleshooting</h2>
-    <div class="trouble-item">
-      <h3>Download fails immediately</h3>
-      <p>Make sure the URL is valid and the media is publicly accessible.</p>
-    </div>
-
-    <div class="trouble-item">
-      <h3>Slow download speeds</h3>
-      <p>Try selecting a lower quality or check your network connection.</p>
-    </div>
-
-    <div class="trouble-item">
-      <h3>Unsupported platform</h3>
-      <p>Check our <a routerLink="/docs/api">API documentation</a> for the list of supported platforms.</p>
-    </div>
+  <div class="next-steps">
+    <h2>Need Help?</h2>
+    <ul>
+      <li><a routerLink="/docs/api">API Documentation</a> - Detailed API reference</li>
+      <li><a routerLink="/docs/configuration">Configuration</a> - Customize your setup</li>
+      <li><a href="https://github.com/ArgonFetch/ArgonFetch/issues" target="_blank">Report Issues</a> - Found a bug? Let us know!</li>
+    </ul>
   </div>
 </div>

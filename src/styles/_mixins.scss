@@ -49,16 +49,16 @@
     }
 }
 
-// Standard card styles
+// Standard card styles. Hover highlights; it never lifts.
 @mixin card {
     padding: map.get(tokens.$spacing, 'card');
     border-radius: map.get(tokens.$effects, 'border-radius');
-    background-color: map.get(tokens.$colors, 'dark');
-    transition: map.get(tokens.$effects, 'transition');
+    background-color: map.get(tokens.$colors, 'ink-raised');
+    border: 1px solid map.get(tokens.$colors, 'ink-line');
+    transition: border-color 150ms ease, background-color 150ms ease;
 
     &:hover {
-        transform: translateY(-5px);
-        box-shadow: map.get(tokens.$effects, 'card-shadow');
+        border-color: rgba(153, 72, 253, 0.45);
     }
 }
 

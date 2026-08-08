@@ -2,7 +2,7 @@
   <h1>Installation Guide</h1>
 
   <p class="lead">
-    ArgonFetch can be easily installed and set up on your system. Follow the steps below to get started with self-hosting ArgonFetch.
+    ArgonFetch can be easily deployed using Docker. Follow the steps below to get started with self-hosting ArgonFetch.
   </p>
 
   <div class="installation-steps">
@@ -13,93 +13,111 @@
       </h3>
       <p>Before installing ArgonFetch, make sure you have the following prerequisites installed on your system:</p>
       <ul>
-        <li><strong>Node.js</strong> (version 18 or higher)</li>
-        <li><strong>npm</strong> or <strong>yarn</strong> package manager</li>
-        <li><strong>Git</strong> for cloning the repository</li>
+        <li><strong>Docker</strong> and <strong>Docker Compose</strong></li>
+        <li><strong>Spotify API Credentials</strong> (Required) - Get them from <a href="https://developer.spotify.com/documentation/web-api/concepts/apps" target="_blank">Spotify Developer Dashboard</a></li>
       </ul>
     </div>
 
     <div class="step">
       <h3>
         <span class="step-number">2</span>
-        Clone the Repository
+        Create Docker Compose File
       </h3>
-      <p>Start by cloning the ArgonFetch repository from GitHub:</p>
+      <p>Create a <code>compose.yml</code> file with the following configuration:</p>
       <div class="code-block-container">
-        <pre class="code-block"><code>git clone https://github.com/ArgonFetch/ArgonFetch.git
-cd ArgonFetch</code></pre>
-        <button class="copy-btn" (click)="copyToClipboard('git clone https://github.com/ArgonFetch/ArgonFetch.git\ncd ArgonFetch')">Copy</button>
+        <pre class="code-block"><code>services:
+  postgres:
+    image: postgres:15
+    container_name: argonfetch-db
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  argonfetch:
+    image: ghcr.io/argonfetch/argonfetch:latest
+    # Alternative: docker.io/pianonic/argonfetch:latest
+    container_name: argonfetch
+    env_file: .env
+    environment:
+      ConnectionStrings__ArgonFetchDatabase: "Host=postgres;Port=5432;Database=${{ '{' }}POSTGRES_DB{{ '}' }};Username=${{ '{' }}POSTGRES_USER{{ '}' }};Password=${{ '{' }}POSTGRES_PASSWORD{{ '}' }}"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('services:\n  postgres:\n    image: postgres:15\n    container_name: argonfetch-db\n    env_file: .env\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n    ports:\n      - &quot;5432:5432&quot;\n    restart: unless-stopped\n\n  argonfetch:\n    image: ghcr.io/argonfetch/argonfetch:latest\n    # Alternative: docker.io/pianonic/argonfetch:latest\n    container_name: argonfetch\n    env_file: .env\n    environment:\n      ConnectionStrings__ArgonFetchDatabase: &quot;Host=postgres;Port=5432;Database=${{POSTGRES_DB}};Username=${{POSTGRES_USER}};Password=${{POSTGRES_PASSWORD}}&quot;\n    ports:\n      - &quot;8080:8080&quot;\n    depends_on:\n      - postgres\n    restart: unless-stopped\n\nvolumes:\n  postgres_data:')">Copy</button>
       </div>
     </div>
 
     <div class="step">
       <h3>
         <span class="step-number">3</span>
-        Install Dependencies
+        Create Environment File
       </h3>
-      <p>Install the required Node.js dependencies:</p>
+      <p>Create a <code>.env</code> file with your configuration:</p>
       <div class="code-block-container">
-        <pre class="code-block"><code>npm install</code></pre>
-        <button class="copy-btn" (click)="copyToClipboard('npm install')">Copy</button>
+        <pre class="code-block"><code># Database
+POSTGRES_USER=argonfetch
+POSTGRES_PASSWORD=changeme123
+POSTGRES_DB=argonfetch
+
+# Spotify API (Required)
+Spotify__ClientId=your_spotify_client_id
+Spotify__ClientSecret=your_spotify_client_secret
+
+# CORS Configuration (Required for production)
+# Comma-separated list of allowed origins
+CORS_ALLOWED_ORIGINS=https://app.argonfetch.dev,https://argonfetch.dev,http://localhost:4200</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('# Database \nPOSTGRES_USER=argonfetch\nPOSTGRES_PASSWORD=changeme123\nPOSTGRES_DB=argonfetch\n\n# Spotify API (Required)\nSpotify__ClientId=your_spotify_client_id\nSpotify__ClientSecret=your_spotify_client_secret\n\n# CORS Configuration (Required for production)\n# Comma-separated list of allowed origins\nCORS_ALLOWED_ORIGINS=https://app.argonfetch.dev,https://argonfetch.dev,http://localhost:4200')">Copy</button>
       </div>
-      <p><strong>Or if you prefer using Yarn:</strong></p>
-      <div class="code-block-container">
-        <pre class="code-block"><code>yarn install</code></pre>
-        <button class="copy-btn" (click)="copyToClipboard('yarn install')">Copy</button>
+      <div class="note">
+        <p><strong>Important:</strong> Replace <code>your_spotify_client_id</code> and <code>your_spotify_client_secret</code> with your actual Spotify API credentials.</p>
+        <p>Get your Spotify credentials from the <a href="https://developer.spotify.com/documentation/web-api/concepts/apps" target="_blank">Spotify Developer Dashboard</a>.</p>
       </div>
     </div>
 
     <div class="step">
       <h3>
         <span class="step-number">4</span>
-        Configuration
+        Start ArgonFetch
       </h3>
-      <p>Copy the example environment file and configure your settings:</p>
+      <p>Start the application using Docker Compose:</p>
       <div class="code-block-container">
-        <pre class="code-block"><code>cp .env.example .env</code></pre>
-        <button class="copy-btn" (click)="copyToClipboard('cp .env.example .env')">Copy</button>
+        <pre class="code-block"><code>docker compose up -d</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('docker compose up -d')">Copy</button>
       </div>
-      <p>Edit the <code>.env</code> file with your preferred settings:</p>
-      <div class="note">
-        <p><strong>Note:</strong> Make sure to configure the <code>PORT</code> and other environment variables according to your needs.</p>
+      <p>ArgonFetch will be available at <code>http://localhost:8080</code></p>
+
+      <p>To view logs:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>docker compose logs -f</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('docker compose logs -f')">Copy</button>
+      </div>
+
+      <p>To stop the application:</p>
+      <div class="code-block-container">
+        <pre class="code-block"><code>docker compose down</code></pre>
+        <button class="copy-btn" (click)="copyToClipboard('docker compose down')">Copy</button>
       </div>
     </div>
 
     <div class="step">
       <h3>
         <span class="step-number">5</span>
-        Start the Application
+        Alternative: Using Pre-built Images
       </h3>
-      <p>Start ArgonFetch in development mode:</p>
-      <div class="code-block-container">
-        <pre class="code-block"><code>npm run dev</code></pre>
-        <button class="copy-btn" (click)="copyToClipboard('npm run dev')">Copy</button>
-      </div>
-      <p>For production deployment:</p>
-      <div class="code-block-container">
-        <pre class="code-block"><code>npm run build
-npm start</code></pre>
-        <button class="copy-btn" (click)="copyToClipboard('npm run build\nnpm start')">Copy</button>
-      </div>
-      <p>ArgonFetch will be available at <code>http://localhost:3000</code> (or your configured port).</p>
-    </div>
-
-    <div class="step">
-      <h3>
-        <span class="step-number">6</span>
-        Docker Installation (Alternative)
-      </h3>
-      <p>You can also run ArgonFetch using Docker:</p>
-      <div class="code-block-container">
-        <pre class="code-block"><code>docker build -t argonfetch .
-docker run -p 3000:3000 argonfetch</code></pre>
-        <button class="copy-btn" (click)="copyToClipboard('docker build -t argonfetch .\ndocker run -p 3000:3000 argonfetch')">Copy</button>
-      </div>
-      <p>Or use Docker Compose:</p>
-      <div class="code-block-container">
-        <pre class="code-block"><code>docker-compose up -d</code></pre>
-        <button class="copy-btn" (click)="copyToClipboard('docker-compose up -d')">Copy</button>
-      </div>
+      <p>ArgonFetch images are available from two registries:</p>
+      <ul>
+        <li><strong>GitHub Container Registry:</strong> <code>ghcr.io/argonfetch/argonfetch:latest</code></li>
+        <li><strong>Docker Hub:</strong> <code>docker.io/pianonic/argonfetch:latest</code></li>
+      </ul>
+      <p>Choose the one that works best for your setup in the compose.yml file.</p>
     </div>
   </div>
 
@@ -108,6 +126,7 @@ docker run -p 3000:3000 argonfetch</code></pre>
     <p>Now that you have ArgonFetch installed, check out these resources:</p>
     <ul>
       <li><a routerLink="/docs/usage">Basic Usage Guide</a> - Learn how to use ArgonFetch</li>
+      <li><a routerLink="/docs/api">API Documentation</a> - Explore the REST API</li>
       <li><a routerLink="/docs/configuration">Configuration Options</a> - Customize your setup</li>
       <li><a href="https://github.com/ArgonFetch/ArgonFetch/issues" target="_blank">Report Issues</a> - Found a bug? Let us know!</li>
     </ul>

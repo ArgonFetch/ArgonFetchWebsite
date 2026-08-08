@@ -3,7 +3,6 @@ import { HeroComponent } from '../../hero/hero.component';
 import { FeaturesComponent } from '../../features/features.component';
 import { ScreenshotsComponent } from '../../screenshots/screenshots.component';
 import { UsageComponent } from '../../usage/usage.component';
-import { RoadmapComponent } from '../../roadmap/roadmap.component';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +10,7 @@ import { RoadmapComponent } from '../../roadmap/roadmap.component';
     HeroComponent,
     FeaturesComponent,
     ScreenshotsComponent,
-    UsageComponent,
-    RoadmapComponent
+    UsageComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

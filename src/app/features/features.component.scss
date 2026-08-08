@@ -1,113 +1,90 @@
-@use "../../styles/shared.scss";
-
 .features {
-  padding: var(--spacing-5xl) 0;
-  background: linear-gradient(135deg, var(--section-bg-1) 0%, var(--darker) 50%, var(--section-bg-1) 100%);
-  position: relative;
+  padding: var(--section-padding);
+  background: var(--ink);
+  border-top: var(--border-hairline);
+}
+
+.section-head {
+  max-width: 46rem;
+  margin-bottom: var(--spacing-12);
+}
+
+/**
+ * The sheet draws its own rules: a 1px gap over an ink-line background makes
+ * every internal divider, so no cell needs its own border and none of them
+ * double up at the seams.
+ */
+.sheet {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--ink-line);
+  border: var(--border-hairline);
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
+}
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(153, 72, 253, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(81, 45, 127, 0.03) 0%, transparent 50%);
+.cell {
+  background: var(--ink);
+  padding: var(--spacing-8);
+  transition: background-color 250ms ease;
+
+  &:hover {
+    background: var(--ink-raised);
   }
 
-  h2 {
-    text-align: center;
-    font-size: var(--font-size-4xl);
-    font-weight: var(--font-weight-extrabold);
-    margin-bottom: var(--spacing-4xl);
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
-    z-index: 1;
+  h3 {
+    margin-top: var(--spacing-5);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--text-primary);
+    line-height: var(--line-height-snug);
   }
 
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-8);
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
+  p {
+    margin-top: var(--spacing-3);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+  }
+}
+
+.cell-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 250ms ease;
+
+  lucide-icon {
+    display: block;
+    line-height: 0;
+    color: var(--primary);
+  }
+}
+
+.cell:hover .cell-label {
+  color: var(--primary-lift);
+}
+
+@media (max-width: 900px) {
+  .sheet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .feature-card {
-    background: linear-gradient(135deg, var(--card) 0%, rgba(75, 85, 99, 0.8) 100%);
-    padding: var(--spacing-8);
-    border-radius: var(--border-radius-2xl);
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    backdrop-filter: var(--backdrop-blur-sm);
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
+  .cell {
+    padding: var(--spacing-6);
+  }
+}
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(150, 68, 255, 0.2);
-      border-color: rgba(153, 72, 253, 0.2);
-
-      &::before {
-        opacity: 1;
-      }
-
-      .icon {
-        background: linear-gradient(135deg, rgba(153, 72, 253, 0.15) 0%, rgba(196, 154, 255, 0.08) 100%);
-      }
-    }
-
-    .icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, rgba(153, 72, 253, 0.1) 0%, rgba(196, 154, 255, 0.05) 100%);
-      border-radius: var(--border-radius-2xl);
-      color: var(--primary);
-      margin: 0 auto var(--spacing-5);
-      font-size: 32px;
-      line-height: 1;
-      border: 1px solid rgba(153, 72, 253, 0.2);
-      transition: var(--transition);
-    }
-
-    h3 {
-      color: var(--text-primary);
-      margin-bottom: var(--spacing-3);
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-bold);
-      line-height: var(--line-height-tight);
-    }
-
-    p {
-      color: var(--text-secondary);
-      font-size: var(--font-size-base);
-      line-height: var(--line-height-relaxed);
-      max-width: 280px;
-      margin: 0 auto;
-    }
+@media (max-width: 600px) {
+  .sheet {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

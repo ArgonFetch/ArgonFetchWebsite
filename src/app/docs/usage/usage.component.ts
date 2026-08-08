@@ -8,5 +8,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './usage.component.scss'
 })
 export class UsageComponent {
-
+  copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text);
+  }
 }
