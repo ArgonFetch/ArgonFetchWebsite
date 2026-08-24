@@ -15,8 +15,7 @@ header {
 }
 
 // The bar only earns an edge once there is content behind it.
-header.scrolled,
-header.docs-mode {
+header.scrolled {
     background: rgba(10, 9, 16, 0.88);
     border-bottom-color: var(--ink-line);
 }
@@ -62,20 +61,6 @@ header.docs-mode {
     font-weight: var(--font-weight-bold);
     letter-spacing: var(--letter-spacing-tight);
     color: var(--text-primary);
-}
-
-.docs-badge {
-    font-family: var(--font-family-code);
-    font-size: 0.6875rem;
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--letter-spacing-wider);
-    text-transform: uppercase;
-    color: var(--primary-lift);
-    background: rgba(153, 72, 253, 0.12);
-    border: 1px solid rgba(153, 72, 253, 0.28);
-    border-radius: var(--border-radius-sm);
-    padding: 0.1875rem 0.375rem;
-    line-height: 1;
 }
 
 /* --- Links -------------------------------------------------------------- */

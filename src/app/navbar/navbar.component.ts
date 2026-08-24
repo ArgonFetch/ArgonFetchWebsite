@@ -1,14 +1,15 @@
-import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, RouterLink } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LucideAngularModule, Menu, X, ArrowLeft } from 'lucide-angular';
-import { Subject } from 'rxjs';
-import { takeUntil, filter } from 'rxjs/operators';
+import { LucideAngularModule, Menu, X } from 'lucide-angular';
 
 /** Landing page sections, in document order, used for the active-link marker. */
 const SECTIONS = ['hero', 'features', 'interface', 'usage'];
+
+/** The docs live in their own VitePress site, not in this app. */
+const DOCS_URL = 'https://docs.argonfetch.dev';
 
 @Component({
   selector: 'app-navbar',
@@ -21,47 +22,23 @@ const SECTIONS = ['hero', 'features', 'interface', 'usage'];
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent {
   isMobileMenuOpen = false;
   isScrolled = false;
   activeSection = 'hero';
-  isDocsMode = false;
-  private destroy$ = new Subject<void>();
+
+  readonly docsUrl = DOCS_URL;
 
   // Font Awesome carries company marks only; everything else is Lucide.
   faGithub = faGithub;
 
   readonly MenuIcon = Menu;
   readonly XIcon = X;
-  readonly ArrowLeftIcon = ArrowLeft;
-
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((event: NavigationEnd) => {
-        this.isDocsMode = event.url.includes('/docs');
-        this.closeMobileMenu();
-      });
-
-    this.isDocsMode = this.router.url.includes('/docs');
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 8;
-    if (!this.isDocsMode) {
-      this.updateActiveSection();
-    }
+    this.updateActiveSection();
   }
 
   /**
@@ -97,13 +74,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   closeMobileMenuAndScroll(_fragment: string) {
     this.closeMobileMenu();
-  }
-
-  navigateBack() {
-    this.router.navigate(['/']);
-  }
-
-  navigateToDocs() {
-    this.router.navigate(['/docs']);
   }
 }

@@ -24,7 +24,6 @@ This repository contains the source code for the ArgonFetch presentation website
 - **Framework**: Angular 19
 - **Styling**: SCSS
 - **Icons**: Font Awesome
-- **Code Highlighting**: Prism.js
 
 ## 🚀 Getting Started
 

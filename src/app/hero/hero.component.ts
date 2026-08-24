@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -71,7 +70,7 @@ const HOLD_RESULT = 3400;
 
 @Component({
   selector: 'app-hero',
-  imports: [CommonModule, FontAwesomeModule, LucideAngularModule, RouterLink],
+  imports: [CommonModule, FontAwesomeModule, LucideAngularModule],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })

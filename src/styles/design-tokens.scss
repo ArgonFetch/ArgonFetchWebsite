@@ -223,23 +223,6 @@ $breakpoints: (
 );
 
 // ========================================
-// PRISM
-// ========================================
-$prism-theme: (
-    'background': #070610,
-    'text': #edebf3,
-    'comment': #6b6480,
-    'punctuation': #a9a3bb,
-    'tag': #c09bff,
-    'attr-name': #b47cff,
-    'string': #4cd2ff,
-    'operator': #ffb454,
-    'keyword': #c09bff,
-    'function': #7de0ff,
-    'variable': #ffb454
-);
-
-// ========================================
 // CSS VARIABLE EXPORT
 // ========================================
 :root {
@@ -315,10 +298,6 @@ $prism-theme: (
     --transition: #{map.get($effects, 'transition')};
     --card-shadow: #{map.get($effects, 'card-shadow')};
 
-    @each $name, $value in $prism-theme {
-        --prism-#{$name}: #{$value};
-    }
-
     // Layout constants shared between the shell and its children
     --nav-height: 64px;
     --measure: 68ch;
@@ -345,10 +324,6 @@ $prism-theme: (
 
 @function breakpoint($key) {
     @return map.get($breakpoints, $key);
-}
-
-@function prism($key) {
-    @return map.get($prism-theme, $key);
 }
 
 // ========================================
