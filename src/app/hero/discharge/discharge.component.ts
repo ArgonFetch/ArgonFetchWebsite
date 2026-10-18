@@ -8,6 +8,7 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
+import { gsap } from '../../motion/motion.service';
 
 /**
  * The hero background: one lit argon tube across the page, drawn the way a
@@ -25,9 +26,19 @@ import {
  *
  * The tube enters from beyond the left edge on the "link" side, runs between
  * the two headline lines, and bends down at the right into a neon download
- * arrow that lands in a tray beside the word "file". When the hero demo fetches, a band of brighter light
+ * arrow that lands in a tray beside the second line. When the hero demo fetches, a band of brighter light
  * runs the whole path, turns the corner and drops into the arrow, and the tray
- * flashes as the result lands. The pointer warms the stretch it is near.
+ * flashes as the result lands.
+ *
+ * It answers the pointer the way a lit discharge tube answers a hand: the gas
+ * gathers toward the nearest point of glass (brighter the faster you move),
+ * and bands of light ripple away from it along the tube, which is what moving
+ * striations look like in a real glow discharge. Clicking the tube sends a
+ * band of light from that point down into the arrow.
+ *
+ * The smoke around it can be stirred: the pointer leaves a short-lived wake
+ * that drags the haze along and curls it into small eddies, which settle
+ * back into the drift after a second or two.
  *
  * Plain WebGL2 and one fragment shader, so the effect costs no library. Without
  * WebGL2 the host's CSS background shows instead.
@@ -51,6 +62,12 @@ uniform float uPulseX;   // its position along the path, 0 = link end, 1 = arrow
 uniform float uFloor;    // baseline of the second headline line, 0..1 from the bottom
 uniform float uArrowX;   // right edge of the arrow's column, 0..1 from the left
 uniform float uArrowW;   // width of that column, as a fraction of the width
+uniform float uTouch;    // 0..1, how close the pointer is to the tube
+uniform float uEnergy;   // 0..1, how fast the pointer is moving
+uniform float uClick;    // 0..1, strength of a band sent by clicking the tube
+uniform float uClickX;   // its position along the path, 0 = link end, 1 = arrow tip
+uniform vec4 uWake[24];  // the pointer's recent path: xy position, zw velocity (px, origin bottom-left)
+uniform float uWakeLife[24]; // 1 when a wake point is fresh, fading to 0
 uniform float uLand;     // 0..1, the arrow and tray flashing as a fetch lands
 
 out vec4 outColor;
@@ -123,11 +140,21 @@ float gWLevel;   // weighted sum of brightness
 float gWBloomD;  // weighted sum of distance (for the smooth-min)
 float gBase;     // brightness before per-piece effects
 float gToTip;    // path length from the link end to the arrow tip
+float gTouchAt;  // where along the path the pointer is nearest
+float gBore;     // tube radius, for sizing the touch effects
 
 float pieceLevel(float along, float arrow, float tray) {
   float lev = gBase;
   lev += band(along, uPulseX * gToTip, uRes.x * 0.04) * uPulse * 1.4 * (1.0 - tray);
   lev += uLand * (tray * 1.1 + arrow * 0.6);
+  lev += band(along, uClickX * gToTip, uRes.x * 0.035) * uClick * 1.6 * (1.0 - tray);
+
+  // The hand: gas gathers at the nearest point, and striations ripple away from it.
+  float fromTouch = abs(along - gTouchAt);
+  float gather = exp(-fromTouch / (gBore * 7.0)) * (1.5 + uEnergy * 1.6);
+  float wave = 0.5 + 0.5 * sin(fromTouch * 0.14 - uTime * 9.0);
+  float ripple = wave * wave * wave * exp(-fromTouch / (gBore * 40.0)) * 1.0;
+  lev += uTouch * (gather + ripple) * (1.0 - tray);
   return lev;
 }
 
@@ -147,11 +174,35 @@ void main() {
 
   // --- Room: drifting smoke, domain-warped so it curls instead of sliding ----
   // The tube lights it further down, so the smoke glows where it passes the glass.
-  vec2 p = vec2(uv.x * aspect, uv.y);
+  // The pointer's wake: each recent point drags the haze along its motion and
+  // spins it into a pair of eddies either side of its path, like a hand
+  // passing through fog. Applied as an offset to where the smoke is sampled.
+  vec2 stir = vec2(0.0);
+  float stirred = 0.0;
+  float wakeR = uRes.y * 0.13;
+  for (int i = 0; i < 24; i++) {
+    float life = uWakeLife[i];
+    if (life < 0.002) continue;
+    vec2 dd = px - uWake[i].xy;
+    vec2 vel = uWake[i].zw;
+    float f = exp(-dot(dd, dd) / (wakeR * wakeR)) * life;
+    float side = sign(vel.x * dd.y - vel.y * dd.x);
+    stir += vel * f * 2.2;
+    stir += vec2(-dd.y, dd.x) / wakeR * f * length(vel) * 1.6 * side;
+    stirred += f * min(length(vel) / 12.0, 1.0);
+  }
+
+  vec2 p = vec2(uv.x * aspect, uv.y) - stir / uRes.y;
   vec2 q = vec2(fbm(p * 1.4 + t * 0.03), fbm(p * 1.4 - t * 0.025 + 7.0));
   float gas = fbm(p * 2.1 + q * 1.9 + t * 0.02);
-  float smoke = smoothstep(0.35, 0.95, gas);
+  // Where the pointer has passed, fine wisps are kicked up out of the haze,
+  // so the wake reads as disturbed smoke even where the haze is thin. The
+  // overlap of wake points is saturated, so lingering never turns into a blob.
+  float st = 1.0 - exp(-stirred * 1.5);
+  float wisp = fbm(p * 7.0 + stir / uRes.y * 2.5 + vec2(t * 0.35, -t * 0.2));
+  float smoke = smoothstep(0.35, 0.95, gas + st * (wisp - 0.36) * 1.8);
   vec3 col = mix(vec3(0.04, 0.014, 0.11), vec3(0.16, 0.05, 0.34), smoke);
+  col += vec3(0.6, 0.28, 0.99) * st * smoothstep(0.5, 0.85, wisp) * 0.2;
 
   // --- Geometry -------------------------------------------------------------
   // The tube enters from beyond the left edge of the page, runs across, and
@@ -182,12 +233,9 @@ void main() {
   float strikeNoise = hash(vec2(floor(t * 18.0), 3.1));
   float on = uCharge >= 0.999 ? 1.0 : mix(0.08, 1.0, step(1.0 - uCharge * 0.9, strikeNoise)) * smoothstep(0.0, 0.15, uCharge);
 
-  // The pointer warms the glass near it. Measured from the pointer itself, so
-  // the warm spot is round and continuous across every piece.
   vec2 m = uMouse * uRes;
-  float warm = exp(-length(px - m) / (uRes.y * 0.16)) * uPull * 0.35;
 
-  gBase = (1.0 + uFlow * 0.18 + warm) * on * (0.985 + 0.015 * noise(vec2(t * 7.0, 0.0)));
+  gBase = (1.0 + uFlow * 0.18) * on * (0.985 + 0.015 * noise(vec2(t * 7.0, 0.0)));
   gK = bore * 0.9;
   gMin = 1e9;
   gW = 0.0;
@@ -196,6 +244,14 @@ void main() {
   float lenH = xB - cr - x0;
   float lenArc = 1.5707963 * cr;
   gToTip = lenH + lenArc + (y0 - cr - tipY);
+  gBore = bore;
+
+  // Nearest point of the main run to the pointer, as a distance along the path.
+  vec2 onH = vec2(clamp(m.x, x0, xB - cr), y0);
+  vec2 onV = vec2(xB, clamp(m.y, tipY, y0 - cr));
+  bool nearV = length(m - onV) < length(m - onH);
+  vec2 touchPoint = nearV ? onV : onH;
+  gTouchAt = nearV ? lenH + lenArc + (y0 - cr - onV.y) : onH.x - x0;
 
   // A reference distance for the blend weights: the straight run is always
   // close enough to everything on screen that this never underflows.
@@ -280,6 +336,10 @@ void main() {
   float pd = length(px - pp);
   float pulseGlow = uPulse / (1.0 + pd * pd / (bore * bore * 16.0));
 
+  // Light spilling out where the gas has gathered under the pointer.
+  float td = length(px - touchPoint);
+  pulseGlow += uTouch * (1.5 + uEnergy * 1.2) / (1.0 + td * td / (bore * bore * 60.0));
+
   vec3 violet = vec3(0.6, 0.28, 0.99);   // #9948fd, the brand violet
   vec3 glow = violet * halo * level * (1.0 - fill);
   // Kept modest on purpose: the white core has to stay the brightest thing,
@@ -313,7 +373,7 @@ void main() {
   outColor = vec4(col, 1.0);
 }`;
 
-const UNIFORMS = ['uRes', 'uTime', 'uMouse', 'uPull', 'uCharge', 'uTube', 'uFlow', 'uPulse', 'uPulseX', 'uFloor', 'uLand', 'uArrowX', 'uArrowW'];
+const UNIFORMS = ['uRes', 'uTime', 'uMouse', 'uPull', 'uCharge', 'uTube', 'uFlow', 'uPulse', 'uPulseX', 'uFloor', 'uLand', 'uArrowX', 'uArrowW', 'uTouch', 'uEnergy', 'uClick', 'uClickX', 'uWake', 'uWakeLife'];
 
 @Component({
   selector: 'app-discharge',
@@ -345,6 +405,10 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
   /** Baseline of the second headline line, 0..1 from the bottom; the tray lands on it. */
   floor = 0.3;
 
+  /** A band sent by clicking the tube: strength, and position along the path (0 link end, 1 arrow tip). */
+  click = 0;
+  clickX = 0;
+
   /** The column beside the second line that the arrow hangs in: right edge (0..1 from the left) and width (fraction). */
   arrowX = 0.97;
   arrowW = 0.1;
@@ -360,9 +424,19 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
   private start = performance.now();
 
-  // The pointer is eased, so the warm spot drifts after it instead of snapping.
-  private mouse = { x: 0.5, y: 0.5, pull: 0 };
-  private target = { x: 0.5, y: 0.5, pull: 0 };
+  // The pointer is eased, so the tube's reaction drifts after it instead of snapping.
+  private mouse = { x: 0.5, y: 0.5, pull: 0, touch: 0, energy: 0 };
+  private target = { x: 0.5, y: 0.5, pull: 0, touch: 0, energy: 0 };
+  private lastPointer?: { x: number; y: number; t: number };
+
+  // The pointer's wake through the smoke: a ring of recent points with their
+  // velocity, aged every frame. Kept as typed arrays so they upload as-is.
+  private readonly wakeSize = 24;
+  private wake = new Float32Array(24 * 4);
+  private wakeBorn = new Float64Array(24).fill(-1e9);
+  private wakeLife = new Float32Array(24);
+  private wakeNext = 0;
+  private wakeLast?: { x: number; y: number; t: number };
 
   ngAfterViewInit(): void {
     const canvas = this.canvasRef.nativeElement;
@@ -374,6 +448,7 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
     this.zone.runOutsideAngular(() => {
       window.addEventListener('resize', this.resize);
       window.addEventListener('pointermove', this.onPointer, { passive: true });
+      window.addEventListener('pointerdown', this.onPress, { passive: true });
       document.documentElement.addEventListener('pointerleave', this.onLeave);
 
       // Stop drawing once the hero is scrolled away; it is the costliest thing on the page.
@@ -394,7 +469,9 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
     this.observer?.disconnect();
     window.removeEventListener('resize', this.resize);
     window.removeEventListener('pointermove', this.onPointer);
+    window.removeEventListener('pointerdown', this.onPress);
     document.documentElement.removeEventListener('pointerleave', this.onLeave);
+    this.clickTween?.kill();
     this.gl?.getExtension('WEBGL_lose_context')?.loseContext();
   }
 
@@ -453,16 +530,115 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
     if (this.still) this.draw(14);
   };
 
+  /**
+   * The tube's path in CSS px, origin bottom-left, mirroring the shader's
+   * geometry so hover and clicks agree with what is drawn.
+   */
+  private geometry() {
+    const canvas = this.canvasRef.nativeElement;
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+    const scale = Math.min(w, h * 1.6);
+    const y0 = this.electrode * h;
+    const x0 = -w * 0.05;
+    const avail = Math.max(y0 - this.floor * h, 40);
+    const u = Math.max(Math.min(avail / 7, (this.arrowW * w * 0.72) / 4.8), 5);
+    const bore = Math.min(scale * 0.011, u * 0.42);
+    const cr = 1.5 * u;
+    const xB = this.arrowX * w - 2.4 * u - bore * 1.3;
+    const trayY = y0 - 7 * u + bore;
+    const tipY = trayY + 1.7 * u;
+    const lenH = xB - cr - x0;
+    const lenArc = (Math.PI / 2) * cr;
+    const toTip = lenH + lenArc + (y0 - cr - tipY);
+    return { w, h, y0, x0, bore, cr, xB, tipY, lenH, lenArc, toTip };
+  }
+
+  /** Distance from a point to the main run, and how far along the path its nearest point is (0..1). */
+  private nearest(x: number, y: number) {
+    const g = this.geometry();
+    const hx = Math.min(Math.max(x, g.x0), g.xB - g.cr);
+    const dH = Math.hypot(x - hx, y - g.y0);
+    const vy = Math.min(Math.max(y, g.tipY), g.y0 - g.cr);
+    const dV = Math.hypot(x - g.xB, y - vy);
+    const along = dH <= dV ? hx - g.x0 : g.lenH + g.lenArc + (g.y0 - g.cr - vy);
+    return { distance: Math.min(dH, dV), along: along / g.toTip, bore: g.bore };
+  }
+
   private onPointer = (e: PointerEvent) => {
     const rect = this.canvasRef.nativeElement.getBoundingClientRect();
     const inside = e.clientY >= rect.top && e.clientY <= rect.bottom;
-    this.target.x = (e.clientX - rect.left) / rect.width;
-    this.target.y = 1 - (e.clientY - rect.top) / rect.height;
+    const x = e.clientX - rect.left;
+    const y = rect.height - (e.clientY - rect.top);
+    this.target.x = x / rect.width;
+    this.target.y = y / rect.height;
     this.target.pull = inside && e.pointerType === 'mouse' ? 1 : 0;
+
+    // Proximity: full strength on the glass, gone a few tube-widths away.
+    const near = this.nearest(x, y);
+    const reach = near.bore * 26;
+    this.target.touch = inside && e.pointerType === 'mouse'
+      ? Math.max(0, 1 - Math.max(near.distance - near.bore, 0) / reach) ** 1.5
+      : 0;
+
+    // Energy follows pointer speed, so a quick sweep across the glass flares it.
+    const now = performance.now();
+    if (this.lastPointer) {
+      const dt = Math.max(now - this.lastPointer.t, 1);
+      const speed = Math.hypot(e.clientX - this.lastPointer.x, e.clientY - this.lastPointer.y) / dt;
+      this.target.energy = Math.min(speed / 2.5, 1);
+    }
+    this.lastPointer = { x: e.clientX, y: e.clientY, t: now };
+
+    // Lay down a wake point every few pixels of travel, carrying the velocity.
+    if (inside && e.pointerType === 'mouse') {
+      const prev = this.wakeLast;
+      if (!prev || Math.hypot(x - prev.x, y - prev.y) > 30) {
+        const dt = prev ? Math.max((now - prev.t) / (1000 / 60), 0.5) : 1;
+        let vx = prev ? (x - prev.x) / dt : 0;
+        let vy = prev ? (y - prev.y) / dt : 0;
+        const speed = Math.hypot(vx, vy);
+        if (speed > 40) { vx *= 40 / speed; vy *= 40 / speed; }
+        const i = this.wakeNext;
+        this.wake.set([x, y, vx, vy], i * 4);
+        this.wakeBorn[i] = now;
+        this.wakeNext = (i + 1) % this.wakeSize;
+        this.wakeLast = { x, y, t: now };
+      }
+    } else {
+      this.wakeLast = undefined;
+    }
+
+    // A pointer cursor over the glass says it can be clicked.
+    const hero = this.canvasRef.nativeElement.closest('section');
+    hero?.classList.toggle('is-over-tube', inside && near.distance < near.bore * 3 + 10);
   };
 
   private onLeave = () => {
     this.target.pull = 0;
+    this.target.touch = 0;
+  };
+
+  private clickTween?: gsap.core.Timeline;
+
+  /** Clicking the glass sends a band of light from that point down into the arrow. */
+  private onPress = (e: PointerEvent) => {
+    if (this.still || (e.target as HTMLElement).closest('a, button, .resolver')) return;
+    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = rect.height - (e.clientY - rect.top);
+    if (y < 0 || y > rect.height) return;
+    const near = this.nearest(x, y);
+    if (near.distance > near.bore * 3 + 14) return;
+
+    const remaining = 1 - near.along;
+    this.clickTween?.kill();
+    this.clickTween = gsap.timeline()
+      .set(this, { clickX: near.along, click: 1 })
+      .to(this, { clickX: 1.02, duration: 0.35 + remaining * 0.9, ease: 'power2.in' })
+      .to(this, { click: 0, duration: 0.25 }, '>-0.1')
+      .to(this, { land: 1, duration: 0.1, ease: 'power2.out' }, '<')
+      .to(this, { land: 0, duration: 1.0, ease: 'power2.in' });
   };
 
   private loop = () => {
@@ -476,6 +652,16 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
     m.x += (this.target.x - m.x) * 0.08;
     m.y += (this.target.y - m.y) * 0.08;
     m.pull += (this.target.pull - m.pull) * 0.05;
+    m.touch += (this.target.touch - m.touch) * 0.12;
+    m.energy += (this.target.energy - m.energy) * 0.08;
+    // Energy drains when the pointer rests, so the flare settles back to a glow.
+    this.target.energy *= 0.92;
+
+    // Wake points fade over about two seconds, easing out so eddies settle softly.
+    for (let i = 0; i < this.wakeSize; i++) {
+      const age = (now - this.wakeBorn[i]) / 2000;
+      this.wakeLife[i] = age >= 1 ? 0 : (1 - age) * (1 - age);
+    }
     this.draw((now - this.start) / 1000);
     this.frame = requestAnimationFrame(this.loop);
   };
@@ -497,6 +683,12 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
     gl.uniform1f(u['uLand'], this.land);
     gl.uniform1f(u['uArrowX'], this.arrowX);
     gl.uniform1f(u['uArrowW'], this.arrowW);
+    gl.uniform1f(u['uTouch'], this.mouse.touch);
+    gl.uniform1f(u['uEnergy'], this.mouse.energy);
+    gl.uniform1f(u['uClick'], this.click);
+    gl.uniform1f(u['uClickX'], this.clickX);
+    gl.uniform4fv(u['uWake'], this.wake);
+    gl.uniform1fv(u['uWakeLife'], this.wakeLife);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 }

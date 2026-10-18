@@ -18,6 +18,11 @@
     app-discharge {
         z-index: -1;
     }
+
+    // Set by the tube when the pointer is over the glass: it can be clicked.
+    &.is-over-tube {
+        cursor: pointer;
+    }
 }
 
 .hero-inner {
@@ -47,7 +52,8 @@
     flex-direction: column;
     gap: clamp(4.5rem, 13vh, 8.5rem);
     font-family: var(--font-family-heading);
-    font-size: clamp(3.25rem, min(9.4vw, 15vh), 9.5rem);
+    // Sized so the longer second line plus the arrow column still fits the width.
+    font-size: clamp(2.5rem, min(7.4vw, 13vh), 6.75rem);
     font-weight: 800;
     line-height: 0.86;
     letter-spacing: -0.03em;
@@ -515,7 +521,7 @@
     .headline {
         --arrow-col: 4.5rem;
         gap: clamp(3rem, 9vh, 5rem);
-        font-size: 12.5vw;
+        font-size: 9.6vw;
     }
 
     .line {
