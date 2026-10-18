@@ -39,19 +39,25 @@ $colors: (
     'signal-glow': rgba(76, 210, 255, 0.14),
 
     // --- Ink (surfaces) -----------------------------------------------------
-    'ink': #0a0910,              // page ground
-    'ink-raised': #100e17,       // panels sitting on the ground
-    'ink-sunken': #070610,       // wells: code blocks, inputs
-    'ink-line': #1e1a29,         // hairlines and dividers
-    'ink-chip': #171423,         // chips, tags, inline code
+    'ink': #10062a,              // page ground: argon discharge violet, not black
+    'ink-raised': #170a36,       // panels sitting on the ground
+    'ink-sunken': #0b041f,       // wells: code blocks, inputs
+    'ink-line': #2a1b52,         // hairlines and dividers
+    'ink-chip': #1e1042,         // chips, tags, inline code
 
     // Legacy aliases kept so existing rules keep resolving
-    'darker': #0a0910,
-    'dark': #100e17,
-    'card': #14111d,
-    'surface': #1e1a29,
-    'section-bg-1': #0a0910,
-    'section-bg-2': #0d0b14,
+    'darker': #10062a,
+    'dark': #170a36,
+    'card': #1a0c3c,
+    'surface': #2a1b52,
+    'section-bg-1': #10062a,
+    'section-bg-2': #13072f,
+
+    // --- Paper (the cooled, light band) --------------------------------------
+    'paper': #eee9ff,
+    'paper-ink': #1a0b3d,
+    'paper-muted': #5e4f8a,
+    'paper-line': #d3c8f5,
 
     'light': #edebf3,
     'white': #ffffff,
@@ -70,8 +76,8 @@ $colors: (
 
     // --- Text ---------------------------------------------------------------
     'text-primary': #edebf3,
-    'text-secondary': #a9a3bb,
-    'text-muted': #746d88,
+    'text-secondary': #b4a8d6,
+    'text-muted': #8072a8,
     'text-dark': #12101a,
 
     // --- State --------------------------------------------------------------
@@ -89,12 +95,13 @@ $colors: (
 // TYPOGRAPHY
 // ========================================
 // Three voices, three jobs:
-//   display - Bricolage Grotesque. Wordmark and section heads only.
-//   sans    - Inter. Everything you actually read.
-//   mono    - JetBrains Mono. Labels, status, numbers, URLs. The tool's own voice.
+//   display - Anybody. A variable-width face, so headlines can stretch and
+//             compress as part of the motion rather than just sit there.
+//   sans    - Schibsted Grotesk. Everything you actually read.
+//   mono    - JetBrains Mono. Only for text that is literally typed: URLs, commands.
 $typography: (
-    'font-family-sans': ('Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif),
-    'font-family-heading': ('Bricolage Grotesque', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif),
+    'font-family-sans': ('Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif),
+    'font-family-heading': ('Anybody', 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, sans-serif),
     'font-family-code': ('JetBrains Mono', 'SF Mono', Monaco, Consolas, 'Courier New', monospace),
 
     'font-weight-light': 300,
@@ -187,7 +194,7 @@ $effects: (
     'shadow': (0 2px 8px rgba(0, 0, 0, 0.5)),
     'shadow-md': (0 6px 20px rgba(0, 0, 0, 0.45)),
     'shadow-lg': (0 16px 40px rgba(0, 0, 0, 0.5)),
-    'shadow-xl': (0 28px 64px rgba(0, 0, 0, 0.55)),
+    'shadow-xl': (0 28px 64px rgba(4, 0, 16, 0.6)),
     'shadow-2xl': (0 40px 90px rgba(0, 0, 0, 0.6)),
 
     'card-shadow': (0 2px 8px rgba(0, 0, 0, 0.5)),
@@ -200,6 +207,7 @@ $effects: (
     // Motion: short, decisive, one easing family.
     'ease-out': cubic-bezier(0.16, 1, 0.3, 1),
     'ease-in-out': cubic-bezier(0.65, 0, 0.35, 1),
+    'ease-expo': cubic-bezier(0.87, 0, 0.13, 1),
     'transition-fast': (all 120ms cubic-bezier(0.16, 1, 0.3, 1)),
     'transition': (all 200ms cubic-bezier(0.16, 1, 0.3, 1)),
     'transition-slow': (all 400ms cubic-bezier(0.16, 1, 0.3, 1)),
@@ -226,7 +234,7 @@ $breakpoints: (
 // PRISM
 // ========================================
 $prism-theme: (
-    'background': #070610,
+    'background': #0b041f,
     'text': #edebf3,
     'comment': #6b6480,
     'punctuation': #a9a3bb,
@@ -265,6 +273,11 @@ $prism-theme: (
     --ink-sunken: #{map.get($colors, 'ink-sunken')};
     --ink-line: #{map.get($colors, 'ink-line')};
     --ink-chip: #{map.get($colors, 'ink-chip')};
+
+    --paper: #{map.get($colors, 'paper')};
+    --paper-ink: #{map.get($colors, 'paper-ink')};
+    --paper-muted: #{map.get($colors, 'paper-muted')};
+    --paper-line: #{map.get($colors, 'paper-line')};
 
     --darker: #{map.get($colors, 'darker')};
     --dark: #{map.get($colors, 'dark')};

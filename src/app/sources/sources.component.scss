@@ -1,0 +1,80 @@
+.sources {
+  padding-block: clamp(3rem, 8vh, 6rem);
+  background: var(--ink);
+  overflow: hidden;
+}
+
+.belt {
+  display: flex;
+  white-space: nowrap;
+}
+
+.track {
+  display: flex;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-family-heading);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.belt-now .item {
+  gap: clamp(1.25rem, 3vw, 3rem);
+  padding-right: clamp(1.25rem, 3vw, 3rem);
+  font-size: clamp(3.5rem, 9vw, 8.5rem);
+  font-variation-settings: 'wdth' 140;
+  color: var(--white);
+}
+
+.spark {
+  width: 0.42em;
+  height: 0.42em;
+  fill: var(--color-primary-light);
+  flex-shrink: 0;
+}
+
+// Planned sources are drawn as outlines: present, but not lit yet.
+.belt-next {
+  margin-top: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.belt-next .item {
+  gap: 0.75rem;
+  padding-right: clamp(2rem, 5vw, 5rem);
+  font-size: clamp(2.25rem, 5vw, 4.75rem);
+  font-variation-settings: 'wdth' 80;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(205, 184, 255, 0.45);
+}
+
+.soon {
+  align-self: flex-start;
+  margin-top: 0.5em;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0;
+  color: var(--text-muted);
+  -webkit-text-stroke: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .belt {
+    flex-wrap: wrap;
+  }
+}

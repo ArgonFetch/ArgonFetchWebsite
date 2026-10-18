@@ -1,0 +1,25 @@
+<section class="selfhost" #section>
+  <div class="inner">
+    <div class="pitch">
+      <h2 class="section-title">Run your<br />own copy.</h2>
+      <p class="section-lede">
+        One compose file starts ArgonFetch and the Postgres it keeps beside it.
+        Add your Spotify credentials and it is yours, on your own machine.
+      </p>
+      <div class="actions">
+        <a routerLink="/docs/installation" class="btn btn-primary">Read the install guide</a>
+        <a href="https://github.com/ArgonFetch/ArgonFetch/releases" class="btn btn-secondary" target="_blank"
+          rel="noopener noreferrer">Releases</a>
+      </div>
+    </div>
+
+    <div class="term" #term>
+      <div class="term-bar" aria-hidden="true">
+        <span></span><span></span><span></span>
+        <span class="term-title">~/argonfetch</span>
+      </div>
+      <pre class="term-body"><code><span class="term-line" *ngFor="let line of lines" [ngClass]="'is-' + line.kind"><span class="term-prompt" *ngIf="line.kind === 'cmd'">$ </span><span class="term-mark" *ngIf="line.kind === 'ok'">✓ </span><span class="term-text">{{ line.text }}</span>
+</span></code></pre>
+    </div>
+  </div>
+</section>

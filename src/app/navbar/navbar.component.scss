@@ -5,11 +5,10 @@
     z-index: 900;
 }
 
+// Clear over the hero; the bar only becomes a surface once content scrolls under it.
 header {
     height: var(--nav-height);
-    background: rgba(10, 9, 16, 0.72);
-    backdrop-filter: var(--backdrop-blur);
-    -webkit-backdrop-filter: var(--backdrop-blur);
+    background: transparent;
     border-bottom: 1px solid transparent;
     transition: border-color 200ms ease, background-color 200ms ease;
 }
@@ -17,7 +16,9 @@ header {
 // The bar only earns an edge once there is content behind it.
 header.scrolled,
 header.docs-mode {
-    background: rgba(10, 9, 16, 0.88);
+    // Near-opaque instead of blurred: a backdrop blur over the live canvas has
+    // to be recomputed every frame and was costing frames mid-scroll.
+    background: rgba(16, 6, 42, 0.96);
     border-bottom-color: var(--ink-line);
 }
 
@@ -65,11 +66,9 @@ header.docs-mode {
 }
 
 .docs-badge {
-    font-family: var(--font-family-code);
-    font-size: 0.6875rem;
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--letter-spacing-wider);
-    text-transform: uppercase;
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
     color: var(--primary-lift);
     background: rgba(153, 72, 253, 0.12);
     border: 1px solid rgba(153, 72, 253, 0.28);
@@ -89,13 +88,11 @@ header.docs-mode {
 .nav-link {
     position: relative;
     padding: 0.5rem 0.75rem;
-    border-radius: var(--border-radius);
-    font-family: var(--font-family-code);
-    font-size: var(--font-size-xs);
+    border-radius: 999px;
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     text-decoration: none;
     cursor: pointer;
     transition: color 150ms ease, background-color 150ms ease;
@@ -130,8 +127,8 @@ header.docs-mode {
     margin-left: var(--spacing-3);
     padding: 0.4375rem 0.75rem;
     background: transparent;
-    border: var(--border-hairline);
-    border-radius: var(--border-radius);
+    border: 1px solid rgba(205, 184, 255, 0.22);
+    border-radius: 999px;
     color: var(--text-secondary);
     font-family: var(--font-family-sans);
     font-size: var(--font-size-sm);

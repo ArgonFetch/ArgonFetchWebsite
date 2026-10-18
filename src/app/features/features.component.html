@@ -1,28 +1,24 @@
-<section id="features" class="features">
-  <div class="container">
-    <header class="section-head">
-      <p class="eyebrow">What it does</p>
-      <h2 class="section-title">Six things worth running it for</h2>
-      <p class="section-lede">
-        ArgonFetch is a small service. Use the hosted one or run your own copy;
-        either way, this is what you get.
-      </p>
-    </header>
+<!--
+  The page cools here: the dark discharge gives way to a light band. The band
+  opens out of a rounded window as it scrolls in.
+-->
+<section id="features" class="features" #section>
+  <div class="paper" #paper>
+    <div class="inner">
+      <header class="head">
+        <h2 class="section-title">Small on purpose.</h2>
+        <p class="section-lede">
+          ArgonFetch is one small service. Use the hosted one or run your own copy.
+          Either way, this is all of it.
+        </p>
+      </header>
 
-    <!--
-      A datasheet, not a card wall: one bounded block, hairline-ruled into
-      cells. The mono labels are categories - nothing here is a sequence, so
-      nothing here is numbered.
-    -->
-    <div class="sheet">
-      <article class="cell" *ngFor="let capability of capabilities">
-        <div class="cell-label">
-          <lucide-icon [img]="capability.icon" [size]="15"></lucide-icon>
-          <span>{{ capability.label }}</span>
-        </div>
-        <h3>{{ capability.title }}</h3>
-        <p>{{ capability.body }}</p>
-      </article>
+      <ul class="rows">
+        <li class="row" *ngFor="let capability of capabilities" #row>
+          <h3>{{ capability.title }}</h3>
+          <p>{{ capability.body }}</p>
+        </li>
+      </ul>
     </div>
   </div>
 </section>

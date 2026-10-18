@@ -1,24 +1,51 @@
-<section id="usage" class="usage">
-  <div class="container">
-    <header class="section-head">
-      <p class="eyebrow">How it works</p>
-      <h2 class="section-title">Three steps, start to file</h2>
-      <p class="section-lede">
-        Once ArgonFetch is running, open it in a browser and the whole job takes
-        about fifteen seconds.
-      </p>
+<section id="usage" class="usage" #section [class.is-static]="motion.reduced">
+  <div class="pin" #pin>
+    <header class="head">
+      <h2 class="section-title">Link in,<br />file out.</h2>
+
+      <!-- Numbered, because the order is real: nothing to pick until the link resolves. -->
+      <ol class="rail" aria-hidden="true">
+        <li class="rail-step" *ngFor="let step of steps; let i = index" [class.is-on]="i <= active">
+          {{ i + 1 }}
+        </li>
+        <span class="rail-fill" #railFill></span>
+      </ol>
     </header>
 
-    <!-- Ordered, because the order is real: nothing to pick until it resolves. -->
-    <ol class="steps">
-      <li class="step" *ngFor="let step of steps; let i = index">
-        <span class="step-index">{{ i + 1 }}</span>
-        <span class="step-icon">
-          <lucide-icon [img]="step.icon" [size]="18"></lucide-icon>
-        </span>
-        <h3>{{ step.title }}</h3>
-        <p>{{ step.body }}</p>
-      </li>
-    </ol>
+    <div class="body">
+      <ol class="steps">
+        <li class="step" *ngFor="let step of steps; let i = index" [class.is-on]="i === active">
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.body }}</p>
+        </li>
+      </ol>
+
+      <!-- The same object, three states: an address, a signal, a file. -->
+      <div class="stage" aria-hidden="true">
+        <p class="url" #url>open.spotify.com/track/2n4kUvIPfx</p>
+
+        <div class="wave" #wave>
+          <span class="bar" *ngFor="let h of bars" [style.--h]="h"></span>
+        </div>
+
+        <div class="picks" #picks>
+          <span class="pick is-picked">MP3</span>
+          <span class="pick">WebM</span>
+          <span class="pick">Cover art</span>
+        </div>
+
+        <div class="file" #file>
+          <img class="file-art" src="covers/cover-midnight-drive.jpg" alt="" width="400" height="400" />
+          <div class="file-text">
+            <span class="file-name">midnight-drive.mp3</span>
+            <span class="file-meta">
+              6.4 MB
+              <span class="file-state"><span #downloading>Downloading</span><span class="is-saved" #saved>Saved</span></span>
+            </span>
+            <span class="file-progress"><span class="file-progress-fill" #progress></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

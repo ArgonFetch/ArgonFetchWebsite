@@ -8,12 +8,12 @@
 
     <div class="nav-links" id="navLinks" [class.active]="isMobileMenuOpen" [class.docs-mode]="isDocsMode">
       <ng-container *ngIf="!isDocsMode">
+        <a routerLink="/" fragment="usage" (click)="closeMobileMenuAndScroll('usage')"
+          [class.active]="isActiveSection('usage')" class="nav-link">How it works</a>
         <a routerLink="/" fragment="features" (click)="closeMobileMenuAndScroll('features')"
           [class.active]="isActiveSection('features')" class="nav-link">Features</a>
         <a routerLink="/" fragment="interface" (click)="closeMobileMenuAndScroll('interface')"
           [class.active]="isActiveSection('interface')" class="nav-link">Interface</a>
-        <a routerLink="/" fragment="usage" (click)="closeMobileMenuAndScroll('usage')"
-          [class.active]="isActiveSection('usage')" class="nav-link">Usage</a>
         <a routerLink="/docs" (click)="closeMobileMenu()" class="nav-link">Docs</a>
       </ng-container>
 

@@ -1,0 +1,101 @@
+.selfhost {
+  background: var(--ink);
+}
+
+.inner {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: clamp(4rem, 12vh, 8rem) var(--spacing-8);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 6rem);
+}
+
+.section-lede {
+  max-width: 38ch;
+  margin-top: var(--spacing-6);
+  color: var(--text-secondary);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-8);
+}
+
+/* --- Terminal ----------------------------------------------------------- */
+
+.term {
+  border-radius: 20px;
+  background: var(--ink-sunken);
+  border: 1px solid var(--ink-line);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4375rem;
+  padding: 0.875rem 1.125rem;
+  border-bottom: 1px solid var(--ink-line);
+
+  > span:not(.term-title) {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ink-line);
+  }
+}
+
+.term-title {
+  margin-left: auto;
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.term-body {
+  margin: 0;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  min-height: 12.5rem;
+  font-family: var(--font-family-code);
+  font-size: clamp(0.8125rem, 1.1vw, 0.9375rem);
+  line-height: 2;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+.term-line {
+  display: block;
+}
+
+.term-prompt {
+  color: var(--color-primary-light);
+}
+
+.is-ok {
+  color: var(--text-secondary);
+}
+
+.term-mark {
+  color: var(--success);
+}
+
+// The one line that is live state, so it gets the signal colour.
+.is-note {
+  margin-top: 0.5rem;
+  color: var(--signal);
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: var(--spacing-4);
+  }
+}

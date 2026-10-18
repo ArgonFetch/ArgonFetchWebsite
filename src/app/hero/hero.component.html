@@ -1,100 +1,115 @@
-<section class="hero" id="hero">
+<section class="hero" id="hero" #hero>
+  <app-discharge #discharge [still]="motion.reduced" />
+
   <div class="hero-inner">
-    <div class="pitch">
-      <h1>
-        Paste a link.<br />
-        <span class="keep">Keep the file.</span>
-      </h1>
-
-      <p class="lede">
-        Paste a link from Spotify, YouTube, SoundCloud or TikTok and take it
-        away as MP3, MP4 or WebM. Use the hosted version, or run your own copy
-        with one compose file. No account, no queue, no tracking.
-      </p>
-
-      <div class="actions">
-        <a href="https://app.argonfetch.dev" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-          Open the live app
-          <lucide-icon [img]="ArrowRightIcon" [size]="16"></lucide-icon>
-        </a>
-        <a routerLink="/docs" class="btn btn-secondary">Host it yourself</a>
-        <a href="https://github.com/ArgonFetch/ArgonFetch" class="btn btn-ghost" target="_blank"
-          rel="noopener noreferrer">
-          <fa-icon [icon]="faGithub"></fa-icon>
-          GitHub
-        </a>
-      </div>
-
-      <p class="build-note">
-        <span class="build-tag">Pre-release</span>
-        <span>Under development, and the main branch may not work as described. For a working build, use the <a
-            href="https://github.com/ArgonFetch/ArgonFetch/releases" target="_blank"
-            rel="noopener noreferrer">releases page</a>.</span>
-      </p>
-    </div>
-
     <!--
-      The resolver: the product's one interaction, performed rather than
-      described. Hidden from assistive tech - the pitch above already says
-      everything it shows, and a looping widget would only add noise.
+      The headline is split across the field: the link on one side of the arc,
+      the file on the other. The filaments are aimed into the gap between them.
     -->
-    <div class="resolver" aria-hidden="true">
-      <div class="resolver-bar">
-        <img class="window-icon" src="logo-simple.svg" alt="" width="18" height="18" />
-        <span class="window-controls">
-          <lucide-icon [img]="MinusIcon" [size]="14"></lucide-icon>
-          <lucide-icon [img]="SquareIcon" [size]="12"></lucide-icon>
-          <lucide-icon [img]="XIcon" [size]="14"></lucide-icon>
-        </span>
-      </div>
+    <h1 class="headline">
+      <span class="line line-a" #lineA>Paste a link.</span>
+      <span class="line line-b" #lineB>Keep the file.</span>
+    </h1>
 
-      <div class="resolver-body">
-        <div class="input-row" [class.is-busy]="phase === 'resolving'">
-          <span class="ring"></span>
-          <span class="input-field">
-            <span class="typed">{{ typedUrl }}</span><span class="caret" [class.blink]="phase === 'typing'"></span>
-            <span class="placeholder" *ngIf="!typedUrl">Paste a link…</span>
-          </span>
-          <span class="input-btn">Resolve</span>
+    <div class="foot" #foot>
+      <div class="pitch">
+        <p class="lede">
+          Spotify, YouTube, SoundCloud and TikTok, out as MP3, MP4 or WebM.
+          Use the hosted app or run your own copy from one compose file. No
+          account, no queue, no tracking.
+        </p>
+
+        <div class="actions">
+          <a href="https://app.argonfetch.dev" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            Open the live app
+          </a>
+          <a routerLink="/docs" class="btn btn-secondary">Host it yourself</a>
+          <a href="https://github.com/ArgonFetch/ArgonFetch" class="btn btn-ghost" target="_blank"
+            rel="noopener noreferrer">
+            <fa-icon [icon]="faGithub"></fa-icon>
+            GitHub
+          </a>
         </div>
 
-        <!--
-          Both states share one grid cell, so the panel keeps a single height
-          from the first frame to the last and never resizes mid-loop.
-        -->
-        <div class="stage">
-          <div class="result" [class.is-visible]="phase === 'resolved'">
-            <div class="result-head">
-              <span class="art">
-                <img [src]="current.cover" alt="" width="400" height="400" />
-                <lucide-icon *ngIf="current.kind === 'video'" [img]="PlayIcon" [size]="22"
-                  class="play"></lucide-icon>
-              </span>
-              <span class="result-text">
-                <span class="result-title">{{ current.title }}</span>
-                <span class="result-meta">
-                  <span class="result-source">{{ current.source }}</span>
-                  <span class="sep">·</span>{{ current.meta }}
-                </span>
-              </span>
-            </div>
+        <p class="build-note">
+          Pre-release. The main branch may not work as described, so for a working build use the
+          <a href="https://github.com/ArgonFetch/ArgonFetch/releases" target="_blank" rel="noopener noreferrer">releases page</a>.
+        </p>
+      </div>
 
-            <div class="formats">
-              <span class="chip" *ngFor="let format of current.formats; let i = index" [style.--i]="i">
-                {{ format }}
-              </span>
-            </div>
+      <!--
+        The resolver: a small replica of the real app at app.argonfetch.dev,
+        performing its one interaction. Hidden from assistive tech - the pitch
+        already says everything it shows, and a looping widget would only add noise.
+      -->
+      <div class="resolver" aria-hidden="true">
+        <div class="app-nav">
+          <span class="app-logo">ArgonFetch</span>
+          <lucide-icon [img]="SunIcon" [size]="15"></lucide-icon>
+        </div>
 
-            <div class="result-action">
-              <lucide-icon [img]="DownloadIcon" [size]="15"></lucide-icon>
-              Download
-            </div>
+        <div class="app-body">
+          <div class="search-row">
+            <span class="input" [class.is-focused]="phase === 'typing'">
+              <lucide-icon class="input-icon" [img]="LinkIcon" [size]="14"></lucide-icon>
+              <span class="input-text">
+                <span class="typed">{{ typedUrl }}</span><span class="caret" [class.blink]="phase === 'typing'"></span>
+                <span class="placeholder" *ngIf="!typedUrl">Enter URL to download...</span>
+              </span>
+              <lucide-icon *ngIf="typedUrl" class="input-clear" [img]="XIcon" [size]="13"></lucide-icon>
+            </span>
+            <span class="search-btn">
+              <lucide-icon [class.spin]="phase === 'resolving'"
+                [img]="phase === 'resolving' ? LoaderIcon : SearchIcon" [size]="14"></lucide-icon>
+              Search
+            </span>
           </div>
 
-          <div class="skeleton" [class.is-visible]="phase !== 'resolved'">
-            <span class="line w-60"></span>
-            <span class="line w-35"></span>
-            <span class="line w-80"></span>
+          <!-- Both states share one grid cell, so the panel never resizes mid-loop. -->
+          <div class="stage">
+            <div class="result" [class.is-visible]="phase === 'resolved' || phase === 'picking'">
+              <div class="card">
+                <span class="art">
+                  <img [src]="current.cover" alt="" width="400" height="400" />
+                  <lucide-icon *ngIf="current.kind === 'Video'" [img]="PlayIcon" [size]="18"
+                    class="play"></lucide-icon>
+                </span>
+                <span class="card-text">
+                  <span class="card-title">{{ current.title }}</span>
+                  <span class="card-author">{{ current.author }}</span>
+                </span>
+                <span class="dl-btn" [class.is-open]="phase === 'picking'">
+                  <lucide-icon [img]="DownloadIcon" [size]="16"></lucide-icon>
+                </span>
+              </div>
+
+              <!-- The format menu, laid out the way the app draws it: kinds, then renditions. -->
+              <div class="menus" [class.is-open]="phase === 'picking'">
+                <div class="menu">
+                  <span class="menu-item" *ngFor="let kind of menuKinds" [class.is-active]="kind === current.kind">
+                    {{ kind }}
+                    <lucide-icon [img]="ChevronIcon" [size]="13"></lucide-icon>
+                  </span>
+                </div>
+                <div class="menu submenu">
+                  <span class="rendition" *ngFor="let r of current.renditions; let i = index"
+                    [class.is-active]="i === current.pick" [style.--i]="i">
+                    <span class="r-label">{{ r.label }}</span>
+                    <span class="r-tag">{{ r.container }}</span>
+                    <span class="r-speed" [class.is-slow]="r.speed === 'slow'">{{ r.speed }}</span>
+                    <span class="r-size">{{ r.size }}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="skeleton" [class.is-visible]="phase === 'resolving'">
+              <span class="sk-art"></span>
+              <span class="sk-lines">
+                <span class="line w-70"></span>
+                <span class="line w-35"></span>
+              </span>
+            </div>
           </div>
         </div>
       </div>

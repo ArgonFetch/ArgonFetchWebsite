@@ -1,33 +1,27 @@
-<section id="interface" class="interface">
-  <div class="container">
-    <header class="section-head">
-      <p class="eyebrow">The interface</p>
-      <h2 class="section-title">This is the whole app</h2>
+<section id="interface" class="interface" #section>
+  <div class="inner">
+    <header class="head">
+      <h2 class="section-title">This is the<br />whole app.</h2>
       <p class="section-lede">
         One field, one list of formats, one button. There is nothing else to learn.
       </p>
     </header>
 
-    <!-- The shot sits in a frame that says where it is: your own machine. -->
-    <figure class="frame">
-      <div class="frame-bar" aria-hidden="true">
-        <img class="window-icon" src="logo-simple.svg" alt="" width="18" height="18" />
-        <span class="window-controls">
-          <lucide-icon [img]="MinusIcon" [size]="14"></lucide-icon>
-          <lucide-icon [img]="SquareIcon" [size]="12"></lucide-icon>
-          <lucide-icon [img]="XIcon" [size]="14"></lucide-icon>
-        </span>
-      </div>
-      <img src="app-interface.png"
-        alt="The ArgonFetch web interface: a single field for the link, with a Search button beside it."
-        loading="lazy" decoding="async" width="1440" height="660" />
-      <figcaption>
-        <span>The start page.</span>
-        <a href="https://app.argonfetch.dev" target="_blank" rel="noopener noreferrer">
-          Try it at app.argonfetch.dev
-          <lucide-icon [img]="ArrowUpRightIcon" [size]="13"></lucide-icon>
-        </a>
-      </figcaption>
-    </figure>
+    <!-- The shot tilts up off the page and settles flat as you reach it. -->
+    <div class="stage" #stage>
+      <figure class="frame" #frame>
+        <img src="app-interface.png"
+          alt="The ArgonFetch web interface with a YouTube link resolved to Big Buck Bunny, and the video menu open on 2160p, 1080p, 360p and 144p MP4 downloads with their file sizes."
+          loading="lazy" decoding="async" width="2440" height="1220" />
+      </figure>
+    </div>
+
+    <p class="caption">
+      A link resolved, video formats open. Big Buck Bunny, CC BY Blender Foundation.
+      <a href="https://app.argonfetch.dev" target="_blank" rel="noopener noreferrer">
+        Try it at app.argonfetch.dev
+        <lucide-icon [img]="ArrowUpRightIcon" [size]="15"></lucide-icon>
+      </a>
+    </p>
   </div>
 </section>

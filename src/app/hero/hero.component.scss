@@ -2,48 +2,92 @@
     display: block;
 }
 
+/* The hero runs under the transparent nav, edge to edge. */
 .hero {
     position: relative;
+    margin-top: calc(-1 * var(--nav-height));
+    min-height: 100svh;
     display: flex;
-    align-items: center;
-    min-height: calc(100svh - var(--nav-height));
-    padding: clamp(3rem, 8vh, 6rem) 0 clamp(3.5rem, 9vh, 6rem);
     overflow: hidden;
     isolation: isolate;
+    // Shown when WebGL2 is unavailable: the same discharge, frozen as a gradient.
+    background:
+        radial-gradient(60% 30% at 50% 50%, rgba(153, 72, 253, 0.35), transparent 70%),
+        var(--ink);
+
+    app-discharge {
+        z-index: -1;
+    }
 }
 
 .hero-inner {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1440px;
     margin-inline: auto;
-    padding-inline: var(--spacing-6);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
-    align-items: center;
-    gap: clamp(2.5rem, 6vw, 5rem);
+    padding: calc(var(--nav-height) + clamp(1.5rem, 5vh, 4rem)) var(--spacing-8) clamp(1.5rem, 4vh, 3rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* --- Left column: the pitch -------------------------------------------- */
+/* --- Headline ---------------------------------------------------------- */
+
+/**
+ * Width is the animated axis. Each line sets --lw (its resting width) and each
+ * letter sets --cw (its charge, 0..1), which the entrance animates from narrow
+ * to full. It only moves on load: width is layout, too costly to scrub on scroll.
+ */
+// The gap between the lines only has to hold the tube. The download arrow it
+// bends into hangs beside the second line, in a column kept free for it
+// (--arrow-col), so the arrow has the full height of that line to work with.
+// Spare height on tall screens goes around the whole block instead.
+.headline {
+    --arrow-col: clamp(5.5rem, 14vw, 14rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4.5rem, 13vh, 8.5rem);
+    font-family: var(--font-family-heading);
+    font-size: clamp(3.25rem, min(9.4vw, 15vh), 9.5rem);
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+    color: var(--white);
+}
+
+.line {
+    --lw: 112;
+    display: block;
+    white-space: nowrap;
+    font-variation-settings: 'wdth' var(--lw);
+}
+
+.line-b {
+    align-self: flex-end;
+    padding-right: var(--arrow-col);
+    color: var(--color-primary-light);
+}
+
+// SplitText's letters inherit the line width and scale it by their own charge.
+:host ::ng-deep .char {
+    --cw: 1;
+    font-variation-settings: 'wdth' calc(var(--lw) * var(--cw));
+}
+
+/* --- Foot: the pitch and the live demo --------------------------------- */
+
+.foot {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 32rem);
+    align-items: end;
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-top: clamp(2rem, 5vh, 3.5rem);
+}
 
 .pitch {
     max-width: 34rem;
 }
 
-.pitch h1 {
-    font-size: clamp(2.5rem, 6.2vw, 4.25rem);
-    font-weight: var(--font-weight-extrabold);
-    letter-spacing: var(--letter-spacing-tighter);
-    line-height: 1.02;
-}
-
-// The payoff half of the headline carries the brand colour; the setup stays white.
-.keep {
-    color: var(--primary-lift);
-}
-
 .lede {
-    margin-top: var(--spacing-5);
-    max-width: 42ch;
     color: var(--text-secondary);
     font-size: var(--font-size-md);
     line-height: var(--line-height-relaxed);
@@ -53,74 +97,45 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-3);
-    margin-top: var(--spacing-8);
+    margin-top: var(--spacing-6);
 }
 
 .build-note {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: var(--spacing-8);
-    padding-top: var(--spacing-5);
-    border-top: var(--border-hairline);
+    margin-top: var(--spacing-5);
     font-size: var(--font-size-sm);
     color: var(--text-muted);
     line-height: var(--line-height-relaxed);
 
     a {
         color: var(--text-secondary);
-        text-decoration: underline;
 
         &:hover {
-            color: var(--primary-lift);
+            color: var(--color-primary-light);
         }
     }
 }
 
-.build-tag {
-    font-family: var(--font-family-code);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
-    color: var(--warning);
-    border: 1px solid rgba(255, 180, 84, 0.32);
-    border-radius: var(--border-radius-sm);
-    padding: 0.1875rem 0.375rem;
-    line-height: 1;
-}
+/* --- Resolver: a replica of the real app -------------------------------- */
 
-/* --- Right column: the resolver ---------------------------------------- */
-
+/**
+ * Colours, radii and type here are the app's own, read off app.argonfetch.dev,
+ * not the site's palette: this panel is a picture of the product, so it keeps
+ * the product's neutral greys and its #a855f7 purple.
+ */
 .resolver {
-    background: var(--ink-raised);
-    border: var(--border-hairline);
-    border-radius: var(--border-radius-xl);
-    box-shadow: var(--shadow-xl);
+    --app-bg: #1a1b1e;
+    --app-surface: #25262b;
+    --app-line: rgba(255, 255, 255, 0.1);
+    --app-purple: #a855f7;
+    --app-muted: #909296;
+
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--white);
+    background: var(--app-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
     overflow: hidden;
-    font-family: var(--font-family-code);
-}
-
-.resolver-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
-    border-bottom: var(--border-hairline);
-    background: rgba(255, 255, 255, 0.014);
-}
-
-.window-icon {
-    width: 18px;
-    height: 18px;
-}
-
-.window-controls {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.875rem;
-    color: var(--text-muted);
+    box-shadow: 0 40px 90px -20px rgba(4, 0, 16, 0.8), 0 0 0 1px rgba(153, 72, 253, 0.12);
 
     lucide-icon {
         display: block;
@@ -128,82 +143,61 @@
     }
 }
 
-.resolver-body {
-    position: relative;
-    padding: var(--spacing-5);
-}
-
-/* Input row -------------------------------------------------------------- */
-
-.input-row {
-    position: relative;
+.app-nav {
     display: flex;
-    align-items: stretch;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: var(--app-surface);
+    color: var(--white);
+}
+
+.app-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--app-purple);
+}
+
+.app-body {
+    padding: 0.875rem 1rem 1rem;
+}
+
+.search-row {
+    display: flex;
     gap: 0.5rem;
-    padding: 0.5rem 0.5rem 0.5rem 0.875rem;
-    background: var(--ink-sunken);
-    border: 1px solid var(--ink-line);
-    border-radius: var(--border-radius-md);
 }
 
-/**
- * While a link is resolving, a lit arc travels around the field's own border.
- *
- * The ring is a 1px window (mask-composite carves out everything but the
- * padding edge); the light inside it is an oversized conic gradient that spins
- * on `rotate`. Rotating a layer is composited on the GPU, where animating a
- * gradient's own angle would repaint the whole gradient every frame and judder.
- */
-.ring {
-    position: absolute;
-    inset: -1px;
-    border-radius: calc(var(--border-radius-md) + 1px);
-    padding: 1px;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 220ms ease;
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 200%;
-        aspect-ratio: 1;
-        translate: -50% -50%;
-        background: conic-gradient(transparent 0turn,
-                transparent 0.55turn,
-                rgba(76, 210, 255, 0.3) 0.78turn,
-                var(--signal) 0.95turn,
-                transparent 1turn);
-        will-change: rotate;
-    }
-}
-
-.input-row.is-busy .ring {
-    opacity: 1;
-
-    &::before {
-        animation: spin 1.4s linear infinite;
-    }
-}
-
-@keyframes spin {
-    to { rotate: 360deg; }
-}
-
-.input-field {
+.input {
     flex: 1;
     min-width: 0;
     display: flex;
     align-items: center;
-    font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    gap: 0.5rem;
+    height: 2.5rem;
+    padding: 0 0.625rem;
+    background: var(--app-surface);
+    border: 1px solid #373a40;
+    border-radius: 4px;
+    transition: border-color 200ms ease;
+
+    &.is-focused {
+        border-color: var(--app-purple);
+    }
+}
+
+.input-icon,
+.input-clear {
+    color: var(--app-muted);
+    flex-shrink: 0;
+}
+
+.input-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    font-size: 0.8125rem;
     overflow: hidden;
 }
 
@@ -215,15 +209,15 @@
 }
 
 .placeholder {
-    color: var(--text-muted);
+    color: var(--app-muted);
+    white-space: nowrap;
 }
 
 .caret {
     display: inline-block;
-    width: 2px;
-    height: 1.05em;
-    margin-left: 1px;
-    background: var(--signal);
+    width: 1px;
+    height: 1.1em;
+    background: var(--white);
     flex-shrink: 0;
     opacity: 0;
 
@@ -237,26 +231,31 @@
     50.01%, 100% { opacity: 0; }
 }
 
-.input-btn {
+.search-btn {
     display: inline-flex;
     align-items: center;
-    padding: 0.4375rem 0.875rem;
-    background: var(--primary);
-    color: var(--white);
-    border-radius: var(--border-radius-sm);
-    font-family: var(--font-family-sans);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
+    gap: 0.375rem;
+    padding: 0 0.875rem;
+    background: var(--app-purple);
+    color: var(--app-bg);
+    border-radius: 4px;
+    font-size: 0.8125rem;
+    font-weight: 700;
     flex-shrink: 0;
 }
 
-/* Result ----------------------------------------------------------------- */
+.spin {
+    animation: spin 0.8s linear infinite;
+}
 
-/* One cell, two states stacked. The taller of the two sets the height once,
-   so the panel never grows or shrinks as the loop runs. */
+@keyframes spin {
+    to { rotate: 360deg; }
+}
+
+/* One cell, two states stacked; the result with its open menu sets the height. */
 .stage {
     display: grid;
-    margin-top: var(--spacing-4);
+    margin-top: 0.875rem;
 
     > * {
         grid-area: 1 / 1;
@@ -264,13 +263,10 @@
 }
 
 .result {
-    padding: var(--spacing-4);
-    border: var(--border-hairline);
-    border-radius: var(--border-radius-md);
-    background: rgba(255, 255, 255, 0.016);
+    position: relative;
     opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
+    transform: translateY(6px);
+    transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out);
 
     &.is-visible {
         opacity: 1;
@@ -278,10 +274,13 @@
     }
 }
 
-.result-head {
+.card {
     display: flex;
     align-items: center;
-    gap: var(--spacing-3);
+    gap: 0.75rem;
+    padding: 0.625rem;
+    background: var(--app-surface);
+    border-radius: 6px;
 }
 
 .art {
@@ -289,10 +288,8 @@
     width: 52px;
     height: 52px;
     flex-shrink: 0;
-    border-radius: var(--border-radius);
+    border-radius: 4px;
     overflow: hidden;
-    background: var(--ink-chip);
-    border: var(--border-hairline);
 
     img {
         width: 100%;
@@ -300,13 +297,12 @@
         object-fit: cover;
     }
 
-    // Video results carry a play marker over the frame, the way a thumbnail does.
     .play {
         position: absolute;
         inset: 0;
         margin: auto;
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
         filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.8));
     }
 
@@ -315,126 +311,219 @@
     }
 }
 
-.result-text {
+.card-text {
+    flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.125rem;
 }
 
-.result-title {
-    font-family: var(--font-family-sans);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-semibold);
-    color: var(--text-primary);
+.card-title {
+    font-size: 0.875rem;
+    font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.result-meta {
+.card-author {
+    font-size: 0.75rem;
+}
+
+.dl-btn {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    color: var(--app-purple);
+    transition: background-color 200ms ease, color 200ms ease;
+
+    &.is-open {
+        background: var(--app-purple);
+        color: var(--white);
+    }
+}
+
+/* The kind menu sits under the download button with its renditions beside it, as in the app. */
+.menus {
     display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    font-size: var(--font-size-xs);
-    color: var(--text-muted);
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 0.25rem;
+    margin-top: 0.375rem;
+    opacity: 0;
+    transition: opacity 200ms ease;
+
+    &.is-open {
+        opacity: 1;
+    }
 }
 
-.result-source {
-    color: var(--text-secondary);
-}
-
-.sep {
-    opacity: 0.5;
-}
-
-.formats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-    margin-top: var(--spacing-4);
-}
-
-// Chips arrive in reading order once the result lands.
-.result.is-visible .chip {
-    animation: chipIn 260ms var(--ease-out) backwards;
-    animation-delay: calc(140ms + var(--i) * 70ms);
-}
-
-@keyframes chipIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to   { opacity: 1; transform: none; }
-}
-
-.result-action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: var(--spacing-4);
-    padding: 0.5625rem;
-    border-radius: var(--border-radius-sm);
-    background: rgba(153, 72, 253, 0.12);
-    border: 1px solid rgba(153, 72, 253, 0.28);
-    color: var(--primary-lift);
-    font-family: var(--font-family-sans);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-}
-
-/* Waiting state. Occupies the same cell as the result. */
-.skeleton {
+.menu {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 0.875rem;
-    padding: var(--spacing-4);
+    padding: 0.25rem;
+    background: var(--app-surface);
+    border: 1px solid var(--app-line);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0.4375rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8125rem;
+
+    lucide-icon {
+        color: var(--app-muted);
+    }
+
+    &.is-active {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--app-purple);
+
+        lucide-icon {
+            color: var(--app-purple);
+        }
+    }
+}
+
+.submenu {
+    margin-top: 0.25rem;
+}
+
+.rendition {
+    display: grid;
+    grid-template-columns: auto auto auto 1fr;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8125rem;
+    transition: background-color 200ms ease, color 200ms ease;
+
+    &.is-active {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--app-purple);
+
+        .r-size {
+            color: var(--app-purple);
+        }
+    }
+}
+
+// Rows land one after another once the menu opens.
+.menus.is-open .rendition {
+    animation: rowIn 240ms var(--ease-out) backwards;
+    animation-delay: calc(120ms + var(--i) * 45ms);
+}
+
+@keyframes rowIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.r-tag {
+    padding: 0.0625rem 0.3125rem;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.07);
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--app-muted);
+}
+
+.r-speed {
+    font-size: 0.6875rem;
+    color: var(--app-muted);
+
+    &.is-slow {
+        color: #f59f00;
+    }
+}
+
+.r-size {
+    justify-self: end;
+    padding-left: 0.75rem;
+    font-size: 0.6875rem;
+    color: var(--app-muted);
+}
+
+.skeleton {
+    align-self: start;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem;
+    background: var(--app-surface);
+    border-radius: 6px;
     opacity: 0;
-    transition: opacity 240ms ease;
+    transition: opacity 200ms ease;
 
     &.is-visible {
         opacity: 1;
     }
 
-    .line {
-        height: 9px;
-        border-radius: var(--border-radius-pill);
-        background: var(--ink-line);
+    .sk-art {
+        width: 52px;
+        height: 52px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.06);
     }
 
-    .w-60 { width: 60%; }
+    .sk-lines {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .line {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .w-70 { width: 70%; }
     .w-35 { width: 35%; }
-    .w-80 { width: 80%; }
 }
 
 /* --- Responsive --------------------------------------------------------- */
 
 @media (max-width: 1000px) {
-    .hero {
-        min-height: 0;
-    }
-
-    .hero-inner {
+    .foot {
         grid-template-columns: minmax(0, 1fr);
-        gap: var(--spacing-10);
+        align-items: start;
     }
 
-    .pitch {
-        max-width: 38rem;
+    .resolver {
+        max-width: 34rem;
     }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 600px) {
     .hero-inner {
-        padding-inline: var(--spacing-5);
+        padding-inline: var(--spacing-4);
+    }
+
+    .headline {
+        --arrow-col: 4.5rem;
+        gap: clamp(3rem, 9vh, 5rem);
+        font-size: 12.5vw;
+    }
+
+    .line {
+        --lw: 78;
     }
 
     .actions .btn {
         flex: 1 1 100%;
-    }
-
-    .resolver-body {
-        padding: var(--spacing-4);
     }
 }
 

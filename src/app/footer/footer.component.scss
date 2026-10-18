@@ -1,7 +1,30 @@
 .footer {
-    padding: var(--spacing-16) 0 var(--spacing-8);
+    padding: var(--spacing-16) 0 0;
     background: var(--ink);
     border-top: var(--border-hairline);
+    overflow: hidden;
+}
+
+/* Sized so the word spans the viewport; the bottom of the letters is cut off by the page edge. */
+.wordmark {
+    margin-top: var(--spacing-10);
+    margin-bottom: -0.2em;
+    font-family: var(--font-family-heading);
+    font-size: 12vw;
+    font-weight: 900;
+    font-variation-settings: 'wdth' 120;
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    text-align: center;
+    white-space: nowrap;
+    color: var(--ink-chip);
+    user-select: none;
+}
+
+// Footer columns line up with the 1440 grid the home sections use.
+.container {
+    max-width: 1440px;
+    padding-inline: var(--spacing-8);
 }
 
 .footer-top {
@@ -46,11 +69,9 @@
     gap: var(--spacing-3);
 
     h2 {
-        font-family: var(--font-family-code);
-        font-size: var(--font-size-xs);
-        font-weight: var(--font-weight-medium);
-        letter-spacing: var(--letter-spacing-wider);
-        text-transform: uppercase;
+        font-family: var(--font-family-sans);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-semibold);
         color: var(--text-muted);
         margin-bottom: var(--spacing-1);
     }
@@ -80,7 +101,7 @@
     border-top: var(--border-hairline);
 
     p {
-        font-family: var(--font-family-code);
+        font-family: var(--font-family-sans);
         font-size: var(--font-size-xs);
         color: var(--text-muted);
     }
