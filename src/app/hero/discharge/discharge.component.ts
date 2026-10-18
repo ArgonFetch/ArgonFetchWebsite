@@ -31,14 +31,12 @@ import { gsap } from '../../motion/motion.service';
  * flashes as the result lands.
  *
  * It answers the pointer the way a lit discharge tube answers a hand: the gas
- * gathers toward the nearest point of glass (brighter the faster you move),
- * and bands of light ripple away from it along the tube, which is what moving
- * striations look like in a real glow discharge. Clicking the tube sends a
- * band of light from that point down into the arrow.
+ * gathers toward the nearest point of glass, brighter the faster you move.
+ * Clicking the tube sends a band of light from that point down into the arrow.
  *
  * The smoke around it can be stirred: the pointer leaves a short-lived wake
  * that drags the haze along and curls it into small eddies, which settle
- * back into the drift after a second or two.
+ * back into the drift after about a second and a half.
  *
  * Plain WebGL2 and one fragment shader, so the effect costs no library. Without
  * WebGL2 the host's CSS background shows instead.
@@ -149,12 +147,10 @@ float pieceLevel(float along, float arrow, float tray) {
   lev += uLand * (tray * 1.1 + arrow * 0.6);
   lev += band(along, uClickX * gToTip, uRes.x * 0.035) * uClick * 1.6 * (1.0 - tray);
 
-  // The hand: gas gathers at the nearest point, and striations ripple away from it.
+  // The hand: gas gathers at the nearest point of glass.
   float fromTouch = abs(along - gTouchAt);
-  float gather = exp(-fromTouch / (gBore * 7.0)) * (1.5 + uEnergy * 1.6);
-  float wave = 0.5 + 0.5 * sin(fromTouch * 0.14 - uTime * 9.0);
-  float ripple = wave * wave * wave * exp(-fromTouch / (gBore * 40.0)) * 1.0;
-  lev += uTouch * (gather + ripple) * (1.0 - tray);
+  float gather = exp(-fromTouch / (gBore * 6.0)) * (0.9 + uEnergy * 0.9);
+  lev += uTouch * gather * (1.0 - tray);
   return lev;
 }
 
@@ -186,9 +182,11 @@ void main() {
     vec2 dd = px - uWake[i].xy;
     vec2 vel = uWake[i].zw;
     float f = exp(-dot(dd, dd) / (wakeR * wakeR)) * life;
-    float side = sign(vel.x * dd.y - vel.y * dd.x);
-    stir += vel * f * 2.2;
-    stir += vec2(-dd.y, dd.x) / wakeR * f * length(vel) * 1.6 * side;
+    // Which way the eddy turns depends on the side of the path, blended
+    // smoothly across it; a hard sign() here tore the smoke along the path.
+    float side = clamp((vel.x * dd.y - vel.y * dd.x) / (length(vel) * wakeR * 0.35 + 1e-3), -1.0, 1.0);
+    stir += vel * f * 1.2;
+    stir += vec2(-dd.y, dd.x) / wakeR * f * length(vel) * 0.9 * side;
     stirred += f * min(length(vel) / 12.0, 1.0);
   }
 
@@ -199,10 +197,11 @@ void main() {
   // so the wake reads as disturbed smoke even where the haze is thin. The
   // overlap of wake points is saturated, so lingering never turns into a blob.
   float st = 1.0 - exp(-stirred * 1.5);
-  float wisp = fbm(p * 7.0 + stir / uRes.y * 2.5 + vec2(t * 0.35, -t * 0.2));
-  float smoke = smoothstep(0.35, 0.95, gas + st * (wisp - 0.36) * 1.8);
+  // Coarse noise on purpose: value noise turns blocky at fine scales.
+  float wisp = fbm(p * 3.2 + stir / uRes.y * 2.0 + vec2(t * 0.3, -t * 0.18));
+  float smoke = smoothstep(0.35, 0.95, gas + st * (wisp - 0.36) * 1.0);
   vec3 col = mix(vec3(0.04, 0.014, 0.11), vec3(0.16, 0.05, 0.34), smoke);
-  col += vec3(0.6, 0.28, 0.99) * st * smoothstep(0.5, 0.85, wisp) * 0.2;
+  col += vec3(0.6, 0.28, 0.99) * st * smoothstep(0.5, 0.85, wisp) * 0.1;
 
   // --- Geometry -------------------------------------------------------------
   // The tube enters from beyond the left edge of the page, runs across, and
@@ -338,7 +337,7 @@ void main() {
 
   // Light spilling out where the gas has gathered under the pointer.
   float td = length(px - touchPoint);
-  pulseGlow += uTouch * (1.5 + uEnergy * 1.2) / (1.0 + td * td / (bore * bore * 60.0));
+  pulseGlow += uTouch * (0.8 + uEnergy * 0.6) / (1.0 + td * td / (bore * bore * 45.0));
 
   vec3 violet = vec3(0.6, 0.28, 0.99);   // #9948fd, the brand violet
   vec3 glow = violet * halo * level * (1.0 - fill);
@@ -521,9 +520,10 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
     const gl = this.gl;
     if (!gl) return;
     const canvas = gl.canvas as HTMLCanvasElement;
-    // The glow is soft by nature, so one pixel per CSS pixel is plenty and keeps
-    // the GPU free for scrolling on high-density screens.
-    const dpr = 1;
+    // Up to 1.5 device pixels per CSS pixel: at 1 the canvas is stretched on
+    // scaled displays and fine detail turns pixelated; beyond 1.5 the soft
+    // glow gains nothing and only costs GPU time.
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     canvas.width = Math.round(canvas.clientWidth * dpr);
     canvas.height = Math.round(canvas.clientHeight * dpr);
     gl.viewport(0, 0, canvas.width, canvas.height);
@@ -576,7 +576,7 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
 
     // Proximity: full strength on the glass, gone a few tube-widths away.
     const near = this.nearest(x, y);
-    const reach = near.bore * 26;
+    const reach = near.bore * 18;
     this.target.touch = inside && e.pointerType === 'mouse'
       ? Math.max(0, 1 - Math.max(near.distance - near.bore, 0) / reach) ** 1.5
       : 0;
@@ -657,9 +657,9 @@ export class DischargeComponent implements AfterViewInit, OnDestroy {
     // Energy drains when the pointer rests, so the flare settles back to a glow.
     this.target.energy *= 0.92;
 
-    // Wake points fade over about two seconds, easing out so eddies settle softly.
+    // Wake points fade over about a second and a half, easing out so eddies settle softly.
     for (let i = 0; i < this.wakeSize; i++) {
-      const age = (now - this.wakeBorn[i]) / 2000;
+      const age = (now - this.wakeBorn[i]) / 1500;
       this.wakeLife[i] = age >= 1 ? 0 : (1 - age) * (1 - age);
     }
     this.draw((now - this.start) / 1000);
