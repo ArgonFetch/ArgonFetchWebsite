@@ -10,7 +10,6 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { LucideAngularModule, Download, Play, Link, X, Search, LoaderCircle, Sun, ChevronRight } from 'lucide-angular';
@@ -104,7 +103,7 @@ const HOLD_MENU = 2900;
 
 @Component({
   selector: 'app-hero',
-  imports: [CommonModule, FontAwesomeModule, LucideAngularModule, RouterLink, DischargeComponent],
+  imports: [CommonModule, FontAwesomeModule, LucideAngularModule, DischargeComponent],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })

@@ -8,7 +8,6 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { MotionService, gsap } from '../motion/motion.service';
 
 /** One line of the terminal. `cmd` lines are typed, output lines just appear. */
@@ -27,7 +26,7 @@ const LINES: TermLine[] = [
 @Component({
   selector: 'app-selfhost',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './selfhost.component.html',
   styleUrl: './selfhost.component.scss',
 })
